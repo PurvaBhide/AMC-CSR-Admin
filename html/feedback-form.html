@@ -1,0 +1,939 @@
+<!doctype html>
+
+<html
+  lang="en"
+  class="light-style layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+  data-style="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>AMC CSR Admin</title>
+
+    <meta name="description" content="" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo/amcLogo.png" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="../assets/js/config.js"></script>
+    <script src="https://kit.fontawesome.com/b27d57f29f.js" crossorigin="anonymous"></script>
+       <style>
+      .form-control,.form-select{
+        border-radius: 20px;
+        padding: 10px;
+        margin-top: 5px;
+        color: rgb(79, 79, 79);
+        border-color:rgb(204, 192, 218);;
+
+      }
+      form{
+        background-color: white;
+         padding: 35px;
+         border-radius: 10px;
+         box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+      }
+      .form-control::placeholder {
+        color: rgb(204, 192, 218);
+}
+
+textarea::placeholder {
+  color: rgb(204, 192, 218);
+}
+
+
+    #policeComplaintForm{
+      background-color: white;
+
+    width: 85%;
+    display: grid;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgb(204, 192, 218);
+    justify-self: anchor-center; }
+
+    h3{
+     text-align: center;
+     padding-top: 20px;
+     color: rgb(108, 100, 117);
+     padding-bottom: 20px;
+     border-bottom: 1px solid rgb(204, 192, 218);
+     margin-bottom: 30px;
+    }
+    button{
+    background: #002A5C;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-right:30px;
+    padding-left: 30px;
+    border: none;
+    color: aliceblue;
+    border-radius: 29px;
+}
+.submitBtn{
+      width: 30rem;
+      display: grid;
+      justify-self: anchor-center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+.submitBtn:disabled {
+  background-color: gray; /* Gray background for disabled state */
+  color: #CCCCCC; /* Light gray text */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+}
+label{
+  font-weight: 600;
+  color: rgb(131, 123, 140);
+}
+.navbar {
+    background-color: #fff;
+    color: rgb(30, 30, 30);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.title {
+    text-align: left;
+    padding-left: 20px;
+    flex-grow: 1;
+}
+
+.title p {
+    margin: 0;
+}
+
+.marathi-text {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.english-text {
+    font-size: 16px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.font-controls button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 3px;
+}
+
+.font-controls button:hover {
+    text-decoration: underline;
+}
+.topNavBtn{
+  background: none;color: aliceblue; font-size: 12px;width: 5%; border-left: 1px solid #fff;border-radius: 0px;
+}
+.rating-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 10px 0;
+}
+
+.emoji {
+    font-size: 20px;
+    cursor: pointer;
+    display: grid;
+    justify-content: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.emoji:hover {
+    transform: scale(1.2);
+}
+
+.selected {
+    transform: scale(1.3);
+    filter: drop-shadow(0px 0px 5px #ffcc00);
+}
+
+.remarks {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .dropdown, .font-controls {
+        width: 100%;
+        text-align: center;
+    }
+    .title{
+      padding-top: 9px;
+    }
+    .font-controls button {
+    margin: -36px 3px;
+}
+.mt-5 {
+    margin-top: 0.25rem !important;
+}
+}
+@media (max-width: 768px){
+  #policeComplaintForm{
+    width: 100%;
+    }
+    .submitBtn{
+      width: 20rem;
+
+    }
+    form{
+      padding: 20px;
+    }
+    #indianEmblemLogo{
+      display: none;
+    }
+}
+.footer {
+            background-color: #0b2e53;
+            color: white;
+            padding: 30px 0;
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .social-icons a {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 1.5rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+        .footer-bottom {
+            background-color: #081f3a;
+            padding: 10px 0;
+            text-align: center;
+            color: white;
+        }
+    </style>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="">
+      <div class="">
+        <!-- Menu -->
+
+
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="">
+          <!-- Navbar -->
+<div class="topNav" style="display: inline-flex;justify-content: end; background-color: #002a5c;width: 100%;">
+  <div class="topNavSection">
+    <button class="topNavBtn" onclick="changeFontSize(1)">A+</button>
+  </div>
+  <div class="topNavSection">
+    <button class="topNavBtn" onclick="resetFontSize()">A</button>
+  </div>
+  <div class="topNavSection">
+    <button class="topNavBtn" onclick="changeFontSize(-1)">A-</button>
+  </div>
+</div>
+          <nav class="navbar">
+            <!-- Left Logo -->
+            <div class="logo">
+                <img src="../assets/img/logo/amcLogo.png" alt="Maharashtra Police">
+
+            </div>
+
+            <!-- Center Content -->
+            <div class="title">
+                <p class="marathi-text">जळगाव जिल्हा पोलीस</p>
+                <p class="english-text">JALGAON DISTRICT POLICE</p>
+            </div>
+
+            <!-- Right Content -->
+            <div class="controls">
+
+                <div class="font-controls">
+                    <button onclick="changeFontSize(1)">A+</button>
+                    <button onclick="resetFontSize()">A</button>
+                    <button onclick="changeFontSize(-1)">A-</button>
+                </div>
+
+                <!-- Language Selection -->
+                <!-- <select class="dropdown">
+                    <option>English</option>
+                    <option>मराठी</option>
+                </select> -->
+
+                <!-- Right Logo -->
+                <div class="logo" id="indianEmblemLogo">
+                    <img src="../assets/img/logo/emblem-of-india-logo.png" alt="Indian Emblem">
+                </div>
+            </div>
+        </nav>
+
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper mt-5 mb-5">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y ">
+                                <p id="location-output"></p>
+                <form id="policeComplaintForm" class="mt-5 pt-5" method="POST" onsubmit="submitFeedback(event)"   >
+                  <!-- <img src="../assets/img/logo/amcLogo.png" height="100px" style="display: grid;  justify-self: anchor-center;"> -->
+                  <h3 >Police Feedback Form</h3>
+                  <div class="row">
+                    <input type="hidden" id="accuracy" name="accuracy">
+
+                    <div class="col-md-6">
+                      <div class="form-group mb-5 mt-5">
+                        <label class="mt-3 mb-3" for="user_name">नागरिकाचे नाव (Citizen Name)<sup class="text-danger">*</sup></label>
+                        <input type="text" class="form-control" id="user_name" name="user_name" required placeholder="Enter your full name">
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group mb-5 mt-5">
+                        <label class="mt-3 mb-3" for="contact_number">संपर्क क्रमांक (Contact Number)<sup class="text-danger">*</sup></label>
+                        <input type="number" class="form-control" id="contact_number" name="contact_number" required placeholder="Enter your contact number">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group mb-5 mt-5">
+                        <label class="mt-3 mb-3" for="department_issue">संबंधित विभागाचे नाव (Concerned Department Name)<sup class="text-danger">*</sup></label>
+                        <select class="form-select" id="department_issue" name="department_issue" required>
+                          <option value="">Select Department</option>
+                          <option value="Crime">Crime</option>
+                          <option value="Law and Order">Law and Order</option>
+                          <option value="Traffic Accidents">Traffic/Accidents</option>
+                          <option value="Passport Verification">Passport/Character Verification</option>
+                          <option value="Permissions">Permissions (Processions/Festivals/Arms)</option>
+                          <option value="Lost Property">Lost Property</option>
+                          <option value="Cyber Crimes">Cyber Crimes</option>
+                          <option value="Police Protection">Police Protection</option>
+                          <option value="Other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group mb-5 mt-5">
+                        <label class="mt-3 mb-3" for="purpose_of_visit">भेट देण्याचा उद्देश (Purpose of Visit)<sup class="text-danger">*</sup></label>
+                        <textarea class="form-control" id="purpose_of_visit" name="purpose_of_visit" required placeholder="Describe your purpose of visit"></textarea>
+                      </div>
+                    </div>
+                  </div>
+  <div class="row">
+                    <div class="form-group mb-5 mt-5 md-6 col-12">
+                      <label class="mt-3 mb-3" for="feedback_comments"> तुम्ही पोलिस स्टेशनद्वारे पुरवलेल्या सेवेबद्दल समाधानी आहात का? <sup class="text-danger">*</sup></label>&nbsp;&nbsp;
+                      <label for="satisfiedYes">होय</label>
+<input type="radio" id="satisfiedYes" name="usersatisfied" value="Yes" >
+<label for="satisfiedNo">नाही</label>
+<input type="radio" id="satisfiedNo" name="usersatisfied" value="No" >
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group mb-5 mt-5 col-md-12">
+                      <label class="mt-3 mb-3" for="feedback_rating">विभागाच्या सेवेबद्दल आणि वागणुकीबद्दल किती समाधानी आहात ( Rating) <sup class="text-danger">*</sup></label>
+
+                      <!-- Emoji Rating Container -->
+                               <!-- Hidden Input to Store Selected Rating -->
+
+                      <input type="hidden" id="feedback_rating" name="feedback_rating">
+                      <div class=" row rating-container">
+                            <div class="emoji col-md-2 col-2" data-value="1">😡
+                            <!-- <div>Very Bad</div> -->
+                          </div>
+                          <div class="emoji col-md-2 col-2" data-value="2">☹️
+                            <!-- <div>Bad</div> -->
+                          </div>
+                          <div class="emoji col-md-2 col-2" data-value="3">😐
+                             <!-- <div>Neutral</div> -->
+                            </div>
+                          <div class="emoji col-md-2 col-2" data-value="4">😊
+                            <!-- <div>Good</div> -->
+                          </div>
+                          <div class="emoji col-md-2 col-2" data-value="5">😍
+                            <!-- <div>Excellent</div> -->
+                          </div>
+                      </div>
+
+                  </div>
+                  </div>
+
+                
+                  <div class="row">
+                    <div class="form-group mb-5 mt-5 md-6 col-12">
+                      <label class="mt-3 mb-3" for="feedback_comments"> पोलीस विभाग आपल्या समस्येचे निराकरण करण्यास यशस्वी झाले का? आपला अभिप्राय नोंदवा! ( Feedback )<sup class="text-danger">*</sup></label>
+                      <textarea class="form-control" id="userfeedbackComments" name="feedback_comments" placeholder="Additional comments or suggestions"></textarea>
+                    </div>
+
+                  </div>
+
+                  <div class="row">
+                    <div class="form-group mb-5 mt-5 md-12">
+                      <label for="geolocation">Geolocation<sup class="text-danger">*</sup></label>
+                      <div class="row">
+                        <div class="col" style="padding-left: 5px;padding-right: 5px;">
+                          <input type="text" class="form-control" id="latitude" name="geolocation[latitude]" placeholder="Latitude" readonly>
+                        </div>
+                        <div class="col" style="padding-left: 5px;padding-right: 5px;">
+                          <input type="text" class="form-control" id="longitude" name="geolocation[longitude]" placeholder="Longitude" readonly>
+                        </div>
+
+                        <div class="col" style="padding-left: 5px;padding-right: 5px;">
+                          <button onclick="getAccurateUserLocation()" style="padding: 10px; background: #FFCD35;"> <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"  height="25" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 489.437"><path fill="#fff"  d="M266.132 425.011c-3.122 2.276-7.36 2.59-10.837.357-37.511-23.86-69.044-52.542-93.798-83.672-34.164-42.862-55.708-90.407-63.066-136.17-7.494-46.427-.492-91.074 22.613-127.381 9.098-14.361 20.738-27.429 34.922-38.715C188.57 13.428 225.811-.263 262.875.004c35.727.268 70.961 13.601 101.424 41.391 10.706 9.722 19.715 20.872 27.074 32.959 24.843 40.899 30.196 93.084 19.269 145.982-17.047 82.829-71.772 160.522-144.51 204.675zM109.524 317.185c6.788 0 12.291 5.503 12.291 12.291s-5.503 12.291-12.291 12.291H71.37L33.264 464.856H477.89l-41.373-123.089h-28.586c-6.788 0-12.291-5.503-12.291-12.291s5.503-12.291 12.291-12.291h46.17L512 489.437H0l53.325-172.252h56.199zm109.962-178.388a7.651 7.651 0 015.13-6.943c-.352-5.997-1.084-15.038.542-20.811a25.468 25.468 0 0111.359-14.428 33.032 33.032 0 016.167-2.948c3.931-1.417 1.983-7.99 6.261-8.076 10.001-.259 26.436 8.89 32.85 15.833a25.399 25.399 0 016.548 16.45l-.407 14.66a5.748 5.748 0 014.205 3.587c2.132 8.631-18.892 29.001-18.892 31.186.05.749.346 1.464.838 2.033 14.587 20.049 53.895 11.106 53.895 50.984H183.595c0-39.891 39.319-30.921 53.895-50.972.714-1.048 1.049-1.627 1.036-2.083 0-1.95-19.04-21.424-19.04-28.472zM255.79 37.251c69.041 0 125.006 55.965 125.006 125.006S324.831 287.263 255.79 287.263s-125.006-55.965-125.006-125.006S186.749 37.251 255.79 37.251z"/></svg></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <input type="hidden" id="timestamp" name="timestamp" value="">
+
+                  <!-- Police Station ID -->
+                  <input type="hidden" id="police_station_id" name="police_station_id" value="">
+
+                  <button
+                  type="submit"
+                  class="submitBtn" id="submitButton" disabled>Submit Feedback</button>
+
+                </form>
+
+                <hr class="my-12" />
+              </div>
+
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+
+    <footer class="footer">
+      <div class="container">
+          <div class="row">
+              <!-- Address Section -->
+              <div class="col-md-4">
+                  <h5 class="text-warning">Address</h5>
+                  <p>
+                      <i class="fas fa-map-marker-alt text-warning"></i> Office Superintendent Of Police - Jalgaon,<br>
+                      Oppo. of New Bus Stand, Jilha Peth, Jalgaon,<br>
+                      Maharashtra 425001
+                  </p>
+                  <p><i class="fas fa-phone text-warning"></i> 0257-2223333</p>
+                  <p><i class="fas fa-phone text-warning"></i> 0257-2235232</p>
+                  <p><i class="fas fa-envelope text-warning"></i> <a href="mailto:sp.jalgaon@mahapolice.gov.in">sp.jalgaon@mahapolice.gov.in</a></p>
+                  <p><i class="fas fa-globe text-warning"></i> <a href="https://www.jalgaonpolice.gov.in" target="_blank">www.jalgaonpolice.gov.in</a></p>
+              </div>
+
+              <!-- Quick Links Section -->
+              <div class="col-md-4">
+                  <h5 class="text-warning">Quick Links</h5>
+                  <ul type="disc">
+                      <li class="p-1"><a href="https://www.mahapolice.gov.in/">Maharashtra State Police</a></li>
+                      <li class="p-1"><a href="https://jalgaon.gov.in/">Collector Office, Jalgaon</a></li>
+                      <li class="p-1"><a href="https://acbmaharashtra.gov.in/">Anti Corruption Bureau, Maharashtra</a></li>
+                      <li class="p-1"><a href="https://mahacid.gov.in/">Criminal Investigation Department (CID), Pune</a></li>
+                      <li class="p-1"><a href="https://dhulepolice.gov.in/">Dhule District Police</a></li>
+                      <li class="p-1"><a href="https://nandurbar.mahapolice.gov.in/">Nandurbar District Police</a></li>
+                      <li class="p-1"><a href="https://nashikcitypolice.gov.in/">Nashik City Police</a></li>
+                      <li class="p-1"><a href="https://www.nashikruralpolice.gov.in/">Nashik Rural Police</a></li>
+                      <li class="p-1"><a href="https://ahmednagardistpolice.gov.in/">Ahilyanagar District Police</a></li>
+                  </ul>
+              </div>
+
+              <!-- Social Media Section -->
+              <div class="col-md-4 text-md-end text-center">
+                  <h5 class="text-warning">Follow Us On Social Media</h5>
+                  <div class="social-icons">
+                      <a href="https://www.facebook.com/JalgaonPolice/"><i class="fab fa-facebook-square"></i></a>
+                      <a href="https://x.com/jalgaonpolice?lang=en"><i class="fab fa-twitter-square"></i></a>
+                      <a href="https://www.youtube.com/@Jalgaonpolice_"><i class="fab fa-youtube-square"></i></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+  <!-- Footer Bottom -->
+  <div class="footer-bottom">
+      <p>© 2025, Jalgaon Police All Rights Reserved</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+
+    <!-- Main JS -->
+    <script src="../assets/js/main.js"></script>
+
+    <!-- Page JS -->
+
+    <!-- Place this tag before closing body tag for github widget button. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          const emojis = document.querySelectorAll(".emoji");
+          const ratingInput = document.getElementById("feedback_rating");
+
+          emojis.forEach(emoji => {
+              emoji.addEventListener("click", function () {
+                  const selectedValue = this.getAttribute("data-value");
+
+                  // Update hidden input value
+                  ratingInput.value = selectedValue;
+
+                  // Highlight the selected emoji (Optional)
+                  emojis.forEach(e => e.classList.remove("selected"));
+                  this.classList.add("selected");
+              });
+          });
+      });
+  </script>
+
+
+<script>
+  // Function to get the user's geolocation
+  function getUserLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Update the geolocation input fields
+        document.getElementById('latitude').value = latitude;
+        document.getElementById('longitude').value = longitude;
+
+        // Store the geolocation in local storage
+        localStorage.setItem('userLocation', JSON.stringify({ latitude, longitude }));
+
+        // Calculate the distance to the police station when available
+        calculateDistanceToPoliceStation(latitude, longitude);
+      }, function (error) {
+        console.error("Error getting location: " + error.message);
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+  // Function to get the accurate location when button is clicked
+  function getAccurateUserLocation() {
+    getUserLocation();
+    // Added accuracy check and logs
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const accuracy = position.coords.accuracy;
+
+        console.log(`Location Accuracy: ${accuracy} meters`);
+        let message = accuracy <= 50
+  ? "Location is accurate (within 50 meters)."
+  : "Location accuracy is poor (more than 50 meters).";
+
+if (!localStorage.getItem("accuracyAlertShown")) {
+  alert(message);
+  localStorage.setItem("accuracyAlertShown", "true");
+}
+
+        // You can also log the coordinates and accuracy
+        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+      }, function (error) {
+        console.error("Error getting location: " + error.message);
+      });
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+
+
+
+  let policeStationData = {};
+
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
+
+
+//   if (!isNaN(policeLat) && !isNaN(policeLon) && stationId) {
+  function calculateDistanceToPoliceStation(userLat, userLon) {
+  const policeLat = parseFloat(getQueryParam('latitude'));
+  const policeLon = parseFloat(getQueryParam('longitude'));
+  const stationId = getQueryParam('stationId');
+
+  console.log('Distance Calculation:', { userLat, userLon, policeLat, policeLon, stationId });
+
+  if (!isNaN(policeLat) && !isNaN(policeLon) && stationId) {
+    // Calculate the distance using the Haversine formula
+    const R = 6371; // Radius of the Earth in km
+    const dLat = (policeLat - userLat) * Math.PI / 180;
+    const dLon = (policeLon - userLon) * Math.PI / 180;
+
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(userLat * Math.PI / 180) * Math.cos(policeLat * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c * 1000; // Convert to meters
+
+    // Set the police station ID for the form
+    document.getElementById('police_station_id').value = stationId;
+
+    // If distance is more than 50 meters, disable the submit button
+    const submitButton = document.getElementById("submitButton");
+    if (distance > 50) {
+      document.getElementById('accuracy').value = "Inaccurate location: More than 50 meters away";
+      alert("You must be within 50 meters of the nearest police station to fill out and submit the form.");
+
+      // Disable the form fields and submit button if the location is too far
+      document.querySelectorAll('input, textarea, select, button').forEach(element => {
+        element.disabled = true;
+      });
+      submitButton.style.backgroundColor = "gray"; // Gray color when disabled
+    } else {
+      document.getElementById('accuracy').value = "Accurate location";
+
+      // Enable the form fields and submit button if the location is within range
+      document.querySelectorAll('input, textarea, select, button').forEach(element => {
+        element.disabled = false;
+      });
+      submitButton.style.backgroundColor = "#007bff"; // Reset to original color when enabled
+    }
+  } else {
+    console.log("Police station location is not available in query parameters.");
+  }
+}
+
+// Set the default user location when the page loads
+window.onload = function() {
+  localStorage.removeItem("accuracyAlertShown");
+  getUserLocation();
+  fetchPoliceStationDetails();
+}
+
+
+async function fetchPoliceStationDetails() {
+    const stationId = getQueryParam('stationId');
+
+    if (!stationId) {
+        console.error("Police station ID is missing in the URL.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`https://mumbailocal.org:8085/api/dashboard/${stationId}`);
+        if (!response.ok) {
+            throw new Error("Failed to fetch police station details.");
+        }
+
+        policeStationData = await response.json();
+
+        // Log details
+        console.log("Fetched Police Station Data:", policeStationData);
+
+    } catch (error) {
+        console.error("Error fetching police station details:", error);
+    }
+}
+
+// Call function on page load
+// window.onload = fetchPoliceStationDetails;
+
+async function submitFeedback(event) {
+    event.preventDefault();
+
+    const stationId = getQueryParam('stationId');
+
+    if (!stationId) {
+        alert("Police station ID is missing!");
+        return;
+    }
+
+    try {
+        // Fetch police station details
+        const stationResponse = await fetch(`https://mumbailocal.org:8085/api/dashboard/${stationId}`);
+
+        if (!stationResponse.ok) {
+            alert("Failed to fetch police station details.");
+            return;
+        }
+
+        const stationData = await stationResponse.json();
+console.log(stationData, "statoindata");
+
+        const policeStationId = stationData.id;
+        const policeStationAddress = stationData?.policestationAddress || "Unknown Address"; // Handling unnamed key
+        const policeStationLatitude = stationData.policestationLatitude || 0;
+        const policeStationLongitude = stationData.policestationLongitude || 0;
+
+        console.log(policeStationId, policeStationAddress, policeStationLatitude, policeStationLongitude);
+
+        // Validate fetched data
+        if (!policeStationId || !policeStationLatitude || !policeStationLongitude) {
+            alert('Police station information is incomplete');
+            return;
+        }
+
+        const form = document.getElementById("policeComplaintForm");
+        const formData = new FormData(form);
+        const now = new Date();
+        const currentDate = now.toISOString().split("T")[0];
+        const currentTime = now.toTimeString().split(" ")[0];
+
+        const resolutionDate = new Date();
+        resolutionDate.setDate(resolutionDate.getDate() + 7);
+        const expectedDateOfResolution = resolutionDate.toISOString().split("T")[0];
+
+        // Get user IP
+        const ipResponse = await fetch("https://api64.ipify.org?format=json");
+        const ipData = await ipResponse.json();
+        const userIP = ipData.ip || "Unknown";
+
+        const payload = {
+            userName: formData.get("user_name"),
+            contactNumber: formData.get("contact_number"),
+            concerneddepartment: formData.get("department_issue"),
+            purposeOfVisit: formData.get("purpose_of_visit"),
+            arrivalDate: currentDate,
+            arrivalTime: currentTime,
+            departureDate: currentDate,
+            departureTime: currentTime,
+            userfeedbackRating: parseInt(formData.get("feedback_rating")) || null,
+            userfeedbackComments: formData.get("feedback_comments"),
+            userSatisfied: formData.get("usersatisfied"),
+            userlatitude: parseFloat(formData.get("geolocation[latitude]")) || 0,
+            userlongitude: parseFloat(formData.get("geolocation[longitude]")) || 0,
+            policestationlatitude: policeStationLatitude,
+            policestationLongitude: policeStationLongitude,
+            ip: userIP,
+            policestationaddress: policeStationAddress,
+            complaintStatus: "Pending",
+            subdepartmentremark: "Pending",
+            departmentremark: "Pending",
+            headofficeremark: "Pending",
+            expecteddateofresolution: expectedDateOfResolution,
+            issuedlicense: "Yes",
+            policeStationId: policeStationId,
+        };
+
+        // Submit feedback
+        const response = await fetch("https://mumbailocal.org:8085/api/feedback", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+
+        if (response.ok) {
+            alert("Feedback submitted successfully!");
+            form.reset();
+        } else {
+            const errorData = await response.json();
+            alert(`Error: ${errorData.message || "Failed to submit feedback."}`);
+        }
+    } catch (error) {
+        console.error("API Error:", error);
+        alert("An error occurred while submitting the feedback.");
+    }
+}
+
+
+// async function submitFeedback(event) {
+//     event.preventDefault();
+
+//     // Log query parameters for debugging
+//     console.log('Query Parameters:', {
+//         stationId: getQueryParam('stationId'),
+//         latitude: getQueryParam('latitude'),
+//         longitude: getQueryParam('longitude')
+//     });
+
+//     // Create police station location object from query parameters
+//     // const policeStationLocation = {
+//     //     stationId: getQueryParam('stationId'),
+//     //     latitude: parseFloat(getQueryParam('latitude')),
+//     //     longitude: parseFloat(getQueryParam('longitude'))
+//     // };
+//     const policeStationId = getQueryParam('stationId');
+//     const policeStationAddress = getQueryParam('address');
+//     const policeStationLatitude = parseFloat(getQueryParam('latitude'));
+//     const policeStationLongitude = parseFloat(getQueryParam('longitude'));
+//     const policeStationRating = parseFloat(getQueryParam('rating'));
+
+// console.log(policeStationId, policeStationAddress,policeStationLatitude,policeStationLongitude );
+
+
+//     // Verify policeStationLocation before using
+//     if (!policeStationId || !policeStationLatitude || !policeStationLongitude) {
+//         alert('Police station location information is incomplete');
+//         return;
+//     }
+
+//     const form = document.getElementById("policeComplaintForm");
+//     const formData = new FormData(form);
+//     const now = new Date();
+//     const currentDate = now.toISOString().split("T")[0];
+//     const currentTime = now.toTimeString().split(" ")[0];
+
+//     const resolutionDate = new Date();
+//     resolutionDate.setDate(resolutionDate.getDate() + 7);
+//     const expectedDateOfResolution = resolutionDate.toISOString().split("T")[0];
+
+//     try {
+//         const ipResponse = await fetch("https://api64.ipify.org?format=json");
+//         const ipData = await ipResponse.json();
+//         const userIP = ipData.ip || "Unknown";
+
+//         const payload = {
+//             userName: formData.get("user_name"),
+//             contactNumber: formData.get("contact_number"),
+//             concerneddepartment: formData.get("department_issue"),
+//             purposeOfVisit: formData.get("purpose_of_visit"),
+
+//             arrivalDate: currentDate,
+//             arrivalTime: currentTime,
+//             departureDate: currentDate,
+//             departureTime: currentTime,
+//             userfeedbackRating: parseInt(formData.get("feedback_rating")) || null,
+//             userfeedbackComments: formData.get("feedback_comments"),
+//             userSatisfied : formData.get("usersatisfied"),
+//             userlatitude: parseFloat(formData.get("geolocation[latitude]")) || 0,
+//             userlongitude: parseFloat(formData.get("geolocation[longitude]")) || 0,
+//             policestationlatitude: policeStationLatitude || 0,
+//             policestationlogintude: policeStationLongitude || 0,
+//             ip: userIP,
+//             policestationaddress: policeStationAddress,
+//             complaintStatus: "Pending",
+//             subdepartmentremark: "Pending",
+//             departmentremark: "Pending",
+//             headofficeremark: "Pending",
+//             expecteddateofresolution: resolutionDate,
+//             issuedlicense: "Yes",
+//             policeStationId: policeStationId,
+//         };
+
+//         const response = await fetch("https://mumbailocal.org:8085/api/feedback", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify(payload)
+//         });
+
+//         if (response.ok) {
+//             alert("Feedback submitted successfully!");
+//             form.reset();
+//         } else {
+//             const errorData = await response.json();
+//             alert(`Error: ${errorData.message || "Failed to submit feedback."}`);
+//         }
+//     } catch (error) {
+//         console.error("API Error:", error);
+//         alert("An error occurred while submitting the feedback.");
+//     }
+// }
+
+
+</script>
+<script>
+  // Font Size Change
+let baseFontSize = 16; // Default font size
+
+function changeFontSize(change) {
+    baseFontSize += change;
+    document.body.style.fontSize = baseFontSize + "px";
+}
+
+function resetFontSize() {
+    baseFontSize = 16;
+    document.body.style.fontSize = baseFontSize + "px";
+}
+
+</script>
+</body>
+</html>

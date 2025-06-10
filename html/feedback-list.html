@@ -1,0 +1,931 @@
+<!doctype html>
+<html
+  lang="en"
+  class="light-style layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="../assets/"
+  data-template="vertical-menu-template-free"
+  data-style="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Amdavad Municipal Corporation CSR Management System | Feedback List</title>
+    <meta name="description" content="" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo/amcLogo.png" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="../assets/css/demo.css" />
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+    <script src="../assets/js/config.js"></script>
+  </head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="index.html" class="app-brand-link">
+              <span class="app-brand-logo demo pt-4 pb-4">
+                <img src="../assets/img/logo/amcLogo.png" alt="logo" height="50px"/>
+              </span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2" style="color:#0042AC">AMC CSR Admin</span>
+            </a>
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+            </a>
+          </div>
+          <div class="menu-inner-shadow"></div>
+          <ul class="menu-inner py-1">
+             <!--Dashboards -->
+            <li class="menu-item">
+              <a href="index.html" class="menu-link">
+                <!--<i class="menu-icon tf-icons bx bxs-dashboard"></i>-->
+                <i class="menu-icon tf-icons bx bx-grid-alt"></i>
+                <div class="text-truncate" data-i18n="Analytics">Dashboards</div>
+              </a>
+            </li>
+            <li class="menu-item active ">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <!--<i class="menu-icon tf-icons bx bx-home-smile"></i>-->
+                <i class="menu-icon tf-icons bx bx-comment-detail"></i>
+                <div class="text-truncate " data-i18n="Dashboards" >Feedback</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item active">
+                  <a href="feedback-list.html" class="menu-link">
+                    <div class="text-truncate " data-i18n="Analytics">View All Feedback</div>
+                  </a>
+                </li>
+                <!-- <li class="menu-item">
+                  <a href="policestation_wise_filter.html" target="_blank" class="menu-link">
+                    <div class="text-truncate" data-i18n="eCommerce">Filter Feedback by Police Station</div>
+                  </a>
+                </li> -->
+                <li class="menu-item">
+                  <a href="feedback-form.html" target="_blank" class="menu-link">
+                    <div class="text-truncate" data-i18n="eCommerce">Feedback Form</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item" id="policeStationMenu">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <!--<i class="menu-icon tf-icons bx bx-home-smile"></i>-->
+                <i class="menu-icon tf-icons bx bx-shield"></i>
+                <div class="text-truncate" data-i18n="Dashboards">Police Station</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="police-station-list.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Analytics">View All Police Stations</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="police-station-create.html"  class="menu-link">
+                    <div class="text-truncate" data-i18n="eCommerce">Police Station Form</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+             <li class="menu-item">
+              <a href="PolicestationLocator.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-map"></i>  <!-- Map icon -->
+                <div class="text-truncate" data-i18n="Analytics">Locate Police Station</div>
+              </a>
+            </li>
+
+            <li class="menu-item" id="createUserMenu">
+              <a href="create-user.html" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-user"></i>
+                  <div class="text-truncate">Create User</div>
+              </a>
+          </li>
+          </ul>
+        </aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav
+          class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+          id="layout-navbar">
+          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
+            <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
+              <i class="bx bx-menu bx-md"></i>
+            </a>
+          </div>
+          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+              <!-- User -->
+              <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+                  <div class="avatar avatar-online">
+                    <img src="../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
+                  </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                          <div class="avatar avatar-online">
+                            <img src="../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
+                          </div>
+                        </div>
+                        <div class="flex-grow-1" id="userInfoContainer">
+                          <h6 class="mb-0">John Doe</h6>
+                          <small class="text-muted">Admin</small>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                 <li>
+    <a class="dropdown-item logout-button" href="./login.html">
+        <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+    </a>
+</li>
+                </ul>
+              </li>
+              <!--/ User -->
+            </ul>
+          </div>
+        </nav>
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="card">
+              <div class="container mt-5">
+                <h5 class="card-header">Feedback List</h5>
+                <div class="row">
+                  <div class="col-md-4 mt-2 mb-2">
+                    <label for="monthSelect">Select Month:</label>
+                    <select id="monthSelect" class="form-control">
+                      <option value="January">January</option>
+                      <option value="February">February</option>
+                      <option value="March">March</option>
+                      <option value="April">April</option>
+                      <option value="May">May</option>
+                      <option value="June">June</option>
+                      <option value="July">July</option>
+                      <option value="August">August</option>
+                      <option value="September">September</option>
+                      <option value="October">October</option>
+                      <option value="November">November</option>
+                      <option value="December">December</option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4 mt-2 mb-2">
+                    <label for="ratingSelect">Filter by Rating:</label>
+                    <select id="ratingSelect" class="form-control">
+                      <option value="0">Select Rating</option>
+                      <option value="1">⭐ </option>
+                      <option value="2">⭐⭐ </option>
+                      <option value="3">⭐⭐⭐ </option>
+                      <option value="4">⭐⭐⭐⭐ </option>
+                      <option value="5">⭐⭐⭐⭐⭐ </option>
+                    </select>
+                  </div>
+
+                  <div class="col-md-4 mt-2 mb-2">
+                    <label for="dateSelect">Select Date:</label>
+                    <input type="date" id="dateSelect" class="form-control">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 p-3">
+                    <label for="policeStationSelect">Select Police Station:</label>
+                        <select id="policeStationSelect" class="form-control">
+                             <option value="">Select Police Station</option>
+                        </select>
+                  </div>
+                  <div class="col-md-6 p-3">
+                    <div class="form-group  ">
+                      <label for="de">Department:</label>
+                      <select class="form-select" id="department_issue" name="department_issue" required>
+                        <option value="">Select Department</option>
+                        <option value="Crime">Crime</option>
+                        <option value="Law and Order">Law and Order</option>
+                        <option value="Traffic Accidents">Traffic Accidents</option>
+                        <option value="Passport Verification">Passport Verification</option>
+                        <option value="Permissions">Permissions (Processions/Festivals/Arms)</option>
+                        <option value="Lost Property">Lost Property</option>
+                        <option value="Cyber Crimes">Cyber Crimes</option>
+                        <option value="Police Protection">Police Protection</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <input type="text" id="searchInput" class="form-control" placeholder="Search entries..." onkeyup="filterTable()" />
+                </div>
+                <!-- Tab Navigation -->
+                <ul class="nav nav-tabs" id="feedbackTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="in-progress-tab" data-bs-toggle="tab" data-bs-target="#in-progress" type="button" role="tab">All </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="resolved-tab" data-bs-toggle="tab" data-bs-target="#resolved" type="button" role="tab">Resolved</button>
+                  </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="feedbackTabsContent">
+                  <div class="tab-pane fade show active" id="in-progress" role="tabpanel">
+                    <div class="table-responsive text-nowrap">
+
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Sr. No</th>
+                            <th>User Name</th>
+                            <th>Contact No.</th>
+                            <th>Department Issue</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody id="inProgressTable" ></div>
+                        </tbody>
+                      </table>
+                      <div id="inProgressPagination" class="pagination-controls" style="display: flex
+                      ;
+                          justify-content: center;
+                          margin-top: 20px;
+                          margin-bottom: 20px;
+                          gap:10px"></div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="resolved" role="tabpanel" >
+
+                    <div class="table-responsive text-nowrap">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Sr. No</th>
+                            <th>User Name</th>
+                            <th>Contact No.</th>
+                            <th>Department Issue</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody id="resolvedTable">
+                      </table>
+                      <div id="resolvedPagination" class="pagination-controls" style="display: flex
+                      ;
+                          justify-content: center;
+                          margin-top: 20px;
+                          margin-bottom: 20px;
+                          gap:10px" ></div>
+                        </tbody>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<div class="modal fade" id="editComplaintModal" tabindex="-1" aria-labelledby="editComplaintModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editComplaintModalLabel">Edit Feedback</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="editComplaintForm">
+          <input type="hidden" id="feedbackId">
+          <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="userName" class="form-label">User Name</label>
+              <input type="text" class="form-control" id="userName" disabled="true">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="contactNumber" class="form-label">Contact Number</label>
+              <input type="text" class="form-control" id="contactNumber" disabled="true">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="concernedDepartment" class="form-label">Concerned Department</label>
+              <input type="text" class="form-control" id="concernedDepartment" disabled="true">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="purposeOfVisit" class="form-label">Purpose Of Visit</label>
+              <input type="text" class="form-control" id="purposeOfVisit" disabled="true">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="arrivalDate" class="form-label">Arrival Date</label>
+              <input type="date" class="form-control" id="arrivalDate" disabled="true">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="arrivalTime" class="form-label">Arrival Time</label>
+              <input type="time" class="form-control" id="arrivalTime" disabled="true">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="departureDate" class="form-label">Departure Date</label>
+              <input type="date" class="form-control" id="departureDate" disabled="true">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="departureTime" class="form-label">Departure Time</label>
+              <input type="time" class="form-control" id="departureTime" disabled="true">
+            </div>
+          </div>
+          <!-- <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="feedbackRating" class="form-label">Feedback Rating</label>
+              <input type="number" class="form-control" id="feedbackRating" min="1" max="5" disabled="true">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="feedbackComments" class="form-label">Feedback Comments</label>
+              <textarea class="form-control" id="feedbackComments" rows="2" disabled="true"></textarea>
+            </div>
+          </div> -->
+          <div class="row">
+            <div class="mb-3 col-md-3">
+              <label for="feedbackRating" class="form-label">Feedback Rating</label>
+              <input type="number" class="form-control" id="feedbackRating" min="1" max="5" disabled="true">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="feedbackComments" class="form-label">Feedback Comments</label>
+              <textarea class="form-control" id="feedbackComments" rows="2" disabled="true"></textarea>
+            </div>
+            <div class="mb-3 col-md-3">
+              <label for="userSatisfied" class="form-label">User Satisfied</label>
+              <input type="text" class="form-control" id="userSatisfied" disabled="true">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="latitude" class="form-label">Latitude</label>
+              <input type="text" class="form-control" id="latitude" disabled="true">
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="longitude" class="form-label">Longitude</label>
+              <input type="text" class="form-control" id="longitude" disabled="true">
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="ip" class="form-label">IP</label>
+              <input type="text" class="form-control" id="ip" disabled="true">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="policeStationAddress" class="form-label">Police Station Address</label>
+              <textarea class="form-control" id="policeStationAddress" rows="2"  disabled="true"></textarea>
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="complaintStatus" class="form-label">Complaint Status</label>
+              <select class="form-control" id="complaintStatus">
+                <option value="Resolved">Resolved</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <!-- Add other statuses if needed -->
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-4">
+              <label for="subdepartmentRemark" class="form-label">Subdepartment Remark</label>
+              <textarea class="form-control" id="subdepartmentRemark" rows="2"></textarea>
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="departmentRemark" class="form-label">Department Remark</label>
+              <textarea class="form-control" id="departmentRemark" rows="2"></textarea>
+            </div>
+            <div class="mb-3 col-md-4">
+              <label for="headOfficerRemark" class="form-label">Head Officer Remark</label>
+              <textarea class="form-control" id="headOfficerRemark" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="expectedDateOfResolution" class="form-label">Expected Date Of Resolution</label>
+              <input type="date" class="form-control" id="expectedDateOfResolution">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="issuedLicense" class="form-label">Issued License</label>
+              <input type="text" class="form-control" id="issuedLicense">
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-md-6">
+              <label for="timestamp" class="form-label">Timestamp</label>
+              <input type="text" class="form-control" id="timestamp" disabled="true">
+            </div>
+            <div class="mb-3 col-md-6">
+              <label for="policeStationId" class="form-label">Police Station ID</label>
+              <input type="text" class="form-control" id="policeStationId" disabled="true">
+              <input type="hidden" id="subdepartmenttimestamp" name="subdepartmenttimestamp">
+<input type="hidden" id="departmenttimestamp" name="departmenttimestamp">
+<input type="hidden" id="headofficertimestamp" name="headofficertimestamp">
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary ms-2">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+              </div>
+              <hr class="my-12" />
+            </div>
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <!-- Core JS -->
+    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../assets/vendor/libs/popper/popper.js"></script>
+    <script src="../assets/vendor/js/bootstrap.js"></script>
+    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/navbar.js"></script>
+     <script src="../assets/js/filter-feedback.js"></script>
+     <!-- rolewise sidebar -->
+     <script>
+      const role = localStorage.getItem('role');
+      if (role ==='HEAD_OFFICE'){
+        document.getElementById('policeStationMenu').style.display = 'block';
+        document.getElementById('createUserMenu').style.display='block';
+      } else{
+        document.getElementById('policeStationMenu').style.display = 'none';
+        document.getElementById('createUserMenu').style.display='none';
+
+      }
+    </script>
+ <script>
+      // Session duration and warning time
+      const SESSION_DURATION = 60 * 60 * 1000; // 1 hour
+      const WARNING_TIME = 10 * 60 * 1000; // 10 minutes before session expiration
+
+      // Set session start time
+      function setSessionStartTime() {
+          localStorage.setItem('sessionStartTime', Date.now());
+      }
+
+      // Clear session and redirect to login
+      function clearSession() {
+          localStorage.clear(); // Clear all local storage
+          alert('Your session has expired. Redirecting to login.');
+          window.location.href = './login.html';
+      }
+
+      // Check session expiration and handle warning
+      function checkSessionExpiration() {
+          const sessionStartTime = localStorage.getItem('sessionStartTime');
+          const currentTime = Date.now();
+
+          if (sessionStartTime) {
+              const timeElapsed = currentTime - parseInt(sessionStartTime);
+
+              if (timeElapsed > SESSION_DURATION) {
+                  clearSession();
+              } else if (timeElapsed > SESSION_DURATION - WARNING_TIME) {
+                  const remainingTime = Math.round((SESSION_DURATION - timeElapsed) / 1000 / 60);
+                  if (!localStorage.getItem('warningShown')) {
+                      alert(`Your session will expire in ${remainingTime} minutes.`);
+                      localStorage.setItem('warningShown', 'true');
+                  }
+              }
+          } else {
+              clearSession();
+          }
+      }
+
+      // Handle user logout
+      function handleLogout() {
+          clearSession();
+      }
+
+      // Event listener for logout button
+      document.addEventListener('DOMContentLoaded', () => {
+          // Redirect to login if userData is not present
+          if (!localStorage.getItem('userData')) {
+              clearSession();
+              return;
+          }
+
+          // Logout button event
+          const logoutButton = document.querySelector('.logout-button');
+          if (logoutButton) {
+              logoutButton.addEventListener('click', (e) => {
+                  e.preventDefault(); // Prevent default link behavior
+                  handleLogout();
+              });
+          }
+
+          // Set session start time if not already set
+          if (!localStorage.getItem('sessionStartTime')) {
+              setSessionStartTime();
+          }
+
+          // Periodically check for session expiration
+          setInterval(checkSessionExpiration, 1 * 60 * 1000); // Check every minute
+      });
+
+      // Reset session timer on user activity
+      const resetSessionEvents = ['mousemove', 'keydown', 'scroll', 'click'];
+      resetSessionEvents.forEach(eventType => {
+          document.addEventListener(eventType, setSessionStartTime);
+      });
+  </script>
+
+    <script>
+      function filterTable() {
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+        const tableWrappers = document.querySelectorAll('.tab-pane.active table tbody');
+        tableWrappers.forEach((tableBody) => {
+          const rows = tableBody.getElementsByTagName('tr');
+          for (let row of rows) {
+            const cells = row.getElementsByTagName('td');
+            let rowContainsSearchTerm = false;
+            for (let cell of cells) {
+              if (cell.textContent.toLowerCase().includes(searchInput)) {
+                rowContainsSearchTerm = true;
+                break;
+              }
+            }
+            row.style.display = rowContainsSearchTerm ? '' : 'none';
+          }
+        });
+      }
+    </script>
+<script>
+  // Global arrays to store all fetched feedback
+  let allFeedback = [];
+  let inProgressFeedback = [];
+  let resolvedFeedback = [];
+
+  // Client-side pagination settings (10 rows per page)
+  const rowsPerPage = 10;
+  let inProgressCurrentPage = 1; // 1-indexed for display
+  let resolvedCurrentPage = 1;
+  let inProgressTotalPages = 0;
+  let resolvedTotalPages = 0;
+
+  // When the DOM is ready, start fetching all pages
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchAllPages(0);
+  });
+
+  // Recursive function to fetch pages until no entries are returned
+  function fetchAllPages(page) {
+    const token = localStorage.getItem('token');
+    let apiUrl ;
+    const role = localStorage.getItem('role');
+    const subdivisionId =  localStorage.getItem('subdivisiondepartmentid');
+    const policeStationId = localStorage.getItem('policestationid');
+    if(role==='HEAD_OFFICE'){
+      apiUrl = `https://mumbailocal.org:8085/api/getfeedback?page=${page}`;
+    } else if(role==='POLICE_SUB_DEPARTMENT'){
+      apiUrl = `https://mumbailocal.org:8085/api/feedback/by-subdivision/${subdivisionId}?page=${page}`;
+    } else{
+     document.getElementById('policeStationSelect').value =
+      apiUrl = `https://mumbailocal.org:8085/api/feedback/by-policestation/${policeStationId}`;
+    }
+    fetch(`${apiUrl}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    })
+      .then(response => response.json())
+      .then(data => {
+        // If this page has entries, add them to our global array and fetch the next page
+        if (data.content && data.content.length > 0) {
+          allFeedback = allFeedback.concat(data.content);
+          fetchAllPages(page + 1);
+        } else {
+          // No more entries; now split into two arrays by complaintStatus
+          inProgressFeedback = allFeedback.filter(item => {
+  const status = item.complaintStatus.trim().toLowerCase();
+  return status === 'pending' || status === 'in progress';
+});
+          resolvedFeedback = allFeedback.filter(item =>
+            item.complaintStatus === 'Resolved'
+          );
+
+          // Calculate total pages for each table
+          inProgressTotalPages = Math.ceil(inProgressFeedback.length / rowsPerPage);
+          resolvedTotalPages = Math.ceil(resolvedFeedback.length / rowsPerPage);
+
+          // Render the first page for both tables
+          renderInProgressTable();
+          renderResolvedTable();
+          renderInProgressPagination();
+          renderResolvedPagination();
+        }
+      })
+      .catch(error => console.error('Error fetching pages:', error));
+  }
+
+  // ----------------------------
+  // In‑Progress Table Rendering
+  // ----------------------------
+  function renderInProgressTable() {
+    const tableElement = document.getElementById('inProgressTable');
+    const start = (inProgressCurrentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const rows = inProgressFeedback.slice(start, end);
+    let html = '';
+    rows.forEach((feedback, index) => {
+      // Global row number: count from 1 across pages
+      const globalIndex = start + index + 1;
+      html += createTableRow(globalIndex, feedback);
+    });
+    tableElement.innerHTML = html;
+  }
+
+  function renderInProgressPagination() {
+    const paginationElement = document.getElementById('inProgressPagination');
+    let html = '';
+    html += `<button class="btn btn-primary btn-sm" onclick="changeInProgressPage(${inProgressCurrentPage - 1})" ${inProgressCurrentPage === 1 ? 'disabled' : ''}>Previous</button>`;
+    html += ` Page ${inProgressCurrentPage} of ${inProgressTotalPages} `;
+    html += `<button class="btn btn-primary btn-sm" onclick="changeInProgressPage(${inProgressCurrentPage + 1})" ${inProgressCurrentPage === inProgressTotalPages ? 'disabled' : ''}>Next</button>`;
+    paginationElement.innerHTML = html;
+  }
+
+  function changeInProgressPage(page) {
+    if (page < 1 || page > inProgressTotalPages) return;
+    inProgressCurrentPage = page;
+    renderInProgressTable();
+    renderInProgressPagination();
+  }
+
+  // ----------------------------
+  // Resolved Table Rendering
+  // ----------------------------
+  function renderResolvedTable() {
+    const tableElement = document.getElementById('resolvedTable');
+    const start = (resolvedCurrentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const rows = resolvedFeedback.slice(start, end);
+    let html = '';
+    rows.forEach((feedback, index) => {
+      const globalIndex = start + index + 1;
+      html += createTableRow(globalIndex, feedback);
+    });
+    tableElement.innerHTML = html;
+  }
+
+  function renderResolvedPagination() {
+    const paginationElement = document.getElementById('resolvedPagination');
+    let html = '';
+    html += `<button class="btn btn-primary btn-sm" onclick="changeResolvedPage(${resolvedCurrentPage - 1})" ${resolvedCurrentPage === 1 ? 'disabled' : ''}>Previous</button>`;
+    html += ` Page ${resolvedCurrentPage} of ${resolvedTotalPages} `;
+    html += `<button class="btn btn-primary btn-sm" onclick="changeResolvedPage(${resolvedCurrentPage + 1})" ${resolvedCurrentPage === resolvedTotalPages ? 'disabled' : ''}>Next</button>`;
+    paginationElement.innerHTML = html;
+  }
+
+  function changeResolvedPage(page) {
+    if (page < 1 || page > resolvedTotalPages) return;
+    resolvedCurrentPage = page;
+    renderResolvedTable();
+    renderResolvedPagination();
+  }
+
+  // ----------------------------
+  // Shared: Create Table Row and Edit Functionality
+  // ----------------------------
+  function createTableRow(index, feedback) {
+    // Choose a badge color based on complaintStatus.
+    const statusClass = feedback.complaintStatus === 'Resolved'
+      ? 'bg-success'
+      : (feedback.complaintStatus === 'Pending' || feedback.complaintStatus === 'InProgress')
+      ? 'bg-warning'
+      : 'bg-primary';
+    // Safely encode the feedback object for the onclick attribute.
+    const escapedFeedback = encodeURIComponent(JSON.stringify(feedback));
+    return `
+      <tr>
+        <td>${index}</td>
+        <td>${feedback.userName}</td>
+        <td>${feedback.contactNumber}</td>
+        <td>${feedback.concerneddepartment}</td>
+        <td><span class="badge ${statusClass}">${feedback.complaintStatus}</span></td>
+        <td>
+          <button class="btn btn-primary btn-sm" onclick='handleEdit(JSON.parse(decodeURIComponent("${escapedFeedback}")))' >
+            Edit
+          </button>
+        </td>
+      </tr>
+    `;
+  }
+
+  // ----------------------------
+  // Edit Modal and Update Functions (Unchanged)
+  // ----------------------------
+  function handleEdit(feedback) {
+    const userRole = localStorage.getItem('role');
+    const token = localStorage.getItem('token');
+    const detailUrl = 'https://mumbailocal.org:8085/api/feedback/' + feedback.id;
+
+    fetch(detailUrl, { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(response => response.json())
+      .then(detailData => {
+        // Populate edit modal fields.
+        document.getElementById('feedbackId').value = detailData.id;
+        document.getElementById('userName').value = detailData.userName;
+        document.getElementById('contactNumber').value = detailData.contactNumber;
+        document.getElementById('concernedDepartment').value = detailData.concerneddepartment;
+        document.getElementById('purposeOfVisit').value = detailData.purposeOfVisit;
+        document.getElementById('arrivalDate').value = detailData.arrivalDate;
+        document.getElementById('arrivalTime').value = detailData.arrivalTime;
+        document.getElementById('departureDate').value = detailData.departureDate;
+        document.getElementById('departureTime').value = detailData.departureTime;
+        document.getElementById('feedbackRating').value = detailData.userfeedbackRating;
+        document.getElementById('feedbackComments').value = detailData.userfeedbackComments;
+        document.getElementById('latitude').value = detailData.userlatitude;
+        document.getElementById('longitude').value = detailData.userlongitude;
+        document.getElementById('ip').value = detailData.ip;
+        document.getElementById('policeStationAddress').value = detailData.policestationAddress;
+        document.getElementById('complaintStatus').value = detailData.complaintStatus;
+        document.getElementById('subdepartmentRemark').value = detailData.subdepartmentremark;
+        document.getElementById('departmentRemark').value = detailData.departmentremark;
+        document.getElementById('headOfficerRemark').value = detailData.headofficeremark;
+        document.getElementById('expectedDateOfResolution').value = detailData.expecteddateofresolution;
+        document.getElementById('issuedLicense').value = detailData.issuedlicense;
+        document.getElementById('timestamp').value = detailData.timestamp;
+        document.getElementById('policeStationId').value = detailData.policeStationId;
+        document.getElementById('userSatisfied').value = detailData.userSatisfied;
+
+        // Configure remark fields based on user role.
+        const subdepartmentRemark = document.getElementById('subdepartmentRemark');
+        const departmentRemark = document.getElementById('departmentRemark');
+        const headOfficerRemark = document.getElementById('headOfficerRemark');
+        const subdepartmentRemarkContainer = subdepartmentRemark.closest('.mb-3');
+        const departmentRemarkContainer = departmentRemark.closest('.mb-3');
+        const headOfficerRemarkContainer = headOfficerRemark.closest('.mb-3');
+        subdepartmentRemarkContainer.style.display = 'none';
+        departmentRemarkContainer.style.display = 'none';
+        headOfficerRemarkContainer.style.display = 'none';
+
+        switch (userRole) {
+          case 'POLICE_SUB_DEPARTMENT':
+            subdepartmentRemarkContainer.style.display = 'block';
+            subdepartmentRemark.disabled = false;
+            break;
+          case 'Department':
+            subdepartmentRemarkContainer.style.display = 'block';
+            departmentRemarkContainer.style.display = 'block';
+            subdepartmentRemark.disabled = true;
+            departmentRemark.disabled = false;
+            break;
+          case 'HEAD_OFFICE':
+            subdepartmentRemarkContainer.style.display = 'block';
+            departmentRemarkContainer.style.display = 'block';
+            headOfficerRemarkContainer.style.display = 'block';
+            subdepartmentRemark.disabled = true;
+            departmentRemark.disabled = true;
+            headOfficerRemark.disabled = false;
+            break;
+          case 'Admin':
+            subdepartmentRemarkContainer.style.display = 'block';
+            departmentRemarkContainer.style.display = 'block';
+            headOfficerRemarkContainer.style.display = 'block';
+            subdepartmentRemark.disabled = false;
+            departmentRemark.disabled = false;
+            headOfficerRemark.disabled = false;
+            break;
+        }
+
+        // Show the edit modal (assumes Bootstrap 5)
+        const editModal = new bootstrap.Modal(document.getElementById('editComplaintModal'));
+        editModal.show();
+      })
+      .catch(error => console.error('Error fetching feedback details:', error));
+  }
+
+  document.getElementById('editComplaintForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const token = localStorage.getItem('token');
+    const feedbackId = document.getElementById('feedbackId').value;
+    const updateUrl = 'https://mumbailocal.org:8085/api/feedback/' + feedbackId;
+// Create the timestamp and remove milliseconds and timezone (e.g., "2024-02-12T15:00:00")
+const currentTimestamp = new Date().toISOString().split('.')[0];
+
+// Get the user role
+const userRole = localStorage.getItem('role');
+
+// Set the appropriate timestamp based on the user role
+switch (userRole) {
+    case 'POLICE_SUB_DEPARTMENT':
+        document.getElementById('subdepartmenttimestamp').value = currentTimestamp;
+        break;
+    case 'Department':
+        document.getElementById('departmenttimestamp').value = currentTimestamp;
+        break;
+    case 'HEAD_OFFICE':
+        document.getElementById('headofficertimestamp').value = currentTimestamp;
+        break;
+    case 'Admin':
+        // Admin can set all timestamps if needed
+        document.getElementById('subdepartmenttimestamp').value = currentTimestamp;
+        document.getElementById('departmenttimestamp').value = currentTimestamp;
+        document.getElementById('headofficertimestamp').value = currentTimestamp;
+        break;
+}
+
+
+    const payload = {
+      userName: document.getElementById("userName").value,
+      contactNumber: document.getElementById("contactNumber").value,
+      concerneddepartment: document.getElementById("concernedDepartment").value,
+      purposeOfVisit: document.getElementById("purposeOfVisit").value,
+      arrivalDate: document.getElementById("arrivalDate").value,
+      arrivalTime: document.getElementById("arrivalTime").value,
+      departureDate: document.getElementById("departureDate").value,
+      departureTime: document.getElementById("departureTime").value,
+      userfeedbackRating: parseInt(document.getElementById("feedbackRating").value, 10),
+      userfeedbackComments: document.getElementById("feedbackComments").value,
+      userlatitude: parseFloat(document.getElementById("latitude").value),
+      userlongitude: parseFloat(document.getElementById("longitude").value),
+      ip: document.getElementById("ip").value,
+      policestationAddress: document.getElementById("policeStationAddress").value,
+      complaintStatus: document.getElementById("complaintStatus").value,
+      subdepartmentremark: document.getElementById("subdepartmentRemark").value,
+      departmentremark: document.getElementById("departmentRemark").value,
+      headofficeremark: document.getElementById("headOfficerRemark").value,
+      expecteddateofresolution: document.getElementById("expectedDateOfResolution").value,
+      issuedlicense: document.getElementById("issuedLicense").value,
+      timestamp: document.getElementById('timestamp').value,
+      policeStationId: document.getElementById("policeStationId").value,
+      subdepartmenttimestamp: document.getElementById('subdepartmenttimestamp').value,
+      departmenttimestamp: document.getElementById('departmenttimestamp').value,
+        headofficetimestamp: document.getElementById('headofficertimestamp').value
+    };
+    fetch(updateUrl, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Failed to update feedback");
+        }
+        return response.json();
+      })
+      .then(() => {
+        alert("Feedback updated successfully!");
+        const editModal = bootstrap.Modal.getInstance(document.getElementById('editComplaintModal'));
+        editModal.hide();
+        // After update, you could re-fetch all pages (or update the arrays accordingly)
+        // For simplicity, here we re-run the initial fetch:
+        allFeedback = [];
+        fetchAllPages(0);
+      })
+      .catch(error => {
+        alert("Failed to update feedback. Please try again.");
+        console.error("Error updating feedback:", error);
+      });
+  });
+</script>
+
+
+    <!-- GitHub widget button (if required) -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  </body>
+</html>
