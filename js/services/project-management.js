@@ -4,21 +4,29 @@ document.addEventListener("DOMContentLoaded", function () {
   loadProjects();
 });
 
-function loadProjects() {
+let currentPage = 0;
+const pageSize = 10;
+
+function loadProjects(page = 0) {
+  currentPage = page;
+
   if (!Api.project || typeof Api.project.listAll !== 'function') {
     console.error("Api.project.listAll() is not available");
     return;
   }
 
-  Api.project.listAll()
+  Api.project.listAll(page, pageSize)
     .then((response) => {
       const projects = response.data.content;
+      const totalPages = response.data.totalPages;
       renderProjectsTable(projects);
+      renderPagination(totalPages);
     })
     .catch((error) => {
       console.error("Error loading projects:", error);
     });
 }
+
 
 function renderProjectsTable(projects) {
   const tbody = document.querySelector("tbody.table-border-bottom-0");
@@ -27,7 +35,8 @@ function renderProjectsTable(projects) {
   projects.forEach((project, index) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-     <td>${index + 1}</td>
+     <td>${index + 1 + currentPage * pageSize}</td>
+
       <td>${project.projectName}</td>
       <td>${Number(project.projectBudget).toLocaleString()}</td>
       <td>${project.categoryName}</td>
@@ -49,6 +58,40 @@ function renderProjectsTable(projects) {
     `;
     tbody.appendChild(row);
   });
+}
+
+function renderPagination(totalPages) {
+  const paginationUl = document.querySelector(".pagination");
+  paginationUl.innerHTML = ""; // Clear current pagination
+
+  // Previous Button
+  const prevDisabled = currentPage === 0 ? "disabled" : "";
+  paginationUl.innerHTML += `
+    <li class="page-item ${prevDisabled}">
+      <a class="page-link" href="javascript:void(0);" onclick="loadProjects(${currentPage - 1})">
+        <i class="tf-icon bx bx-chevron-left"></i>
+      </a>
+    </li>
+  `;
+
+  // Page Numbers
+  for (let i = 0; i < totalPages; i++) {
+    paginationUl.innerHTML += `
+      <li class="page-item ${currentPage === i ? 'active' : ''}">
+        <a class="page-link" href="javascript:void(0);" onclick="loadProjects(${i})">${i + 1}</a>
+      </li>
+    `;
+  }
+
+  // Next Button
+  const nextDisabled = currentPage === totalPages - 1 ? "disabled" : "";
+  paginationUl.innerHTML += `
+    <li class="page-item ${nextDisabled}">
+      <a class="page-link" href="javascript:void(0);" onclick="loadProjects(${currentPage + 1})">
+        <i class="tf-icon bx bx-chevron-right"></i>
+      </a>
+    </li>
+  `;
 }
 
 function deleteProject(id) {
