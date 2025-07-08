@@ -12,12 +12,13 @@ var ParticipantService = {
 listAll: function (page = 0, size = 5, filters = {}) {
   const params = new URLSearchParams({
     page,
-    size,
-    ...(filters.category && { category: filters.category }),
-    ...(filters.ngo && { ngo: filters.ngo }),
-    ...(filters.minBudget != null && { minBudget: filters.minBudget }),
-    ...(filters.maxBudget != null && { maxBudget: filters.maxBudget })
+    size
   });
+
+  if (filters.category) params.append("category", filters.category);
+  if (filters.ngo) params.append("ngo", filters.ngo);
+  if (filters.minBudget != null) params.append("minBudget", filters.minBudget);
+  if (filters.maxBudget != null) params.append("maxBudget", filters.maxBudget);
 
   return api.request({
     path: `/listAllParticipant?${params.toString()}`,
