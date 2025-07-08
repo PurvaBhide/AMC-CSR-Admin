@@ -9,12 +9,22 @@ var ParticipantService = {
     });
   },
 
-  listAll: function() {
-    return api.request({
-      path: '/listAllParticipant',
-      method: 'GET'
-    });
-  },
+listAll: function (page = 0, size = 5, filters = {}) {
+  const params = new URLSearchParams({
+    page,
+    size,
+    ...(filters.category && { category: filters.category }),
+    ...(filters.ngo && { ngo: filters.ngo }),
+    ...(filters.minBudget != null && { minBudget: filters.minBudget }),
+    ...(filters.maxBudget != null && { maxBudget: filters.maxBudget })
+  });
+
+  return api.request({
+    path: `/listAllParticipant?${params.toString()}`,
+    method: 'GET'
+  });
+}
+,
 
   getById: function(id) {
     return api.request({
