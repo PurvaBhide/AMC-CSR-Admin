@@ -99,27 +99,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-// function uploadMainImage(file) {
-//   const formData = new FormData();
-//   formData.append('files', file);
-//   fetch('https://mumbailocal.org:8087/upload/images', {
-//     method: 'POST',
-//     body: formData
-//   })
-//     .then(response => response.json())
-//     .then(result => {
-//       console.log(':white_check_mark: Main image uploaded:', result);
-//       const preview = document.getElementById('main_image_preview');
-//       preview.innerHTML = `:heavy_check_mark: Uploaded: <a href="${result.url}" target="_blank">${result.filename || 'View'}</a>`;
-//       // Store URL to submit with form
-//       window.uploadedMainImageUrl = result.url;
-//     })
-//     .catch(error => {
-//       console.error(':x: Upload failed:', error);
-//       alert('Main image upload failed.');
-//     });
-// }
-
 
 function uploadMainImage(file) {
   const formData = new FormData();
@@ -233,49 +212,12 @@ function fetchProject(id) {
     });
 }
 
-// Save or update project
-// function saveProject(id) {
-//   const data = {
-//   projectName: document.getElementById('name').value,
-//   projectDescription: document.getElementById('description').value,
-//   categoryId: document.getElementById('category_id').value,
-//   ngoId: document.getElementById('ngo_id').value,
-//   projectBudget: document.getElementById('scale').value,
-//   projectStatus: document.getElementById('status').value,
-//   projectDEpartmentName: document.getElementById('department_name').value,
-//   companyName: document.getElementById('company_name').value,
-//   projectLocation: document.getElementById('location').value,
-//   projectShortDescription: document.getElementById('short_description').value,
-//   impactpeople: document.getElementById('people_impacted').value,
-//   mainImageUrl: window.uploadedMainImageUrl || '',
-//   projectImages: window.uploadedGalleryUrls || []
-// };
-
-//   const request = id
-//     ? Api.project.update(id, data)
-//     : Api.project.add(data);
-
-//   request
-//     .then(() => {
-//       alert('Project saved successfully!');
-//       window.location.href = 'projectlist.html';
-//     })
-//     .catch(error => {
-//       console.error('❌ Error saving project:', error);
-//       alert('Failed to save project.');
-//     });
-// }
-
 function saveProject(id) {
   const data = {
     projectName: document.getElementById('name').value,
     projectDescription: document.getElementById('description').value,
     categoryId: document.getElementById('category_id').value,  // ✅ selected Category ID
     ngoId: document.getElementById('ngo_id').value,
-    // categoryId:4,
-    // categoryId: document.getElementById('category_id').value,
-    // ngoId: 1,
-    // ngoId: document.getElementById('ngo_id').value,
     projectBudget: document.getElementById('scale').value,
     projectStatus: document.getElementById('status').value,
     projectDEpartmentName: document.getElementById('department_name').value,
@@ -286,17 +228,22 @@ function saveProject(id) {
     projectMainImage: window.uploadedMainImageUrl || '', // :white_check_mark: Uploaded main image URL
     projectImages: window.uploadedGalleryUrls || []  // :white_check_mark: Uploaded gallery image URLs
   };
-  const request = id
-    Api.project.update(id, data)
+  const request = Api.project.update(id, data)
 
-  request
-    .then(() => {
-      alert('Project saved successfully!');
-      window.location.href = 'projectlist.html';
+   request
+    .then(response => {
+      // ✅ Check if response contains projectId and projectName
+      if (response && response.projectId && response.projectName) {
+        alert("✅ Project updated successfully!");
+        window.location.href = "projectlist.html";
+      } else {
+        alert("⚠️ Update pending or incomplete. Please verify the response.");
+        console.warn("Response:", response);
+      }
     })
     .catch(error => {
-      console.error(':x: Error saving project:', error);
-      alert('Failed to save project.');
+      console.error("❌ Error saving project:", error);
+      alert("❌ Failed to save project. Please try again.");
     });
 }
 
