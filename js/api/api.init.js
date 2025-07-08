@@ -10,3 +10,6 @@ if (typeof ProjectService !== 'undefined') {
 if (typeof NgoService !== 'undefined') {
   Api.ngo = NgoService;
 }
+if (typeof ParticipantService !== 'undefined') {
+  Api.participant = ParticipantService;
+}
