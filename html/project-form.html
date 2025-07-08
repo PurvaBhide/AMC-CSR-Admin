@@ -332,6 +332,10 @@
                       <button type="submit" class="btn btn-primary me-2">Save</button>
                       <button type="button" onclick="window.history.back()"
                         class="btn btn-outline-secondary">Cancel</button>
+                      <button type="button" class="btn btn-outline-secondary" style="float: inline-end;"
+                        onclick="window.location.href='projectlist.html'">
+                        Back
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -366,7 +370,7 @@
   <script src="../assets/vendor/js/menu.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/navbar.js"></script>
-  <script src="../assets/js/filter-feedback.js"></script>
+  <!-- <script src="../assets/js/filter-feedback.js"></script> -->
 
   <!-- api connection js files start -->
   <script src="../js/api/api.config.js"></script>
@@ -382,7 +386,7 @@
   <!-- rolewise sidebar -->
   <!-- GitHub widget button (if required) -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <script>
+  <!-- <script>
     // Load data if editing
     if (getUrlParam('id')) {
       fetchProject(getUrlParam('id'));
@@ -402,7 +406,7 @@
       }
       return projects;
     }
-  </script>
+  </script> -->
 </body>
 
 </html>
