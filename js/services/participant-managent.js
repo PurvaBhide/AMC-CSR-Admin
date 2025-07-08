@@ -16,20 +16,21 @@ const pageSize = 5; // Based on your API's "pageSize" value
 function loadParticipants(page = 0) {
   currentPage = page;
 
-  const category = document.getElementById('categoryFilter').value;
-  const ngo = document.getElementById('ngoFilter').value;
+  const category = document.getElementById('categoryFilter').value.trim();
+  const ngo = document.getElementById('ngoFilter').value.trim();
   const budget = document.getElementById('budgetFilter').value;
 
-  let [minBudget, maxBudget] = budget.split('-');
+  let [minBudget, maxBudget] = budget ? budget.split('-') : [null, null];
   minBudget = minBudget ? parseInt(minBudget) : null;
   maxBudget = maxBudget ? parseInt(maxBudget) : null;
 
-  Api.participant.listAll(page, pageSize, {
-    category,
-    ngo,
-    minBudget,
-    maxBudget
-  })
+  const filters = {};
+  if (category) filters.category = category;
+  if (ngo) filters.ngo = ngo;
+  if (minBudget != null) filters.minBudget = minBudget;
+  if (maxBudget != null) filters.maxBudget = maxBudget;
+
+  Api.participant.listAll(page, pageSize, filters)
     .then((response) => {
       const participants = response.data.content;
       const totalPages = response.data.totalPages;
@@ -40,6 +41,7 @@ function loadParticipants(page = 0) {
       console.error("Error loading participants:", error);
     });
 }
+
 
 
 function renderParticipantsTable(participants) {
@@ -136,15 +138,15 @@ function loadFilterOptions() {
     });
 
   // Load NGOs - assuming you have Api.ngo.listAll()
-  Api.ngo.listAll()
-    .then(response => {
-      const ngos = response.data;
-      const ngoSelect = document.getElementById('ngoFilter');
-      ngos.forEach(ngo => {
-        const option = document.createElement('option');
-        option.value = ngo.ngoname;
-        option.textContent = ngo.ngoname;
-        ngoSelect.appendChild(option);
-      });
-    });
+//   Api.ngo.listAll()
+//     .then(response => {
+//       const ngos = response.data;
+//       const ngoSelect = document.getElementById('ngoFilter');
+//       ngos.forEach(ngo => {
+//         const option = document.createElement('option');
+//         option.value = ngo.ngoname;
+//         option.textContent = ngo.ngoname;
+//         ngoSelect.appendChild(option);
+//       });
+//     });
 }
