@@ -2,29 +2,45 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   loadParticipants();
+  loadFilterOptions();
+
+  document.getElementById('categoryFilter').addEventListener('change', () => loadParticipants(0));
+  document.getElementById('ngoFilter').addEventListener('change', () => loadParticipants(0));
+  document.getElementById('budgetFilter').addEventListener('change', () => loadParticipants(0));
 });
 
+
 let currentPage = 0;
-const pageSize = 10;
+const pageSize = 5; // Based on your API's "pageSize" value
 
 function loadParticipants(page = 0) {
   currentPage = page;
 
-  if (!Api.participant || typeof Api.participant.listAll !== 'function') {
-    console.error("Api.participant.listAll() is not available");
-    return;
-  }
+  const category = document.getElementById('categoryFilter').value;
+  const ngo = document.getElementById('ngoFilter').value;
+  const budget = document.getElementById('budgetFilter').value;
 
-  Api.participant.listAll()
+  let [minBudget, maxBudget] = budget.split('-');
+  minBudget = minBudget ? parseInt(minBudget) : null;
+  maxBudget = maxBudget ? parseInt(maxBudget) : null;
+
+  Api.participant.listAll(page, pageSize, {
+    category,
+    ngo,
+    minBudget,
+    maxBudget
+  })
     .then((response) => {
       const participants = response.data.content;
+      const totalPages = response.data.totalPages;
       renderParticipantsTable(participants);
-      // Pagination can be implemented if totalPages is available in response
+      renderPagination(totalPages);
     })
     .catch((error) => {
       console.error("Error loading participants:", error);
     });
 }
+
 
 function renderParticipantsTable(participants) {
   const tbody = document.querySelector("tbody.table-border-bottom-0");
@@ -59,6 +75,37 @@ function renderParticipantsTable(participants) {
   });
 }
 
+function renderPagination(totalPages) {
+  const paginationUl = document.querySelector(".pagination");
+  paginationUl.innerHTML = ""; // Clear current pagination
+
+  const prevDisabled = currentPage === 0 ? "disabled" : "";
+  paginationUl.innerHTML += `
+    <li class="page-item ${prevDisabled}">
+      <a class="page-link" href="javascript:void(0);" onclick="loadParticipants(${currentPage - 1})">
+        <i class="tf-icon bx bx-chevron-left"></i>
+      </a>
+    </li>
+  `;
+
+  for (let i = 0; i < totalPages; i++) {
+    paginationUl.innerHTML += `
+      <li class="page-item ${currentPage === i ? 'active' : ''}">
+        <a class="page-link" href="javascript:void(0);" onclick="loadParticipants(${i})">${i + 1}</a>
+      </li>
+    `;
+  }
+
+  const nextDisabled = currentPage === totalPages - 1 ? "disabled" : "";
+  paginationUl.innerHTML += `
+    <li class="page-item ${nextDisabled}">
+      <a class="page-link" href="javascript:void(0);" onclick="loadParticipants(${currentPage + 1})">
+        <i class="tf-icon bx bx-chevron-right"></i>
+      </a>
+    </li>
+  `;
+}
+
 function deleteParticipant(id) {
   const confirmDelete = confirm("Are you sure you want to delete this participant?");
   if (!confirmDelete) return;
@@ -71,5 +118,33 @@ function deleteParticipant(id) {
     .catch((error) => {
       console.error("Failed to delete participant:", error);
       alert("Failed to delete participant. Please try again.");
+    });
+}
+
+function loadFilterOptions() {
+  // Load Categories
+  Api.category.listAll()
+    .then(response => {
+      const categories = response.data;
+      const categorySelect = document.getElementById('categoryFilter');
+      categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.categoryName;
+        option.textContent = category.categoryName;
+        categorySelect.appendChild(option);
+      });
+    });
+
+  // Load NGOs - assuming you have Api.ngo.listAll()
+  Api.ngo.listAll()
+    .then(response => {
+      const ngos = response.data;
+      const ngoSelect = document.getElementById('ngoFilter');
+      ngos.forEach(ngo => {
+        const option = document.createElement('option');
+        option.value = ngo.ngoname;
+        option.textContent = ngo.ngoname;
+        ngoSelect.appendChild(option);
+      });
     });
 }
