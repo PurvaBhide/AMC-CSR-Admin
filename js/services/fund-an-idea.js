@@ -16,5 +16,12 @@ fundanideaSrevices={
       path: `/fundanideashowbyid/${id}`,
       method:'GET'
     })
-  }
+  },
+  updatefundanidea:function(id,formdata){
+    return api.request({
+      path:`/updateFundanIdea/${id}`,
+      method:'PUT',
+      data:formdata
+    })
+  },
 }
