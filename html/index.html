@@ -1,418 +1,412 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  class="light-style layout-menu-fixed layout-compact"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free"
-  data-style="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Amdavad Municipal Corporation CSR Management System | Dashboard</title>
-    <meta name="description" content="" />
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/logo/amcLogo.png" />
+<html lang="en" class="light-style layout-menu-fixed layout-compact" dir="ltr" data-theme="theme-default"
+  data-assets-path="../assets/" data-template="vertical-menu-template-free" data-style="light">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  <title>Amdavad Municipal Corporation CSR Management System | Dashboard</title>
+  <meta name="description" content="" />
 
-    <!-- Icons -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="../assets/img/logo/amcLogo.png" />
 
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
-    <script src="../assets/js/config.js"></script>
+  <!-- Core CSS -->
+  <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="../assets/css/demo.css" />
 
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Vendors CSS -->
+  <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
-    <!-- Custom Styles -->
-    <style>
-        :root {
-            --primary-color: #696cff;
-            --success-color: #71dd37;
-            --danger-color: #ff3e1d;
-            --warning-color: #ffab00;
-        }
+  <!-- Helpers -->
+  <script src="../assets/vendor/js/helpers.js"></script>
+  <script src="../assets/js/config.js"></script>
 
-        .dashboard-content {
-            padding: 1.5rem;
-        }
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        .stats-card {
-            border-radius: 0.375rem;
-            padding: 1.5rem;
-            height: 100%;
-            background: white;
-            box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
-            transition: transform 0.2s ease-in-out;
-        }
+  <!-- Custom Styles -->
+  <style>
+    :root {
+      --primary-color: #696cff;
+      --success-color: #71dd37;
+      --danger-color: #ff3e1d;
+      --warning-color: #ffab00;
+    }
 
-        .stats-card:hover {
-            transform: translateY(-3px);
-        }
+    .dashboard-content {
+      padding: 1.5rem;
+    }
 
-        .stats-icon {
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            color: white;
-        }
+    .stats-card {
+      border-radius: 0.375rem;
+      padding: 1.5rem;
+      height: 100%;
+      background: white;
+      box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+      transition: transform 0.2s ease-in-out;
+    }
 
-        .stats-number {
-            font-size: 1.875rem;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
-        }
+    .stats-card:hover {
+      transform: translateY(-3px);
+    }
 
-        .stats-label {
-            font-size: 0.9375rem;
-            color: #697a8d;
-        }
+    .stats-icon {
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      color: white;
+    }
 
-        .chart-container {
-    position: relative;
-    height: 400px;
-    margin-bottom: 20px;
-    padding: 70px;
-    padding-top: 30px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
-}
+    .stats-number {
+      font-size: 1.875rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
 
-.chart-title {
-    /* font-size: 16px;
+    .stats-label {
+      font-size: 0.9375rem;
+      color: #697a8d;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 400px;
+      margin-bottom: 20px;
+      padding: 70px;
+      padding-top: 30px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+    }
+
+    .chart-title {
+      /* font-size: 16px;
     font-weight: 500;
     margin-bottom: 15px;
     color: #566a7f; */
-    font-size: 1rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
-    color: #566a7f;
-}
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: #566a7f;
+    }
 
-.chart-error {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #dc3545;
-    text-align: center;
-}
+    .chart-error {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #dc3545;
+      text-align: center;
+    }
 
-canvas {
-    max-width: 100%;
-}
+    canvas {
+      max-width: 100%;
+    }
 
-        .station-selector {
-            background: white;
-            border-radius: 0.375rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
-        }
+    .station-selector {
+      background: white;
+      border-radius: 0.375rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);
+    }
 
-        .station-selector select {
-            height: 2.875rem;
-            border-color: #d9dee3;
-            border-radius: 0.375rem;
-        }
+    .station-selector select {
+      height: 2.875rem;
+      border-color: #d9dee3;
+      border-radius: 0.375rem;
+    }
 
-        .station-selector select:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0.25rem rgba(105, 108, 255, 0.1);
-        }
+    .station-selector select:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0.25rem rgba(105, 108, 255, 0.1);
+    }
 
-        .welcome-message {
-            font-weight: 500;
-            color: #566a7f;
-        }
+    .welcome-message {
+      font-weight: 500;
+      color: #566a7f;
+    }
 
-        @media (max-width: 767.98px) {
-            .dashboard-content {
-                padding: 1rem;
-            }
-        }
-    </style>
+    @media (max-width: 767.98px) {
+      .dashboard-content {
+        padding: 1rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
-            <!-- Menu -->
-          <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-  <!-- Logo & Brand -->
-  <div class="app-brand demo">
-    <a href="index.html" class="app-brand-link">
-      <span class="app-brand-logo demo pt-4 pb-4">
-        <img src="../assets/img/logo/amcLogo.png" alt="AMC Logo" height="50px"/>
-      </span>
-      <span class="app-brand-text demo menu-text fw-bold ms-2">Admin</span>
-    </a>
-    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-      <i class="bx bx-chevron-left bx-sm align-middle"></i>
-    </a>
-  </div>
+  <!-- Layout wrapper -->
+  <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+      <!-- Menu -->
+      <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+        <!-- Logo & Brand -->
+        <div class="app-brand demo">
+          <a href="index.html" class="app-brand-link">
+            <span class="app-brand-logo demo pt-4 pb-4">
+              <img src="../assets/img/logo/amcLogo.png" alt="AMC Logo" height="50px" />
+            </span>
+            <span class="app-brand-text demo menu-text fw-bold ms-2">Admin</span>
+          </a>
+          <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+          </a>
+        </div>
 
-  <div class="menu-inner-shadow"></div>
+        <div class="menu-inner-shadow"></div>
 
-  <!-- Sidebar Menu -->
-  <ul class="menu-inner py-1">
-    <!-- Dashboard -->
-    <li class="menu-item active">
-      <a href="index.html" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-        <div class="text-truncate">Dashboard</div>
-      </a>
-    </li>
+        <!-- Sidebar Menu -->
+        <ul class="menu-inner py-1">
+          <!-- Dashboard -->
+          <li class="menu-item active">
+            <a href="index.html" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-home-circle"></i>
+              <div class="text-truncate">Dashboard</div>
+            </a>
+          </li>
 
-    <!-- Resources -->
-    <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-folder"></i>
-        <div class="text-truncate">Resources</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="#" class="menu-link">
-            <div class="text-truncate">All Resources</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="resources.html" class="menu-link">
-            <div class="text-truncate">Resources Form</div>
-          </a>
-        </li>
-        <!-- <li class="menu-item">
-          <a href="completedProjects.html" class="menu-link">
-            <div class="text-truncate">Completed</div>
-          </a>
-        </li> -->
-      </ul>
-    </li>
-    <!-- Projects -->
-    <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-folder"></i>
-        <div class="text-truncate">Projects</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="projectlist.html" class="menu-link">
-            <div class="text-truncate">All Projects</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="project-form.html" class="menu-link">
-            <div class="text-truncate">Project Form</div>
-          </a>
-        </li>
-        <!-- <li class="menu-item">
-          <a href="completedProjects.html" class="menu-link">
-            <div class="text-truncate">Completed</div>
-          </a>
-        </li> -->
-      </ul>
-    </li>
-
-    <!-- Categories -->
-   <!-- Categories -->
-<li class="menu-item">
-  <a href="category.html" class="menu-link">
-    <i class="menu-icon tf-icons bx bx-category"></i>
-    <div class="text-truncate">Categories</div>
-  </a>
-</li>
-
-
-    <!-- Donations -->
-    <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-donate-heart"></i>
-        <div class="text-truncate">Donations</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="donationlist.html" class="menu-link">
-            <div class="text-truncate">All Donations</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="donationReport.html" class="menu-link">
-            <div class="text-truncate">Donation Form</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-     <!-- Ideas -->
-  <li class="menu-item">
-    <a href="javascript:void(0);" class="menu-link menu-toggle">
-      <i class="menu-icon tf-icons bx bx-bulb"></i>
-      <div class="text-truncate" data-i18n="Ideas">Ideas</div>
-    </a>
-    <ul class="menu-sub">
-      <li class="menu-item">
-        <a href="ideaList.html" class="menu-link">
-          <div class="text-truncate">Submitted Ideas</div>
-        </a>
-      </li>
-      </ul>
-    <!-- NGO Partners -->
-    <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-group"></i>
-        <div class="text-truncate">NGO Partners</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="ngoPartnersList.html" class="menu-link">
-            <div class="text-truncate">All Partners</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="pendingNgos.html" class="menu-link">
-            <div class="text-truncate">Pending Applications</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    <!-- Media -->
-    <li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-photo-album"></i>
-        <div class="text-truncate">Media</div>
-      </a>
-      <ul class="menu-sub">
-        <li class="menu-item">
-          <a href="gallery.html" class="menu-link">
-            <div class="text-truncate">Gallery</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="successStories.html" class="menu-link">
-            <div class="text-truncate">Success Stories</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="successStories.html" class="menu-link">
-            <div class="text-truncate">News and Events</div>
-          </a>
-        </li>
-        <li class="menu-item">
-          <a href="successStories.html" class="menu-link">
-            <div class="text-truncate">Publication</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-
-    <!-- Settings -->
-    <li class="menu-item">
-      <a href="settings.html" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-cog"></i>
-        <div class="text-truncate">Settings</div>
-      </a>
-    </li>
-  </ul>
-</aside>
-            <!-- / Menu -->
-
-            <!-- Layout page -->
-            <div class="layout-page">
-                <!-- Navbar -->
-
-                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-
-                     id="layout-navbar">
-                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                            <i class="bx bx-menu bx-sm"></i>
-                        </a>
-                    </div>
-
-                    <div class="navbar-center mx-auto text-center w-px-400">
-                        <span class="welcome-message fw-semibold" id="welcomeText">Welcome, Admin!</span>
-                    </div>
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
-                          <!-- User -->
-                          <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                            <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
-                              <div class="avatar avatar-online">
-                                <img src="../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                              <li>
-                                <a class="dropdown-item" href="#">
-                                  <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                      <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
-                                      </div>
-                                    </div>
-                                    <div class="flex-grow-1" >
-                                      <h6 class="mb-0">Admin</h6>
-                                      <small class="text-muted">Online</small>
-                                    </div>
-                                  </div>
-                                </a>
-                              </li>
-                             <li>
-                <a class="dropdown-item logout-button" href="">
-                    <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+          <!-- Resources -->
+          <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-folder"></i>
+              <div class="text-truncate">Resources</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item">
+                <a href="#" class="menu-link">
+                  <div class="text-truncate">All Resources</div>
                 </a>
-            </li>
-                            </ul>
-                          </li>
-                          <!--/ User -->
-                        </ul>
-                      </div>
-                </nav>
-                <!-- / Navbar -->
+              </li>
+              <li class="menu-item">
+                <a href="resources.html" class="menu-link">
+                  <div class="text-truncate">Resources Form</div>
+                </a>
+              </li>
+              <!-- <li class="menu-item">
+          <a href="completedProjects.html" class="menu-link">
+            <div class="text-truncate">Completed</div>
+          </a>
+        </li> -->
+            </ul>
+          </li>
+          <!-- Projects -->
+          <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-folder"></i>
+              <div class="text-truncate">Projects</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item">
+                <a href="projectlist.html" class="menu-link">
+                  <div class="text-truncate">All Projects</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="project-form.html" class="menu-link">
+                  <div class="text-truncate">Project Form</div>
+                </a>
+              </li>
+              <!-- <li class="menu-item">
+          <a href="completedProjects.html" class="menu-link">
+            <div class="text-truncate">Completed</div>
+          </a>
+        </li> -->
+            </ul>
+          </li>
 
-                <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <!-- Content -->
-                    <div class="container-xxl flex-grow-1 container-p-y">
-  <!-- Dashboard Header -->
-  <div class="row mb-4">
-    <div class="col-12">
-      <div class="card bg-gradient-primary text-white">
-        <div class="card-body p-4">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <!-- <h4 class="mb-1 text-secondary">Welcome back, Admin!</h4> -->
-              <p class="mb-0 text-secondary">Here's what's happening with your CSR portal today</p>
-            </div>
-            <!-- <div class="dropdown">
+          <!-- Categories -->
+          <!-- Categories -->
+          <li class="menu-item">
+            <a href="category.html" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-category"></i>
+              <div class="text-truncate">Categories</div>
+            </a>
+          </li>
+
+
+          <!-- Donations -->
+          <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-donate-heart"></i>
+              <div class="text-truncate">Donations</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item">
+                <a href="donationlist.html" class="menu-link">
+                  <div class="text-truncate">All Donations</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="donationReport.html" class="menu-link">
+                  <div class="text-truncate">Donation Form</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Ideas -->
+          <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-bulb"></i>
+              <div class="text-truncate" data-i18n="Ideas">Ideas</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item">
+                <a href="ideaList.html" class="menu-link">
+                  <div class="text-truncate">Submitted Ideas</div>
+                </a>
+              </li>
+            </ul>
+            <!-- NGO Partners -->
+          <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-group"></i>
+              <div class="text-truncate">NGO Partners</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item">
+                <a href="ngoPartnersList.html" class="menu-link">
+                  <div class="text-truncate">All Partners</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="pendingNgos.html" class="menu-link">
+                  <div class="text-truncate">Pending Applications</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Media -->
+          <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons bx bx-photo-album"></i>
+              <div class="text-truncate">Media</div>
+            </a>
+            <ul class="menu-sub">
+              <li class="menu-item">
+                <a href="gallery.html" class="menu-link">
+                  <div class="text-truncate">Gallery</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="successStories.html" class="menu-link">
+                  <div class="text-truncate">Success Stories</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="successStories.html" class="menu-link">
+                  <div class="text-truncate">News and Events</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="successStories.html" class="menu-link">
+                  <div class="text-truncate">Publication</div>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Settings -->
+          <li class="menu-item">
+            <a href="settings.html" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-cog"></i>
+              <div class="text-truncate">Settings</div>
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- / Menu -->
+
+      <!-- Layout page -->
+      <div class="layout-page">
+        <!-- Navbar -->
+
+        <nav
+          class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+          id="layout-navbar">
+          <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+              <i class="bx bx-menu bx-sm"></i>
+            </a>
+          </div>
+
+          <div class="navbar-center mx-auto text-center w-px-400">
+            <span class="welcome-message fw-semibold" id="welcomeText">Welcome, Admin!</span>
+          </div>
+          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+              <!-- User -->
+              <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);" data-bs-toggle="dropdown">
+                  <div class="avatar avatar-online">
+                    <img src="../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
+                  </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li>
+                    <a class="dropdown-item" href="#">
+                      <div class="d-flex">
+                        <div class="flex-shrink-0 me-3">
+                          <div class="avatar avatar-online">
+                            <img src="../assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
+                          </div>
+                        </div>
+                        <div class="flex-grow-1">
+                          <h6 class="mb-0">Admin</h6>
+                          <small class="text-muted">Online</small>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item logout-button" href="">
+                      <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <!--/ User -->
+            </ul>
+          </div>
+        </nav>
+        <!-- / Navbar -->
+
+        <!-- Content wrapper -->
+        <div class="content-wrapper">
+          <!-- Content -->
+          <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Dashboard Header -->
+            <div class="row mb-4">
+              <div class="col-12">
+                <div class="card bg-gradient-primary text-white">
+                  <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div>
+                        <!-- <h4 class="mb-1 text-secondary">Welcome back, Admin!</h4> -->
+                        <p class="mb-0 text-secondary">Here's what's happening with your CSR portal today</p>
+                      </div>
+                      <!-- <div class="dropdown">
               <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
                 <i class="bx bx-cog"></i> Settings
               </button>
@@ -421,240 +415,241 @@ canvas {
                 <li><a class="dropdown-item" href="#">Notification Settings</a></li>
               </ul>
             </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enhanced Summary Cards -->
+            <div class="row mb-4 g-4">
+              <!-- Pending Projects -->
+              <div class="col-sm-6 col-xl-3">
+                <div class="card card-hover shadow-sm">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="avatar avatar-md bg-warning bg-opacity-10 p-3 me-3 rounded">
+                        <i class="bx bx-folder text-warning fs-4"></i>
+                      </div>
+                      <div>
+                        <h5 class="mb-0" id="pendingProjects">12</h5>
+                        <small class="text-muted">Pending Projects</small>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <a href="pendingProjects.html" class="btn btn-sm btn-outline-warning">Review Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Total Donations -->
+              <div class="col-sm-6 col-xl-3">
+                <div class="card card-hover shadow-sm">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="avatar avatar-md bg-success bg-opacity-10 p-3 me-3 rounded">
+                        <i class="bx bx-donate-heart text-success fs-4"></i>
+                      </div>
+                      <div>
+                        <h5 class="mb-0" id="totalDonations">₹8.2L</h5>
+                        <small class="text-muted">Total Donations</small>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <a href="donationList.html" class="btn btn-sm btn-outline-success">View All</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- NGO Applications -->
+              <div class="col-sm-6 col-xl-3">
+                <div class="card card-hover shadow-sm">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="avatar avatar-md bg-danger bg-opacity-10 p-3 me-3 rounded">
+                        <i class="bx bx-group text-danger fs-4"></i>
+                      </div>
+                      <div>
+                        <h5 class="mb-0" id="ngoApplications">5</h5>
+                        <small class="text-muted">NGO Applications</small>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <a href="pendingNgos.html" class="btn btn-sm btn-outline-danger">Process Now</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Media -->
+              <div class="col-sm-6 col-xl-3">
+                <div class="card card-hover shadow-sm">
+                  <div class="card-body">
+                    <div class="d-flex align-items-center">
+                      <div class="avatar avatar-md bg-info bg-opacity-10 p-3 me-3 rounded">
+                        <i class="bx bx-photo-album text-info fs-4"></i>
+                      </div>
+                      <div>
+                        <h5 class="mb-0" id="mediaUploads">23</h5>
+                        <small class="text-muted">New Media Files</small>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <a href="gallery.html" class="btn btn-sm btn-outline-info">View Gallery</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Dashboard Content -->
+            <div class="row g-4">
+              <!-- Project Status Chart (Enhanced) -->
+              <div class="col-lg-8">
+                <div class="card shadow-sm">
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Project Status Overview</h5>
+                    <div class="dropdown">
+                      <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
+                        data-bs-toggle="dropdown">
+                        This Month
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">This Week</a></li>
+                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                        <li><a class="dropdown-item" href="#">This Year</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="projectStatusChart" height="250"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Activity (Enhanced) -->
+              <div class="col-lg-4">
+                <div class="card shadow-sm">
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Recent Activity</h5>
+                    <a href="activityLog.html" class="btn btn-sm btn-outline-secondary">View All</a>
+                  </div>
+                  <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                      <a href="#" class="list-group-item list-group-item-action border-0">
+                        <div class="d-flex align-items-center">
+                          <div class="avatar avatar-sm bg-secondary bg-opacity-10 p-2 me-3 rounded">
+                            <i class="bx bx-file text-secondary"></i>
+                          </div>
+                          <div>
+                            <h6 class="mb-1">New project submitted</h6>
+                            <small class="text-muted">2 minutes ago</small>
+                          </div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action border-0">
+                        <div class="d-flex align-items-center">
+                          <div class="avatar avatar-sm bg-success bg-opacity-10 p-2 me-3 rounded">
+                            <i class="bx bx-check-circle text-success"></i>
+                          </div>
+                          <div>
+                            <h6 class="mb-1">NGO "Green Earth" approved</h6>
+                            <small class="text-muted">1 hour ago</small>
+                          </div>
+                        </div>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action border-0">
+                        <div class="d-flex align-items-center">
+                          <div class="avatar avatar-sm bg-info bg-opacity-10 p-2 me-3 rounded">
+                            <i class="bx bx-rupee text-info"></i>
+                          </div>
+                          <div>
+                            <h6 class="mb-1">₹50K donation received</h6>
+                            <small class="text-muted">3 hours ago</small>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Actions -->
+              <div class="col-12">
+                <div class="card shadow-sm">
+                  <div class="card-header">
+                    <h5 class="mb-0">Quick Actions</h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row g-3">
+                      <div class="col-sm-6 col-md-3">
+                        <a href="project-form.html" class="btn btn-outline-primary w-100">
+                          <i class="bx bx-plus me-2"></i> Add Project
+                        </a>
+                      </div>
+                      <div class="col-sm-6 col-md-3">
+                        <a href="donation-form.html" class="btn btn-outline-success w-100">
+                          <i class="bx bx-donate-heart me-2"></i> Record Donation
+                        </a>
+                      </div>
+                      <div class="col-sm-6 col-md-3">
+                        <a href="category-form.html" class="btn btn-outline-info w-100">
+                          <i class="bx bx-category me-2"></i> Create Category
+                        </a>
+                      </div>
+                      <div class="col-sm-6 col-md-3">
+                        <a href="media-upload.html" class="btn btn-outline-warning w-100">
+                          <i class="bx bx-upload me-2"></i> Upload Media
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+          <!-- / Content -->
         </div>
+        <!-- / Content wrapper -->
       </div>
+      <!-- / Layout page -->
     </div>
   </div>
 
-  <!-- Enhanced Summary Cards -->
-  <div class="row mb-4 g-4">
-    <!-- Pending Projects -->
-    <div class="col-sm-6 col-xl-3">
-      <div class="card card-hover shadow-sm">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="avatar avatar-md bg-warning bg-opacity-10 p-3 me-3 rounded">
-              <i class="bx bx-folder text-warning fs-4"></i>
-            </div>
-            <div>
-              <h5 class="mb-0" id="pendingProjects">12</h5>
-              <small class="text-muted">Pending Projects</small>
-            </div>
-          </div>
-          <div class="mt-3">
-            <a href="pendingProjects.html" class="btn btn-sm btn-outline-warning">Review Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Total Donations -->
-    <div class="col-sm-6 col-xl-3">
-      <div class="card card-hover shadow-sm">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="avatar avatar-md bg-success bg-opacity-10 p-3 me-3 rounded">
-              <i class="bx bx-donate-heart text-success fs-4"></i>
-            </div>
-            <div>
-              <h5 class="mb-0" id="totalDonations">₹8.2L</h5>
-              <small class="text-muted">Total Donations</small>
-            </div>
-          </div>
-          <div class="mt-3">
-            <a href="donationList.html" class="btn btn-sm btn-outline-success">View All</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- NGO Applications -->
-    <div class="col-sm-6 col-xl-3">
-      <div class="card card-hover shadow-sm">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="avatar avatar-md bg-danger bg-opacity-10 p-3 me-3 rounded">
-              <i class="bx bx-group text-danger fs-4"></i>
-            </div>
-            <div>
-              <h5 class="mb-0" id="ngoApplications">5</h5>
-              <small class="text-muted">NGO Applications</small>
-            </div>
-          </div>
-          <div class="mt-3">
-            <a href="pendingNgos.html" class="btn btn-sm btn-outline-danger">Process Now</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Recent Media -->
-    <div class="col-sm-6 col-xl-3">
-      <div class="card card-hover shadow-sm">
-        <div class="card-body">
-          <div class="d-flex align-items-center">
-            <div class="avatar avatar-md bg-info bg-opacity-10 p-3 me-3 rounded">
-              <i class="bx bx-photo-album text-info fs-4"></i>
-            </div>
-            <div>
-              <h5 class="mb-0" id="mediaUploads">23</h5>
-              <small class="text-muted">New Media Files</small>
-            </div>
-          </div>
-          <div class="mt-3">
-            <a href="gallery.html" class="btn btn-sm btn-outline-info">View Gallery</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Core JS -->
+  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../assets/vendor/js/bootstrap.js"></script>
+  <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="../assets/vendor/js/menu.js"></script>
+  <script src="../assets/js/navbar.js"></script>
 
-  <!-- Interactive Dashboard Content -->
-  <div class="row g-4">
-    <!-- Project Status Chart (Enhanced) -->
-    <div class="col-lg-8">
-      <div class="card shadow-sm">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">Project Status Overview</h5>
-          <div class="dropdown">
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-              This Month
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">This Week</a></li>
-              <li><a class="dropdown-item" href="#">This Month</a></li>
-              <li><a class="dropdown-item" href="#">This Year</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-body">
-          <canvas id="projectStatusChart" height="250"></canvas>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Recent Activity (Enhanced) -->
-    <div class="col-lg-4">
-      <div class="card shadow-sm">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">Recent Activity</h5>
-          <a href="activityLog.html" class="btn btn-sm btn-outline-secondary">View All</a>
-        </div>
-        <div class="card-body p-0">
-          <div class="list-group list-group-flush">
-            <a href="#" class="list-group-item list-group-item-action border-0">
-              <div class="d-flex align-items-center">
-                <div class="avatar avatar-sm bg-secondary bg-opacity-10 p-2 me-3 rounded">
-                  <i class="bx bx-file text-secondary"></i>
-                </div>
-                <div>
-                  <h6 class="mb-1">New project submitted</h6>
-                  <small class="text-muted">2 minutes ago</small>
-                </div>
-              </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action border-0">
-              <div class="d-flex align-items-center">
-                <div class="avatar avatar-sm bg-success bg-opacity-10 p-2 me-3 rounded">
-                  <i class="bx bx-check-circle text-success"></i>
-                </div>
-                <div>
-                  <h6 class="mb-1">NGO "Green Earth" approved</h6>
-                  <small class="text-muted">1 hour ago</small>
-                </div>
-              </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action border-0">
-              <div class="d-flex align-items-center">
-                <div class="avatar avatar-sm bg-info bg-opacity-10 p-2 me-3 rounded">
-                  <i class="bx bx-rupee text-info"></i>
-                </div>
-                <div>
-                  <h6 class="mb-1">₹50K donation received</h6>
-                  <small class="text-muted">3 hours ago</small>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Quick Actions -->
-    <div class="col-12">
-      <div class="card shadow-sm">
-        <div class="card-header">
-          <h5 class="mb-0">Quick Actions</h5>
-        </div>
-        <div class="card-body">
-          <div class="row g-3">
-            <div class="col-sm-6 col-md-3">
-              <a href="project-form.html" class="btn btn-outline-primary w-100">
-                <i class="bx bx-plus me-2"></i> Add Project
-              </a>
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <a href="donation-form.html" class="btn btn-outline-success w-100">
-                <i class="bx bx-donate-heart me-2"></i> Record Donation
-              </a>
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <a href="category-form.html" class="btn btn-outline-info w-100">
-                <i class="bx bx-category me-2"></i> Create Category
-              </a>
-            </div>
-            <div class="col-sm-6 col-md-3">
-              <a href="media-upload.html" class="btn btn-outline-warning w-100">
-                <i class="bx bx-upload me-2"></i> Upload Media
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-                    <!-- / Content -->
-                </div>
-                <!-- / Content wrapper -->
-            </div>
-            <!-- / Layout page -->
-        </div>
-    </div>
+  <!-- Main JS -->
+  <script src="../assets/js/main.js"></script>
 
-    <!-- Core JS -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../assets/vendor/js/menu.js"></script>
-        <script src="../assets/js/navbar.js"></script>
-
-    <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="../assets/js/form-basic-inputs.js"></script>
+  <!-- Page JS -->
+  <script src="../assets/js/form-basic-inputs.js"></script>
 
 
-<!-- Bootstrap JS Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
-    <!-- GitHub buttons -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="../assets/js/navbar.js"></script>
+  <!-- GitHub buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <script src="../assets/js/navbar.js"></script>
 
 
-    <!-- <script src="../js/dashbord.js"></script> -->
-     <script src="../js/indexdas.js"></script>
-      <!-- <script src="../js/indexdashboard.js"></script> -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-<script src="../assets/vendor/libs/popper/popper.js"></script>
-<script src="../assets/vendor/js/bootstrap.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- <script src="../js/dashbord.js"></script> -->
+  <script src="../js/indexdas.js"></script>
+  <!-- <script src="../js/indexdashboard.js"></script> -->
+  <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+  <script src="../assets/vendor/libs/popper/popper.js"></script>
+  <script src="../assets/vendor/js/bootstrap.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    </body>
+</body>
 
-    </html>
+</html>
