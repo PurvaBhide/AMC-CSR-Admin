@@ -238,8 +238,8 @@
                             <div class="card mb-4">
                                 <h5 class="card-header">Fund An Idea Details</h5>
                                 <div class="card-body">
-                                    <form id="projectForm">
-                                        <input type="hidden" id="projectId">
+                                    <form id="FundAnIdeaForm">
+                                        <input type="hidden" id="fundanideaid">
 
                                         <!-- Name -->
                                         <div class="row">
@@ -248,12 +248,12 @@
                                                 <label class="form-label">Nature Of Project *</label>
                                                 <input type="text" class="form-control" id="natureofproject" required>
                                             </div>
-
                                             <div class=" col-md-6 mb-3">
-                                                <label class="form-label">Fund An Idea Project Location *</label>
-                                                <input type="text" class="form-control" id="fundanideaprojectlocation"
+                                                <label class="form-label">Fund An Idea Project Name *</label>
+                                                <input type="text" class="form-control" id="fundanideaprojectname"
                                                     required></input>
                                             </div>
+
                                         </div>
                                         <div class="row">
                                             <div class=" col-md-6 mb-3">
@@ -261,55 +261,58 @@
                                                 <input type="text" class="form-control" id="fundanideadepartment"
                                                     required></input>
                                             </div>
-
                                             <div class=" col-md-6 mb-3">
-                                                <label class="form-label">Fund An Idea Document </label>
-                                                <input type="file" class="form-control" id="fundanideadocement"></input>
-                                                <div id="fundanideadocement_preview"
-                                                    class="form-text text-success mt-1"></div>
+                                                <label class="form-label">Fund An Idea Project Location *</label>
+                                                <input type="text" class="form-control" id="fundanideaprojectlocation"
+                                                    required></input>
                                             </div>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Fund An Idea Description* </label>
-                                            <textarea type="text" class="form-control" id="fundanideadescription"
-                                                rows="5" required></textarea>
+
                                         </div>
 
-                                        <div class="mb-3">
-                                            <label class="form-label">Fund An Idea Organization Name *</label>
-                                            <input type="text" class="form-control" id="fundanideaorganizationname"
-                                                required></input>
-                                        </div>
+
                                         <div class="row">
+                                            <div class=" col-md-6 mb-3">
+                                                <label class="form-label">Fund An Idea Organization Name *</label>
+                                                <input type="text" class="form-control" id="fundanideaorganizationname"
+                                                    required></input>
+                                            </div>
                                             <div class=" col-md-6 mb-3">
                                                 <label class="form-label">Fund An Idea Email Id *</label>
                                                 <input type="text" class="form-control" id="fundanideaemailid"
                                                     required></input>
                                             </div>
+                                        </div>
+                                        <div class="row">
                                             <div class=" col-md-6 mb-3">
                                                 <label class="form-label">Fund An Idea Contact Number *</label>
                                                 <input type="number" class="form-control" id="fundanideaphonenumber"
                                                     required></input>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class=" col-md-6 mb-3">
                                                 <label class="form-label">Fund An Idea Contact Person Name* </label>
                                                 <input type="text" class="form-control" id="fundanideacontactpersonname"
                                                     required></input>
                                             </div>
+                                        </div>
+                                        <div class="row">
+
                                             <div class=" col-md-6 mb-3">
                                                 <label class="form-label">Fund An Idea Estimate Amount* </label>
                                                 <input type="number" class="form-control" id="fundanideaestimateamount"
                                                     required></input>
                                             </div>
+                                            <div class=" col-md-6 mb-3">
+                                                <label class="form-label">Fund An Idea Document </label>
+                                                <input type="file" class="form-control" id="fundanideadocement"
+                                                    onchange="uploadAndSetDocument()"></input>
+
+                                                <div id="fundanideadocement_preview" style="margin-top: 5px;"></div>
+
+                                            </div>
                                         </div>
 
 
-                                        <!-- Scale -->
-                                        <!-- Budget Field (Replaces Scale Dropdown) -->
                                         <div class="row">
-
                                             <div class=" col-md-6 mb-3">
                                                 <label for="status" class="form-label">Fund An Ideas Status</label>
                                                 <select class="form-select" id="fundanideastatus">
@@ -319,19 +322,36 @@
                                                     </option>
                                                     <option value="Internal Forwarding">Stage 2: Internal Forwarding
                                                     </option>
-                                                    <option value="Routing to AMC-MET & Concerned Department">Stage 3:
+                                                    <option value="Routing to AMC-MET & Concerned Department">Stage
+                                                        3:
                                                         Routing to AMC-MET & Concerned Department</option>
-                                                    <option value="Budgetary / Procedural Review">Stage 4: Budgetary /
+                                                    <option value="Budgetary / Procedural Review">Stage 4: Budgetary
+                                                        /
                                                         Procedural Review</option>
                                                     <option value="Stakeholder Meeting & Finalisation">Stage 5:
                                                         Stakeholder
                                                         Meeting & Finalisation</option>
-                                                    <option value="Project Approval & Tri-Partite Agreement">Stage 6:
+                                                    <option value="Project Approval & Tri-Partite Agreement">Stage
+                                                        6:
                                                         Project Approval & Tri-Partite Agreement</option>
                                                     <option value="Procurement">Stage 7: Procurement</option>
                                                     <option value="Implementation">Stage 8: Implementation</option>
                                                 </select>
                                             </div>
+                                            <div class=" col-md-6 mb-3">
+                                                <label class="form-label">Token </label>
+                                                <input type="text" class="form-control" id="fundanideatoken"
+                                                    readonly></input>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class=" col-md-12 mb-3">
+                                                <label class="form-label">Fund An Idea Description* </label>
+                                                <textarea type="text" class="form-control" id="fundanideadescription"
+                                                    rows="5" required></textarea>
+                                            </div>
+
                                         </div>
 
 
@@ -343,8 +363,7 @@
                                             <button type="button" onclick="window.history.back()"
                                                 class="btn btn-outline-secondary">Cancel</button>
                                             <button type="button" class="btn btn-outline-secondary"
-                                                style="float: inline-end;"
-                                                onclick="window.location.href='projectlist.html'">
+                                                style="float: inline-end;" onclick="window.history.back()">
                                                 Back
                                             </button>
                                         </div>
