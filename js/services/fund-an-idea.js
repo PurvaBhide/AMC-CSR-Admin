@@ -24,4 +24,11 @@ fundanideaSrevices={
       data:formdata
     })
   },
+  add:function(formdata){
+    return api.request({
+      path:'/addFundanidea',
+      method:'POST',
+      data:formdata
+    })
+  }
 }
