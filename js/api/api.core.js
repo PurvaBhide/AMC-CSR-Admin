@@ -29,7 +29,7 @@ ApiCore.prototype.request = function(params) {
 };
 
 ApiCore.prototype.uploadFile = function(path, file, fieldName) {
-  fieldName = fieldName || 'file';
+  fieldName = fieldName || 'files';
   var formData = new FormData();
   formData.append(fieldName, file);
   
