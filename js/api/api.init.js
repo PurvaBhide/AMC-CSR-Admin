@@ -13,3 +13,6 @@ if (typeof NgoService !== 'undefined') {
 if (typeof ParticipantService !== 'undefined') {
   Api.participant = ParticipantService;
 }
+if(typeof galleryServices!== 'undefined'){
+  Api.gallery = galleryServices;
+}
