@@ -16,3 +16,6 @@ if (typeof ParticipantService !== 'undefined') {
 if(typeof galleryServices!== 'undefined'){
   Api.gallery = galleryServices;
 }
+if(typeof SuccessStoryService!== 'undefined'){
+  Api.successStory = SuccessStoryService;
+}

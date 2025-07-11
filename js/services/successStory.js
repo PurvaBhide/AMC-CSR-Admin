@@ -2,8 +2,8 @@ var SuccessStoryService = {
   create: function(data) {
     return api.request({ path: '/createsuccessstory', method: 'POST', data: data });
   },
-  listAll: function() {
-    return api.request({ path: '/listallSuccessStory', method: 'GET' });
+  listAll: function(page, size) {
+    return api.request({ path: '/listallSuccessStory?page=' + (page || 0) + '&size=' + (size || 10),  method: 'GET' });
   },
   getById: function(id) {
     return api.request({ path: '/successStoryshowbyid/' + id, method: 'GET' });
