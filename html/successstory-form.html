@@ -116,15 +116,16 @@
                     </li>
 
                     <!-- Ideas -->
+
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-bulb"></i>
-                            <div class="text-truncate" data-i18n="Ideas">Fund An Ideas</div>
+                            <div class="text-truncate" data-i18n="Ideas">Ideas</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a href="ideaList.html" class="menu-link">
-                                    <div class="text-truncate">Liat All Ideas</div>
+                                    <div class="text-truncate">Submitted Ideas</div>
                                 </a>
                             </li>
                         </ul>
@@ -232,92 +233,88 @@
 
                 <!-- Content wrapper -->
                 <div class="container-xxl flex-grow-1 container-p-y">
-                    <!-- Header -->
-                    <div class="card mb-4">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Gallery</h5>
-                            <a href="gallery-form.html" class="btn btn-primary">
-                                <i class="bx bx-plus"></i> Add Gallery
-                            </a>
-                        </div>
-                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card mb-4">
+                                <h5 class="card-header">Success Stories Details</h5>
+                                <div class="card-body">
+                                    <form id="successStoriesform">
+                                        <input type="hidden" id="fundanideaid">
 
-                    <!-- Filters -->
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label class="form-label">File Type</label>
-                                    <select class="form-select" id="filetypefilter">
-                                        <option value="">Select Type</option>
-                                        <option value="image">Image</option>
-                                        <option value="video">Video</option>
-                                        <!-- Dynamically populated -->
-                                    </select>
+
+                                        <div class="row">
+
+                                            <div class=" col-md-6 mb-3">
+                                                <label class="form-label">Category </label>
+                                                <select class="form-control" id="categoryId">
+                                                    <option value="">Select Type</option>
+
+                                                    <!-- <option value="document">Document</option> -->
+                                                </select>
+
+                                            </div>
+                                            <div class=" col-md-6 mb-3">
+                                                <label class="form-label">NGO </label>
+                                                <select class="form-control" id="ngoId">
+                                                    <option value="">Select Type</option>
+
+                                                    <!-- <option value="document">Document</option> -->
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class=" col-md-6 mb-3">
+                                                <label class="form-label">Success Story Title*</label>
+                                                <input type="text" class="form-control" id="successStoryTitle"
+                                                    placeholder="Enter Success Story Title" required>
+                                            </div>
+                                            <div class=" col-md-6 mb-3">
+                                                <label class="form-label">Success Story date*</label>
+                                                <input type="date" class="form-control" id="successstoryDate"
+                                                    placeholder="Enter Success Story Title" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class=" col-md-6 mb-3">
+                                                <label class="form-label">Success Story Image* </label>
+                                                <input type="file" class="form-control" id="successstoryImage"
+                                                    onchange=""></input>
+                                                <div style="margin-top: 5px;"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class=" col-md-12 mb-3">
+                                                <label class="form-label">Success Story Description* </label>
+                                                <textarea type="text" class="form-control" id="successstoryDescription"
+                                                    onchange="" required rows="5"
+                                                    placeholder="Enter success story description"></textarea>
+                                                <div style="margin-top: 5px;"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <button type="submit" class="btn btn-primary me-2"
+                                                id="submitBtn">Submit</button>
+                                            <button type="submit" class="btn btn-primary me-2"
+                                                id="saveBtn">Save</button>
+                                            <button type="button" onclick="window.history.back()"
+                                                class="btn btn-outline-secondary">Cancel</button>
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                style="float: inline-end;" onclick="window.history.back()">
+                                                Back
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
-                    <!-- Projects Table -->
-                    <div class="card">
-                        <div class="table-responsive text-nowrap">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Sr. No.</th>
-                                        <th>File Type</th>
-                                        <th>image / video</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0">
-                                    <!-- Sample Row (Dynamic data from backend) -->
-
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <!-- <li><a class="dropdown-item" href="gallery-form.html?id=1"><i
-                                                            class="bx bx-edit me-1"></i>
-                                                        Edit</a></li> -->
-                                                <li><a class="dropdown-item" href="javascript:void(0);"
-                                                        onclick="deleteFundAnIdea(id)"><i class="bx bx-trash me-1"></i>
-                                                        Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="mt-4">
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item prev">
-                                    <a class="page-link" href="javascript:void(0);"><i
-                                            class="tf-icon bx bx-chevron-left"></i></a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="javascript:void(0);">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="javascript:void(0);">2</a>
-                                </li>
-                                <li class="page-item next">
-                                    <a class="page-link" href="javascript:void(0);"><i
-                                            class="tf-icon bx bx-chevron-right"></i></a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
                 </div>
+
+                <!-- Script for form handling -->
+
             </div>
 
         </div>
@@ -342,16 +339,45 @@
     <script src="../assets/vendor/js/menu.js"></script>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/navbar.js"></script>
+    <!-- <script src="../assets/js/filter-feedback.js"></script> -->
+
+    <!-- api connection js files start -->
     <script src="../js/api/api.config.js"></script>
     <script src="../js/api/api.core.js"></script>
+    <script src="../js/services/category.js"></script>
+    <script src="../js/services/ngo.js"></script>
     <!-- <script src="../js/services/project.js"></script> -->
     <script src="../js/api/api.init.js"></script>
     <script src="../js/services/gallery.js"></script>
-    <script src="../js/script/gallerylist.js"></script>
-    <!-- <script src="../js/services/project-management.js"></script> -->
 
+    <script src="../js/services/successStory.js"></script>
+    <script src="../js/script/successstoryform.js"></script>
+
+    <!-- api connection js files end -->
+    <!-- rolewise sidebar -->
+    <!-- GitHub widget button (if required) -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- <script>
+    // Load data if editing
+    if (getUrlParam('id')) {
+      fetchProject(getUrlParam('id'));
+    }
 
+    // Form submission
+    document.getElementById('projectForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      saveProject();
+    });
+    function filterByBudget(range) {
+      if (range === "1000000") {
+        return projects.filter(p => p.scale >= 1000000);
+      } else if (range) {
+        const [min, max] = range.split('-').map(Number);
+        return projects.filter(p => p.scale >= min && p.scale < max);
+      }
+      return projects;
+    }
+  </script> -->
 </body>
 
 </html>
