@@ -243,7 +243,23 @@
                     </div>
 
                     <!-- Filters -->
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label class="form-label">File Type</label>
+                                    <select class="form-select" id="filetypefilter">
+                                        <option value="">Select Type</option>
+                                        <option value="image">Image</option>
+                                        <option value="video">Video</option>
+                                        <!-- Dynamically populated -->
+                                    </select>
+                                </div>
 
+
+                            </div>
+                        </div>
+                    </div>
                     <!-- Projects Table -->
                     <div class="card">
                         <div class="table-responsive text-nowrap">
@@ -251,11 +267,8 @@
                                 <thead>
                                     <tr>
                                         <th>Sr. No.</th>
-                                        <th>Project Name</th>
-                                        <th>Department</th>
-                                        <th>Contact Person Name </th>
-                                        <th>Estimate Amount (₹)</th> <!-- Changed from "Scale" -->
-                                        <th>status</th>
+                                        <th>File Type</th>
+                                        <th>image / video</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -268,9 +281,9 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="fund-an-idea-form.html?id=1"><i
+                                                <!-- <li><a class="dropdown-item" href="gallery-form.html?id=1"><i
                                                             class="bx bx-edit me-1"></i>
-                                                        Edit</a></li>
+                                                        Edit</a></li> -->
                                                 <li><a class="dropdown-item" href="javascript:void(0);"
                                                         onclick="deleteFundAnIdea(id)"><i class="bx bx-trash me-1"></i>
                                                         Delete</a></li>
@@ -333,8 +346,8 @@
     <script src="../js/api/api.core.js"></script>
     <!-- <script src="../js/services/project.js"></script> -->
     <script src="../js/api/api.init.js"></script>
-    <!-- <script src="../js/services/fund-an-idea.js"></script>
-    <script src="../js/script/listallfundanidea.js"></script> -->
+    <script src="../js/services/gallery.js"></script>
+    <script src="../js/script/gallerylist.js"></script>
     <!-- <script src="../js/services/project-management.js"></script> -->
 
     <script async defer src="https://buttons.github.io/buttons.js"></script>

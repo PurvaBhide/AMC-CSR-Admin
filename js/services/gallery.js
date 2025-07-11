@@ -1,50 +1,3 @@
-// // const { data } = require("jquery");
-
-// galleryServices={
-//     add : function(formdata){
-//         return api.request({
-//             path:'/addgallery',
-//             method:'POST',
-//             data:formdata
-//         })
-//     },
-//     uploadimage:function(formdata){
-//         return api.request({
-//             path:'/upload/images',
-//             method:'POST',
-//             data:formdata
-//         })
-//     },
-//       uploaddocument:function(formdata){
-//         return api.request({
-//             path:'/upload/documents',
-//             method:'POST',
-//             data:formdata
-//         })
-//     },
-
-//       uploadvideo:function(formdata){
-//         return api.request({
-//             path:'/upload/videos',
-//             method:'POST',
-//             data:formdata
-//         })
-//     },
-//   // Add this update method
-//     update: function(id, formdata) {
-//         return api.request({
-//             path: `/updategallery/${id}`,
-//             method: 'PUT',
-//             data: formdata
-//         })
-//     },
-
-// }
-
-
-// Remove the require statement as it's not needed in browser
-// const { data } = require("jquery");
-
 galleryServices = {
     add: function(formdata) {
         return api.request({
@@ -53,10 +6,7 @@ galleryServices = {
             data: formdata
         });
     },
-    
-    // These are no longer needed since we use api.uploadFile directly
-    // But keep them for backward compatibility if needed elsewhere
-    uploadimage: function(formData) {
+     uploadimage: function(formData) {
         return api.uploadFile('/upload/images', formData.get('files'), 'files');
     },
     
@@ -74,5 +24,23 @@ galleryServices = {
             method: 'PUT',
             data: formdata
         });
-    }
+    },
+    listall:function(){
+        return api.request({
+            path:'/listallgallery',
+            method:'GET'
+        })
+    },
+    filetype:function(type){
+        return api.request({
+            path:`/galleryfileType/${type}`,
+            method:'GET',
+                   })
+    },
+    delete:function(id){
+        return api.request({
+            path:`/deletegallery/${id}`,
+            method:'DELETE',
+            })
+            }
 };

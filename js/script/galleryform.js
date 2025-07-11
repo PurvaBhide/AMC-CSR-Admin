@@ -401,29 +401,24 @@ function updateFilePreview() {
             </div>
             
             <!-- Show submission payload -->
-            <div class="bg-light p-2 rounded">
-              <div class="text-muted" style="font-size: 0.7rem;">Will submit:</div>
-              <code style="font-size: 0.7rem; word-break: break-all;">
-                ${JSON.stringify(submissionData, null, 2)}
-              </code>
-            </div>
+           
           </div>
         </div>
       </div>
     `;
   });
 
-  html += `
-        </div>
-        <div class="mt-3 p-2 bg-info bg-opacity-10 rounded">
-          <small class="text-info">
-            <i class="fas fa-info-circle me-1"></i>
-            Each file will be submitted as a separate API call with the payload structure shown above.
-          </small>
-        </div>
-      </div>
-    </div>
-  `;
+  // html += `
+  //       </div>
+  //       <div class="mt-3 p-2 bg-info bg-opacity-10 rounded">
+  //         <small class="text-info">
+  //           <i class="fas fa-info-circle me-1"></i>
+  //           Each file will be submitted as a separate API call with the payload structure shown above.
+  //         </small>
+  //       </div>
+  //     </div>
+  //   </div>
+  // `;
 
   previewContainer.innerHTML = html;
 }
@@ -519,6 +514,7 @@ function createGallery() {
     .then(responses => {
       console.log("All files submitted successfully:", responses);
       alert(`Gallery created successfully! ${uploadedFiles.length} files added.`);
+      window.location.href="gallery.html";
       
       // Reset form
       uploadedFiles = [];
