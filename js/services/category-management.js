@@ -43,7 +43,7 @@ function loadCategories() {
     .catch(error => {
       showErrorState(error);
     })
-    .finally(() => {
+    .then(() => {
       resetRefreshButton();
     });
 }
@@ -66,7 +66,7 @@ function handleAddCategory(e) {
     .catch(error => {
       handleFormError(error, 'categoryName');
     })
-    .finally(() => {
+    .then(() => {
       setButtonLoading(btn, false);
     });
 }
@@ -89,7 +89,7 @@ function handleEditCategory(e) {
     .catch(error => {
       handleFormError(error, 'editCategoryName');
     })
-    .finally(() => {
+    .then(() => {
       setButtonLoading(btn, false);
     });
 }
