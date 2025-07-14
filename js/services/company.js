@@ -2,8 +2,9 @@ var CompanyService = {
   add: function(data) {
     return api.request({ path: '/addCompany', method: 'POST', data: data });
   },
-  listAll: function() {
-    return api.request({ path: '/listall', method: 'GET' });
+  listAll: function(page = 1, size = 10) {
+    return api.request({ path: `/listallcompanies?page=${page - 1}&size=${size}`, method: 'GET' }); // page-1 because
+    // most backends are 0-indexed for pages
   },
   getById: function(id) {
     return api.request({ path: '/companyShowById/' + id, method: 'GET' });
