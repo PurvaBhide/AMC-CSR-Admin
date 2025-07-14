@@ -19,3 +19,6 @@ if(typeof galleryServices!== 'undefined'){
 if(typeof SuccessStoryService!== 'undefined'){
   Api.successStory = SuccessStoryService;
 }
+if(typeof newsService!== 'undefined'){
+  Api.news = newsService;
+}
