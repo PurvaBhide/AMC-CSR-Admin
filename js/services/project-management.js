@@ -52,11 +52,12 @@ function getFilterParams() {
     params.append('ngoId', ngoEl.value);
   }
 
-  // Budget filter
-  const budgetEl = document.getElementById("budgetFilter");
-  if (budgetEl && budgetEl.value && budgetEl.value !== "") {
-    params.append('projectBudget', budgetEl.value);
-  }
+const budgetEl = document.getElementById("budgetFilter");
+if (budgetEl && budgetEl.value && budgetEl.value !== "") {
+  const [min, max] = budgetEl.value.split('-');
+  if (min) params.append('minBudget', min);
+  if (max) params.append('maxBudget', max);
+}
 
   // Status filter (assuming you have this element in your UI)
   const statusEl = document.getElementById("statusFilter");
@@ -77,20 +78,35 @@ function loadProjects() {
     if (filterParams) {
       console.log("Fetching with filters:", filterParams);
       // Fetch filtered projects
-      fetch(`https://mumbailocal.org:8087/projects/filter?${filterParams}`)
-        .then(response => {
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          return response.json();
-        })
-        .then(apiResponse => {
-          // The API response for filtered projects seems to have a 'data' array
-          allFilteredProjects = apiResponse.data || []; // Ensure it's an array
-          paginateFilteredResults();
-        })
-        .catch(error => {
-          console.error("Filter error:", error);
-          showError("Error loading filtered projects");
-        });
+fetch(`https://mumbailocal.org:8087/projects/filter?${filterParams}`)
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return response.json();
+  })
+  .then(apiResponse => {
+    let projects = apiResponse.data || [];
+
+    // Apply client-side budget filtering
+    const budgetEl = document.getElementById("budgetFilter");
+    if (budgetEl && budgetEl.value) {
+      const [minStr, maxStr] = budgetEl.value.split("-");
+      const min = parseInt(minStr);
+      const max = parseInt(maxStr);
+      projects = projects.filter(project => {
+        const budget = parseInt(project.projectBudget || 0);
+        return budget >= min && budget <= max;
+      });
+    }
+
+    allFilteredProjects = projects;
+    paginateFilteredResults();
+  })
+  .catch(error => {
+    console.error("Filter error:", error);
+    showError("No projects found matching the selected filters.");
+  });
+
+
     } else {
       // Fetch all projects with server-side pagination
       Api.project.listAll(currentPage, pageSize)
