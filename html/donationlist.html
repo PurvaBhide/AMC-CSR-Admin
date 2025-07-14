@@ -249,31 +249,11 @@
           <!-- Filters -->
           <div class="card mb-4">
             <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <label class="form-label">Category</label>
-                  <select class="form-select" id="categoryFilter">
-                    <option value="">All Categories</option>
-                    <!-- Dynamically populated -->
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">NGO</label>
-                  <select class="form-select" id="ngoFilter">
-                    <option value="">All NGOs</option>
-                    <!-- Dynamically populated -->
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Budget Range (₹)</label>
-                  <select class="form-select" id="budgetFilter">
-                    <option value="">All Budgets</option>
-                    <option value="0-50000">Under ₹50,000</option>
-                    <option value="50000-100000">₹50,000 - ₹1,00,000</option>
-                    <option value="100000-500000">₹1,00,000 - ₹5,00,000</option>
-                    <option value="500000-1000000">₹5,00,000 - ₹10,00,000</option>
-                    <option value="1000000">Above ₹10,00,000</option>
-                  </select>
+              <div class="row justify-content-end">
+                <div class="col">
+                  <label for="searchInput" class="form-label">Search Participants</label>
+                  <input type="text" id="searchInput" class="form-control"
+                    placeholder="Search by name, email, mobile, organization..." />
                 </div>
               </div>
             </div>
@@ -285,7 +265,7 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th>Sr. No.</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Mobile</th>
@@ -354,7 +334,7 @@
   <script src="../js/api/api.config.js"></script>
   <script src="../js/api/api.core.js"></script>
   <script src="../js/services/participant.js"></script>
-  <!-- <script src="../js/services/ngo.js"></script> -->
+  <script src="../js/services/ngo.js"></script>
   <script src="../js/services/category.js"></script>
   <script src="../js/api/api.init.js"></script>
   <script src="../js/services/participant-managent.js"></script>
