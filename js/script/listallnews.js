@@ -98,7 +98,9 @@ function renderNewsTable(newsList) {
                     </button>
                     <ul class="dropdown-menu">
                         <li>
+
                             <a class="dropdown-item" href="newsform.html?id=${news.letestupdateid}">
+
                                 <i class="bx bx-edit me-1"></i> Edit
                             </a>
                         </li>

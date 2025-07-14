@@ -5,6 +5,7 @@ newsService={
             method:'GET'
         })
      },
+
      create:function(formData){
         return api.request({
             path:'/AddLatestupdates',
@@ -39,5 +40,6 @@ newsService={
                     })
                     },
      
+
 
 }
