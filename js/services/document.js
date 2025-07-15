@@ -9,7 +9,7 @@ var DocumentService = {
     return api.request({ path: '/documentShowById/' + id, method: 'GET' });
   },
   getByType: function(type) {
-    return api.request({ path: '/documents/' + type, method: 'GET' });
+    return api.request({ path: '' + type, method: 'GET' });
   },
   update: function(id, data) {
     return api.request({ path: '/documentUpdate/' + id, method: 'PUT', data: data });

@@ -22,3 +22,6 @@ if(typeof SuccessStoryService!== 'undefined'){
 if(typeof newsService!== 'undefined'){
   Api.news = newsService;
 }
+if(typeof DocumentService!== 'undefined'){
+  Api.document = DocumentService;
+}

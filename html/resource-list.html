@@ -245,6 +245,15 @@
                             <a href="resources.html" class="btn btn-primary"><i class="bx bx-plus"></i> Add Resource</a>
                         </div>
                     </div>
+                    <div class="card p-3">
+                        <label for="documentTypeFilter" class="form-label">Select Document Type</label>
+                        <select id="documentTypeFilter" class="form-select" style="max-width: 300px;">
+                            <option value="">All Documents</option>
+                            <option value="legal document">Legal Document</option>
+                            <option value="framework">Framework</option>
+                            <option value="reference">Reference</option>
+                        </select>
+                    </div>
 
                     <!-- Table -->
                     <div class="card">
@@ -259,27 +268,6 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                    <!-- Dynamic Rows will be inserted here -->
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Training Manual</td>
-                                        <td><a href="../assets/docs/manual.pdf" target="_blank">View File</a></td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                                                    <i class="bx bx-dots-vertical-rounded"></i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="resources.html?id=1"><i
-                                                                class="bx bx-edit me-1"></i>Edit</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"
-                                                            onclick="deleteResource(1)"><i
-                                                                class="bx bx-trash me-1"></i>Delete</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- More dynamic rows -->
                                 </tbody>
                             </table>
                         </div>
@@ -289,15 +277,11 @@
                     <div class="mt-4">
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center">
-                                <li class="page-item prev"><a class="page-link" href="javascript:void(0);"><i
-                                            class="tf-icon bx bx-chevron-left"></i></a></li>
-                                <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a></li>
-                                <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                                <li class="page-item next"><a class="page-link" href="javascript:void(0);"><i
-                                            class="tf-icon bx bx-chevron-right"></i></a></li>
+                                <!-- Pagination buttons will be injected here -->
                             </ul>
                         </nav>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -328,11 +312,11 @@
     <script src="../assets/js/navbar.js"></script>
     <script src="../js/api/api.config.js"></script>
     <script src="../js/api/api.core.js"></script>
-    <!-- <script src="../js/services/project.js"></script> -->
+    <script src="../js/services/document.js"></script>
     <script src="../js/api/api.init.js"></script>
     <!-- <script src="../js/services/successStory.js"></script>
     <script src="../js/script/successstorylist.js"></script> -->
-    <!-- <script src="../js/services/project-management.js"></script> -->
+    <script src="../js/services/document-management.js"></script>
 
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
