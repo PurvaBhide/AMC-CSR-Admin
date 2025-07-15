@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", function() {
 function loadParticipantData(id) {
   Api.participant.getById(id)
     .then(response => {
-      const participant = response.data;
+      const participant = response.data.participant;
+      const project = response.data.project;
+      console.log(project,"participant")
       document.getElementById('participantID').value = participant.participantID;
       document.getElementById('participantName').value = participant.participantName;
       document.getElementById('participantEmail').value = participant.participantEmail;
@@ -23,6 +25,12 @@ function loadParticipantData(id) {
 
       document.getElementById('amount').value = participant.amount || '';
       document.getElementById('status').value = participant.status || 'ACTIVE';
+      document.getElementById('projectName').value= project.projectName||'';
+      document.getElementById('projectShortDescription').value= project.projectShortDescription||'';
+      document.getElementById('projectDEpartmentName').value= project.projectDEpartmentName||'';
+      document.getElementById('projectBudget').value= project.projectBudget||'';
+      document.getElementById('projectStatus').value= project.projectStatus||'';
+
     })
     .catch(error => {
       console.error("Error loading participant:", error);
