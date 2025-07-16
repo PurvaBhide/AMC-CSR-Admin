@@ -248,11 +248,9 @@
                         <label class="form-label">Resource Type *</label>
                         <select class="form-select" id="resourceType" required>
                           <option value="">Select Resource Type</option>
-                          <option value="legal">Legal Documents</option>
-                          <!-- <option value="accounts">Final Accounts</option> -->
-                          <option value="frameworks">Frameworks</option>
-                          <option value="reference">Reference Materials</option>
-                          <!-- <option value="publication">Publications</option> -->
+                          <option value="legal document">Legal Document</option>
+                          <option value="framework">Framework</option>
+                          <option value="reference">Reference</option>
                         </select>
                       </div>
 
@@ -273,57 +271,23 @@
                     </div>
 
                     <!-- Row 4: PDF Upload -->
-                    <div class="row mb-4">
-                      <div class="col-md-12">
+                    <div class="row" style="    align-items: center;">
+                      <div class="col-md-9">
                         <label class="form-label">PDF File *</label>
                         <input type="file" class="form-control" id="pdfFile" accept=".pdf" required>
                         <div class="form-text">Maximum file size: 10MB</div>
                       </div>
+                      <div class="col-md-3">
+                        <button type="button" class="btn btn-secondary" id="uploadPdfButton">
+                          <i class="bx bx-upload me-1"></i> Upload PDF
+                        </button>
+                      </div>
                     </div>
+                    <div id="uploadedFileName" class="form-text text-success mt-2"></div>
+
+
 
                     <!-- Conditional Rows -->
-                    <!-- Legal Documents Fields -->
-                    <div id="legalFields" class="row additional-fields d-none">
-                      <div class="col-md-6 mb-3">
-                        <label class="form-label">Effective Date</label>
-                        <input type="date" class="form-control" id="effectiveDate">
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <label class="form-label">Document Number</label>
-                        <input type="text" class="form-control" id="docNumber" placeholder="e.g., ACT-2023-001">
-                      </div>
-                    </div>
-
-                    <!-- Publication Fields -->
-                    <div id="publicationFields" class="row additional-fields d-none">
-                      <div class="col-md-6 mb-3">
-                        <label class="form-label">Publication Date</label>
-                        <input type="date" class="form-control" id="publicationDate">
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <label class="form-label">ISBN/ISSN</label>
-                        <input type="text" class="form-control" id="isbn" placeholder="Optional identification number">
-                      </div>
-                    </div>
-
-                    <!-- Final Accounts Fields -->
-                    <div id="accountsFields" class="row additional-fields d-none">
-                      <div class="col-md-6 mb-3">
-                        <label class="form-label">Financial Year</label>
-                        <select class="form-select" id="financialYear">
-                          <option value="2023-24">2023-24</option>
-                          <option value="2022-23">2022-23</option>
-                          <option value="2021-22">2021-22</option>
-                        </select>
-                      </div>
-                      <div class="col-md-6 mb-3">
-                        <label class="form-label">Audit Status</label>
-                        <select class="form-select" id="auditStatus">
-                          <option value="unaudited">Unaudited</option>
-                          <option value="audited">Audited</option>
-                        </select>
-                      </div>
-                    </div>
 
                     <!-- Form Actions -->
                     <div class="row mt-4">
@@ -369,78 +333,18 @@
   <script src="../assets/vendor/js/menu.js"></script>
   <script src="../assets/js/main.js"></script>
   <script src="../assets/js/navbar.js"></script>
-  <script src="../assets/js/filter-feedback.js"></script>
+
+  <script src="../js/api/api.config.js"></script>
+  <script src="../js/api/api.core.js"></script>
+  <script src="../js/services/document.js"></script>
+  <script src="../js/api/api.init.js"></script>
+  <script src="../js/services/resource-form-handler.js"></script>
+  <!-- <script src="../js/script/successstorylist.js"></script>
+  <script src="../js/services/document-management.js"></script> -->
   <!-- rolewise sidebar -->
   <!-- GitHub widget button (if required) -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <script>
-    // Load data if editing
-    if (getUrlParam('id')) {
-      fetchProject(getUrlParam('id'));
-    }
 
-    // Form submission
-    document.getElementById('projectForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      saveProject();
-    });
-    function filterByBudget(range) {
-      if (range === "1000000") {
-        return projects.filter(p => p.scale >= 1000000);
-      } else if (range) {
-        const [min, max] = range.split('-').map(Number);
-        return projects.filter(p => p.scale >= min && p.scale < max);
-      }
-      return projects;
-    }
-  </script>
-  <script>
-    // Show/hide additional fields based on resource type
-    document.getElementById('resourceType').addEventListener('change', function () {
-      // Hide all additional fields first
-      document.querySelectorAll('.additional-fields').forEach(field => {
-        field.classList.add('d-none');
-      });
-
-      // Show relevant fields
-      if (this.value === 'legal') {
-        document.getElementById('legalFields').classList.remove('d-none');
-      } else if (this.value === 'publication') {
-        document.getElementById('publicationFields').classList.remove('d-none');
-      } else if (this.value === 'accounts') {
-        document.getElementById('accountsFields').classList.remove('d-none');
-      }
-    });
-
-    // Form submission
-    document.getElementById('resourceForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      const formData = new FormData();
-      formData.append('type', document.getElementById('resourceType').value);
-      formData.append('title', document.getElementById('title').value);
-      formData.append('description', document.getElementById('description').value);
-      formData.append('file', document.getElementById('pdfFile').files[0]);
-
-      // Add conditional fields
-      const resourceType = document.getElementById('resourceType').value;
-      if (resourceType === 'legal') {
-        formData.append('effective_date', document.getElementById('effectiveDate').value);
-        formData.append('document_number', document.getElementById('docNumber').value);
-      } else if (resourceType === 'publication') {
-        formData.append('publication_date', document.getElementById('publicationDate').value);
-        formData.append('isbn', document.getElementById('isbn').value);
-      } else if (resourceType === 'accounts') {
-        formData.append('financial_year', document.getElementById('financialYear').value);
-        formData.append('audit_status', document.getElementById('auditStatus').value);
-      }
-
-      // In production: Replace with actual API call
-      console.log('Form data:', Object.fromEntries(formData));
-      alert('Resource saved successfully!');
-      this.reset();
-    });
-  </script>
 
 </body>
 
