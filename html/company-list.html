@@ -257,45 +257,7 @@
             </div>
           </div>
 
-          <!-- Filters -->
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <label class="form-label">Category</label>
-                  <select class="form-select" id="categoryFilter">
-                    <option value="">All Categories</option>
-                    <!-- Dynamically populated -->
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">NGO</label>
-                  <select class="form-select" id="ngoFilter">
-                    <option value="">All NGOs</option>
-                    <!-- Dynamically populated -->
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Budget Range (₹)</label>
-                  <select class="form-select" id="budgetFilter">
-                    <option value="">All Budgets</option>
-                    <option value="50000">Under ₹50,000</option>
-                    <option value="100000">₹1,00,000</option>
-                    <option value="200000">₹2,00,000</option>
-                    <option value="300000">₹3,00,000</option>
-                    <option value="400000">₹4,00,000</option>
-                    <option value="500000">₹5,00,000</option>
-                    <option value="600000">₹6,00,000</option>
-                    <option value="700000">₹7,00,000</option>
-                    <option value="800000">₹8,00,000</option>
-                    <option value="900000">₹9,00,000</option>
-                    <option value="1000000">₹10,00,000</option>
-                    <!-- <option value="1000001">Above ₹10,00,000</option> -->
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
+
 
           <!-- Projects Table -->
           <div class="card">
@@ -333,7 +295,9 @@
 
           <!-- Pagination -->
           <div class="mt-4">
-            <nav aria-label="Page navigation">
+            <div id="pagination" class="mt-3 text-center"></div>
+
+            <!-- <nav aria-label="Page navigation">
               <ul class="pagination justify-content-center">
                 <li class="page-item prev">
                   <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-left"></i></a>
@@ -348,7 +312,7 @@
                   <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-right"></i></a>
                 </li>
               </ul>
-            </nav>
+            </nav> -->
           </div>
         </div>
       </div>
