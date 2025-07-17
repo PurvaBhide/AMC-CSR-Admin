@@ -29,6 +29,9 @@ var ProjectService = {
     return api.request({ path: '/updateProject/' + id, method: 'PUT', data: data });
   },
   delete: function(id) {
-    return api.request({ path: '/deleteProject/' + id, method: 'DELETE' });
+    return api.request({
+      path:`/deleteProject/${id}`,
+      method: 'DELETE'
+    })  
   }
 };
