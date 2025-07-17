@@ -364,3 +364,34 @@ function clearFilters() {
   allFilteredProjects = [];
   loadProjects();
 }
+
+
+function deleteProject(projectId, projectName) {
+    console.log('🗑️ Delete project called with ID:', projectId);
+    
+    const confirmMessage = projectName 
+        ? `Are you sure you want to delete "${projectName}"?`
+        : `Are you sure you want to delete this project?`;
+    
+    if (!confirm(confirmMessage)) {
+        return;
+    }
+
+    ProjectService.delete(projectId)
+        .then(response => {
+            console.log('✅ Project deleted successfully:', response);
+            alert('Project deleted successfully!');
+            
+            // Remove from DOM or reload page
+            const projectRow = document.querySelector(`[data-project-id="${projectId}"]`);
+            if (projectRow) {
+                projectRow.remove();
+            } else {
+                window.location.reload(); // Fallback: reload the page
+            }
+        })
+        .catch(error => {
+            console.error('❌ Error deleting project:', error);
+            alert('Failed to delete project. Please try again.');
+        });
+}
