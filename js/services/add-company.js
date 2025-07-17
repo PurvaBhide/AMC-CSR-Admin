@@ -1,135 +1,318 @@
-// company-form-handler.js
+// // company-form-handler.js
+// document.addEventListener('DOMContentLoaded', function() {
+//     // Initialize form elements
+//     const companyForm = document.getElementById('companyForm');
+//     const companyID = document.getElementById('companyID');
+//     const companyName = document.getElementById('companyName');
+//     const companyUrl = document.getElementById('companyUrl');
+//     const status = document.getElementById('status');
+//     const formTitle = document.getElementById('formTitle');
+//     const companyCategory = document.getElementById('companyCategory');
+
+//     // Check if we're editing an existing company
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const editCompanyId = urlParams.get('id');
+
+//     if (editCompanyId) {
+//         formTitle.textContent = 'Edit Company';
+//         loadCompanyData(editCompanyId);
+//     } else {
+//         formTitle.textContent = 'Add Company';
+//     }
+
+//     // Form submission handler
+//     companyForm.addEventListener('submit', function(e) {
+//         e.preventDefault();
+
+//         // Validate form
+//         if (!companyName.value || companyName.value.trim() === '') {
+//             showError('Company name is required', companyName);
+//             return;
+//         }
+
+//         // Prepare company data
+//         const companyData = {
+//             companyname: companyName.value.trim(),
+//             companyurl: companyUrl.value.trim(),
+//             status: status.value,
+//             categoryId: companyCategory.value
+//         };
+
+//         // Remove empty or null values
+//         Object.keys(companyData).forEach(key => {
+//             if (companyData[key] === null || companyData[key] === '') {
+//                 delete companyData[key];
+//             }
+//         });
+
+//         if (editCompanyId) {
+//             updateCompany(editCompanyId, companyData);
+//         } else {
+//             addCompany(companyData);
+//         }
+//     });
+
+//   function loadCompanyData(id) {
+//     toggleFormLoading(true);
+
+//     CompanyService.getById(id)
+//         .then(response => {
+//             // Check if response is wrapped in a data property
+//             const companyData = response.data ? response.data : response;
+
+//             // Populate form fields
+//             companyID.value = id;
+//             companyName.value = companyData.companyname || companyData.name || '';
+//             companyUrl.value = companyData.companyurl || companyData.websiteUrl || companyData.url || '';
+//             status.value = companyData.status || 'ACTIVE';
+
+//             // Set category if available
+//             if (companyData.categoryId) {
+//                 companyCategory.value = companyData.categoryId;
+//             } else if (companyData.category && companyData.category.id) {
+//                 companyCategory.value = companyData.category.id;
+//             }
+//         })
+//         .catch(error => {
+//             console.error('Error loading company:', error);
+//             showError('Failed to load company data. Please try again.');
+//             // Redirect to list if error occurs
+//             setTimeout(() => {
+//                 window.location.href = 'company-list.html';
+//             }, 2000);
+//         })
+//         .finally(() => {
+//             toggleFormLoading(false); // This ensures loading state is always cleared
+//         });
+// }
+
+// function toggleFormLoading(isLoading) {
+//     const submitButton = companyForm.querySelector('button[type="submit"]');
+//     if (submitButton) {
+//         submitButton.disabled = isLoading;
+//         submitButton.innerHTML = isLoading
+//             ? '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...'
+//             : editCompanyId ? 'Update Company' : 'Add Company';
+//     }
+// }
+
+//     function addCompany(data) {
+//         toggleFormLoading(true);
+
+//         CompanyService.add(data)
+//             .then(response => {
+//                 showSuccess('Company added successfully!');
+//                 // Redirect to list after delay to show success message
+//                 setTimeout(() => {
+//                     window.location.href = 'company-list.html?added=true';
+//                 }, 1500);
+//             })
+//             .catch(error => {
+//                 console.error('Add company error:', error);
+//                 showError(error.response?.data?.message || 'Failed to add company. Please try again.');
+//             })
+//             .finally(() => {
+//                 toggleFormLoading(false);
+//             });
+//     }
+
+//     function updateCompany(id, data) {
+//         toggleFormLoading(true);
+
+//         CompanyService.update(id, data)
+//             .then(response => {
+//                 showSuccess('Company updated successfully!');
+//                 // Redirect to list after delay to show success message
+//                 setTimeout(() => {
+//                     window.location.href = 'company-list.html?updated=true';
+//                 }, 1500);
+//             })
+//             .catch(error => {
+//                 console.error('Update company error:', error);
+//                 showError(error.response?.data?.message || 'Failed to update company. Please try again.');
+//             })
+//             .finally(() => {
+//                 toggleFormLoading(false);
+//             });
+//     }
+
+//     function toggleFormLoading(isLoading) {
+//         const submitButton = companyForm.querySelector('button[type="submit"]');
+//         if (submitButton) {
+//             submitButton.disabled = isLoading;
+//             submitButton.innerHTML = isLoading
+//                 ? '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...'
+//                 : editCompanyId ? 'Update Company' : 'Add Company';
+//         }
+//     }
+
+//     function showError(message, element = null) {
+//         // Create or use a better notification system
+//         const notification = document.createElement('div');
+//         notification.className = 'alert alert-danger position-fixed top-0 end-0 m-3';
+//         notification.style.zIndex = '9999';
+//         notification.style.minWidth = '300px';
+//         notification.innerHTML = message;
+//         document.body.appendChild(notification);
+
+//         // Auto remove after 5 seconds
+//         setTimeout(() => {
+//             notification.remove();
+//         }, 5000);
+
+//         if (element) {
+//             element.focus();
+//             element.classList.add('is-invalid');
+//             setTimeout(() => element.classList.remove('is-invalid'), 3000);
+//         }
+//     }
+
+//     function showSuccess(message) {
+//         // Create or use a better notification system
+//         const notification = document.createElement('div');
+//         notification.className = 'alert alert-success position-fixed top-0 end-0 m-3';
+//         notification.style.zIndex = '9999';
+//         notification.style.minWidth = '300px';
+//         notification.innerHTML = message;
+//         document.body.appendChild(notification);
+
+//         // Auto remove after 5 seconds
+//         setTimeout(() => {
+//             notification.remove();
+//         }, 5000);
+//     }
+// });
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize form elements
+    // Form elements
     const companyForm = document.getElementById('companyForm');
     const companyID = document.getElementById('companyID');
     const companyName = document.getElementById('companyName');
     const companyUrl = document.getElementById('companyUrl');
     const status = document.getElementById('status');
-    const formTitle = document.getElementById('formTitle');
     const companyCategory = document.getElementById('companyCategory');
+    const formTitle = document.getElementById('formTitle');
+    const submitButton = companyForm.querySelector('button[type="submit"]');
 
-
-    // Check if we're editing an existing company
+    // Check edit mode
     const urlParams = new URLSearchParams(window.location.search);
     const editCompanyId = urlParams.get('id');
 
     if (editCompanyId) {
+        formTitle.textContent = 'Edit Company';
+        submitButton.textContent = 'Update Company';
         loadCompanyData(editCompanyId);
     }
 
-    // Form submission handler
-    companyForm.addEventListener('submit', function(e) {
+    // Form submission
+    companyForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // Validate form - ensure companyName has value
-        if (!companyName.value || companyName.value.trim() === '') {
-            showError('Company name is required', companyName);
-            return;
-        }
+        if (!validateForm()) return;
 
-        // Prepare company data - ensure proper field names match API expectations
         const companyData = {
-            companyname: companyName.value.trim(),  // Ensure this matches what your API expects
-            companyurl: companyUrl.value.trim(), // Changed from 'url' to 'websiteUrl' if needed
+            companyname: companyName.value.trim(),
+            companyurl: companyUrl.value.trim(),
             status: status.value,
             categoryId: companyCategory.value
         };
 
-        // Remove empty or null values
-        Object.keys(companyData).forEach(key => {
-            if (companyData[key] === null || companyData[key] === '') {
-                delete companyData[key];
-            }
-        });
+        try {
+            toggleFormLoading(true);
 
-        if (editCompanyId) {
-            updateCompany(editCompanyId, companyData);
-        } else {
-            addCompany(companyData);
+            if (editCompanyId) {
+                await updateCompany(editCompanyId, companyData);
+                showSuccess('Company updated successfully!');
+            } else {
+                await addCompany(companyData);
+                showSuccess('Company added successfully!');
+            }
+
+            setTimeout(() => {
+                window.location.href = 'company-list.html';
+            }, 1500);
+        } catch (error) {
+            console.error('Error:', error);
+            showError(error.message || 'Operation failed. Please try again.');
+        } finally {
+            toggleFormLoading(false);
         }
     });
 
-    function loadCompanyData(id) {
-        toggleFormLoading(true);
-
-        CompanyService.getById(id)
-            .then(response => {
-                formTitle.textContent = 'Edit Company';
-                companyID.value = id;
-
-                // Map API response to form fields - adjust field names as needed
-                companyName.value = response.name || response.companyName || '';
-                companyUrl.value = response.websiteUrl || response.url || '';
-                status.value = response.status || 'ACTIVE';
-            })
-            .catch(error => {
-                console.error('Error loading company:', error);
-                showError('Failed to load company data');
-                window.location.href = 'company-list.html';
-            })
-            .finally(() => {
-                toggleFormLoading(false);
-            });
+    function validateForm() {
+        if (!companyName.value.trim()) {
+            showError('Company name is required', companyName);
+            return false;
+        }
+        return true;
     }
 
-    function addCompany(data) {
-        toggleFormLoading(true);
+    async function loadCompanyData(id) {
+        try {
+            toggleFormLoading(true);
+            const response = await CompanyService.getById(id);
+            const company = response.data || response;
 
-        // Debug: Log the data being sent
-        console.log('Sending company data:', data);
+            companyID.value = id;
+            companyName.value = company.companyname || '';
+            companyUrl.value = company.companyurl || '';
+            status.value = company.status || 'ACTIVE';
+            companyCategory.value = company.categoryId || '';
 
-        CompanyService.add(data)
-            .then(response => {
-                showSuccess('Company added successfully!');
-                window.location.href = 'companylist.html?added=true';
-            })
-            .catch(error => {
-                console.error('Add company error:', error);
-                showError(`Failed to add company: ${error.message || 'Server error'}`);
-            })
-            .finally(() => {
-                toggleFormLoading(false);
-            });
+        } catch (error) {
+            console.error('Load error:', error);
+            showError('Failed to load company data');
+            setTimeout(() => window.location.href = 'company-list.html', 2000);
+        } finally {
+            toggleFormLoading(false);
+        }
     }
 
-    function updateCompany(id, data) {
-        toggleFormLoading(true);
+    async function addCompany(data) {
+        const response = await CompanyService.add(data);
+        return response;
+    }
 
-        console.log('Updating company with:', data);
-
-        CompanyService.update(id, data)
-            .then(response => {
-                showSuccess('Company updated successfully!');
-                window.location.href = 'companylist.html?updated=true';
-            })
-            .catch(error => {
-                console.error('Update company error:', error);
-                showError(`Failed to update company: ${error.message || 'Server error'}`);
-            })
-            .finally(() => {
-                toggleFormLoading(false);
-            });
+    async function updateCompany(id, data) {
+        const response = await CompanyService.update(id, data);
+        return response;
     }
 
     function toggleFormLoading(isLoading) {
-        const submitButton = companyForm.querySelector('button[type="submit"]');
         submitButton.disabled = isLoading;
         submitButton.innerHTML = isLoading
             ? '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...'
-            : 'Save Company';
+            : editCompanyId ? 'Update Company' : 'Add Company';
     }
 
     function showError(message, element = null) {
-        alert(message); // Replace with toast notification if available
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-danger alert-dismissible fade show position-fixed top-0 end-0 m-3';
+        alertDiv.style.zIndex = '9999';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        document.body.appendChild(alertDiv);
+
+        setTimeout(() => alertDiv.remove(), 5000);
+
         if (element) {
             element.focus();
             element.classList.add('is-invalid');
-            setTimeout(() => element.classList.remove('is-invalid'), 3000);
         }
     }
 
     function showSuccess(message) {
-        alert(message); // Replace with toast notification if available
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-success alert-dismissible fade show position-fixed top-0 end-0 m-3';
+        alertDiv.style.zIndex = '9999';
+        alertDiv.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        document.body.appendChild(alertDiv);
+
+        setTimeout(() => alertDiv.remove(), 5000);
     }
 });
