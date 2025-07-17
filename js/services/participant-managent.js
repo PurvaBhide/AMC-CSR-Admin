@@ -179,7 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 let currentPage = 0;
-const pageSize = 5;
+const pageSize = 10;
 let allParticipants = [];
 
 function loadParticipants(page = 0) {
