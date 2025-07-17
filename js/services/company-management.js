@@ -48,7 +48,18 @@ $(document).ready(function () {
         <tr>
           <td>${startIndex + index + 1}</td>
           <td>${company.companyname || 'N/A'}</td>
-          <td><a href="${company.companyurl || '#'}" target="_blank">${company.companyurl || 'N/A'}</a></td>
+           <td>${company.authcomprepresentativename || 'N/A'}</td>
+           <td>${company.authcomprepresentativeemail || 'N/A'}</td>
+            <td style="
+      width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;">
+    <a href="${company.companyurl || '#'}" target="_blank">
+      ${company.companyurl || 'N/A'}
+    </a>
+  </td>
           <td>
             <div class="dropdown">
               <button class="btn p-0" type="button" data-bs-toggle="dropdown">

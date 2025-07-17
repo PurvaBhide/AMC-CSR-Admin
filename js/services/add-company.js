@@ -189,6 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const companyID = document.getElementById('companyID');
     const companyName = document.getElementById('companyName');
     const companyUrl = document.getElementById('companyUrl');
+    const representativeName = document.getElementById('authcomprepresentativename');
+    const representativeEmail = document.getElementById('authcomprepresentativeemail');
     const status = document.getElementById('status');
     const companyCategory = document.getElementById('companyCategory');
     const formTitle = document.getElementById('formTitle');
@@ -214,7 +216,9 @@ document.addEventListener('DOMContentLoaded', function() {
             companyname: companyName.value.trim(),
             companyurl: companyUrl.value.trim(),
             status: status.value,
-            categoryId: companyCategory.value
+            categoryId: companyCategory.value,
+            authcomprepresentativename: representativeName.value,
+            authcomprepresentativeemail: representativeEmail.value,
         };
 
         try {
@@ -257,6 +261,8 @@ document.addEventListener('DOMContentLoaded', function() {
             companyName.value = company.companyname || '';
             companyUrl.value = company.companyurl || '';
             status.value = company.status || 'ACTIVE';
+            representativeName.value = company.authcomprepresentativename || '';
+            representativeEmail.value = company.authcomprepresentativeemail || ''
             companyCategory.value = company.categoryId || '';
 
         } catch (error) {
