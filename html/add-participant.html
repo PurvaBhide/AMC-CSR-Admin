@@ -237,52 +237,14 @@
         <!-- Content wrapper -->
         <div class="container-xxl flex-grow-1 container-p-y">
           <!-- Header -->
-          <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h5 class="mb-0">All Participant</h5>
-              <a href="participant-form.html" class="btn btn-primary">
-                <i class="bx bx-plus"></i> Add Participant
-              </a>
-            </div>
-          </div>
 
-          <!-- Filters -->
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <label class="form-label">Category</label>
-                  <select class="form-select" id="categoryFilter">
-                    <option value="">All Categories</option>
-                    <!-- Dynamically populated -->
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">NGO</label>
-                  <select class="form-select" id="ngoFilter">
-                    <option value="">All NGOs</option>
-                    <!-- Dynamically populated -->
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Budget Range (₹)</label>
-                  <select class="form-select" id="budgetFilter">
-                    <option value="">All Budgets</option>
-                    <option value="0-50000">Under ₹50,000</option>
-                    <option value="50000-100000">₹50,000 - ₹1,00,000</option>
-                    <option value="100000-500000">₹1,00,000 - ₹5,00,000</option>
-                    <option value="500000-1000000">₹5,00,000 - ₹10,00,000</option>
-                    <option value="1000000">Above ₹10,00,000</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
+
+
 
           <!-- Projects Form -->
           <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
-              <h5 class="mb-0" id="formTitle">Edit Participant</h5>
+              <h5 class="mb-0" id="formTitle">Add Participant</h5>
               <a href="donationlist.html" class="btn btn-secondary">
                 <i class="bx bx-arrow-back"></i> Back to List
               </a>
@@ -290,11 +252,10 @@
           </div>
           <div class="card p-4">
             <!-- <div class="table-responsive "> -->
-            <form id="participantForm">
-              <input type="hidden" id="participantID">
+            <form id="AddparticipantForm">
               <div class="row mb-3">
                 <div class="col-md-6">
-                  <label class="form-label">Name</label>
+                  <label class="form-label">Participant Name</label>
                   <input type="text" class="form-control" id="participantName" required>
                 </div>
                 <div class="col-md-6">
@@ -314,52 +275,22 @@
               </div>
               <div class="row mb-3">
                 <div class="col-md-6">
-                  <label class="form-label">Amount</label>
-                  <input type="number" class="form-control" id="amount">
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Token</label>
-                  <input type="text" class="form-control" id="token" disabled>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <label class="form-label">Status</label>
-                  <select class="form-select" id="status">
-                    <option value="EXPRESSION OF INTEREST"> Expression of Interest</option>
-                    <option value="INTERNAL_FORWARDING">Internal Forwarding</option>
-                    <option value="ROUTING_TO_DEPARTMENT">Routing to AMC-MET & Concerned Department</option>
-                    <option value="BUDGETARY_REVIEW">Budgetary/Procedural Review</option>
-                    <option value="STAKEHOLDER_MEETING"> Stakeholder Meeting & Finalisation</option>
-                    <option value="PROJECT_APPROVAL">Project Approval & Tri-Partite Agreement</option>
-                    <option value="PROCUREMENT">Procurement</option>
-                    <option value="IMPLEMENTATION">Implementation</option>
+                  <label class="form-label">Select Project*</label>
+                  <select class="form-select" id="projectSelect" required>
+                    <option value="" selected disabled>Select a project</option>
+                    <!-- Options will be added dynamically by JavaScript -->
                   </select>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Project Name</label>
-                  <input type="text" class="form-control" id="projectName" readonly>
-                </div>
-              </div>
-              <div class="row mb-3">
-                <div class="col-md-6">
-                  <label class="form-label">Project Description</label>
-                  <input type="text" class="form-control" id="projectShortDescription" readonly>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Project Department Name</label>
-                  <input type="text" class="form-control" id="projectDEpartmentName" readonly>
+                  <div class="invalid-feedback">Please select a project</div>
                 </div>
 
-              </div>
-              <div class="row mb-3">
                 <div class="col-md-6">
-                  <label class="form-label">Project Budget</label>
-                  <input type="text" class="form-control" id="projectBudget" readonly>
+                  <label class="form-label">Amount</label>
+                  <input type="number" class="form-control" id="amount" required>
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label">Project Status</label>
-                  <input type="text" class="form-control" id="projectStatus" readonly>
+              </div>
+              <div class="row">
+                <div class="col-12 mb-4">
+                  <input type="textarea" class="form-control" id="note" placeholder="Note (optional)">
                 </div>
               </div>
 
@@ -372,30 +303,13 @@
             <!-- </div> -->
           </div>
 
-          <!-- Pagination -->
-          <!-- <div class="mt-4">
-            <nav aria-label="Page navigation">
-              <ul class="pagination justify-content-center">
-                <li class="page-item prev">
-                  <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-left"></i></a>
-                </li>
-                <li class="page-item active">
-                  <a class="page-link" href="javascript:void(0);">1</a>
-                </li>
-                <li class="page-item">
-                  <a class="page-link" href="javascript:void(0);">2</a>
-                </li>
-                <li class="page-item next">
-                  <a class="page-link" href="javascript:void(0);"><i class="tf-icon bx bx-chevron-right"></i></a>
-                </li>
-              </ul>
-            </nav>
-          </div> -->
+
         </div>
       </div>
-
     </div>
-    <hr class="my-12" />
+
+  </div>
+  <hr class="my-12" />
   </div>
   </div>
   <!-- Content wrapper -->
@@ -424,6 +338,8 @@
   <script src="../js/api/api.config.js"></script>
   <script src="../js/api/api.core.js"></script>
   <script src="../js/services/participant.js"></script>
+  <script src="../js/services/project.js"></script>
+
   <!-- <script src="../js/services/ngo.js"></script> -->
   <script src="../js/services/category.js"></script>
   <script src="../js/api/api.init.js"></script>
