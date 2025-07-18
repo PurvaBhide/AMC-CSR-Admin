@@ -25,3 +25,9 @@ if(typeof newsService!== 'undefined'){
 if(typeof DocumentService!== 'undefined'){
   Api.document = DocumentService;
 }
+if(typeof CompanyService!== 'undefined'){
+  Api.company = CompanyService;
+}
+if(typeof fundanideaSrevices!== 'undefined'){
+  Api.fundanidea = fundanideaSrevices;
+}
