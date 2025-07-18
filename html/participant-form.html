@@ -236,48 +236,10 @@
 
         <!-- Content wrapper -->
         <div class="container-xxl flex-grow-1 container-p-y">
-          <!-- Header -->
-          <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h5 class="mb-0">All Participant</h5>
-              <a href="participant-form.html" class="btn btn-primary">
-                <i class="bx bx-plus"></i> Add Participant
-              </a>
-            </div>
-          </div>
+
 
           <!-- Filters -->
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <label class="form-label">Category</label>
-                  <select class="form-select" id="categoryFilter">
-                    <option value="">All Categories</option>
-                    <!-- Dynamically populated -->
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">NGO</label>
-                  <select class="form-select" id="ngoFilter">
-                    <option value="">All NGOs</option>
-                    <!-- Dynamically populated -->
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Budget Range (₹)</label>
-                  <select class="form-select" id="budgetFilter">
-                    <option value="">All Budgets</option>
-                    <option value="0-50000">Under ₹50,000</option>
-                    <option value="50000-100000">₹50,000 - ₹1,00,000</option>
-                    <option value="100000-500000">₹1,00,000 - ₹5,00,000</option>
-                    <option value="500000-1000000">₹5,00,000 - ₹10,00,000</option>
-                    <option value="1000000">Above ₹10,00,000</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
+
 
           <!-- Projects Form -->
           <div class="card mb-4">
@@ -364,9 +326,15 @@
               </div>
 
               <div class="row">
-                <div class="col-12">
+                <div class="col-6">
                   <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
+                <div class="col-6">
+                  <button type="button" class="btn btn-secondary" id="CommunicateBtn"
+                    onclick="communicatin()">Communicate with
+                    participant</button>
+                </div>
+
               </div>
             </form>
             <!-- </div> -->
