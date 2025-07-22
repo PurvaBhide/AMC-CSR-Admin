@@ -191,6 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const companyUrl = document.getElementById('companyUrl');
     const representativeName = document.getElementById('authcomprepresentativename');
     const representativeEmail = document.getElementById('authcomprepresentativeemail');
+    const password = document.getElementById('password');
     const status = document.getElementById('status');
     const companyCategory = document.getElementById('companyCategory');
     const formTitle = document.getElementById('formTitle');
@@ -206,6 +207,22 @@ document.addEventListener('DOMContentLoaded', function() {
         loadCompanyData(editCompanyId);
     }
 
+document.addEventListener('DOMContentLoaded', function() {
+    // [Previous code remains the same until the updateCompany function]
+
+    async function updateCompany(id, data) {
+        // Only include password in update if it's been changed (not empty)
+        if (!data.password || data.password.trim() === '') {
+            delete data.password;
+        }
+
+        const response = await CompanyService.update(id, data);
+        return response;
+    }
+
+    
+    // [Rest of the code remains the same]
+});
     // Form submission
     companyForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -219,6 +236,8 @@ document.addEventListener('DOMContentLoaded', function() {
             categoryId: companyCategory.value,
             authcomprepresentativename: representativeName.value,
             authcomprepresentativeemail: representativeEmail.value,
+            role:'CORPORATION',
+            password:password.value,
         };
 
         try {
@@ -264,6 +283,8 @@ document.addEventListener('DOMContentLoaded', function() {
             representativeName.value = company.authcomprepresentativename || '';
             representativeEmail.value = company.authcomprepresentativeemail || ''
             companyCategory.value = company.categoryId || '';
+            password.value = company.password || '';
+
 
         } catch (error) {
             console.error('Load error:', error);
