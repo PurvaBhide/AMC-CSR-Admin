@@ -308,68 +308,6 @@ function uploadGalleryImages() {
 
 // Fetch project details and populate form (edit mode)
 
-// function fetchProject(id) {
-//   console.log('🟢 Fetching project details for ID:', id);
-//   Api.project.getById(id)
-//     .then(response => {
-//       const p = response.data;
-//       console.log('✅ Project data loaded:', p);
-      
-//       // Populate form fields
-//       document.getElementById('projectId').value = p.projectId;
-//       document.getElementById('name').value = p.projectName || '';
-//       document.getElementById('description').value = p.projectDescription || '';
-//       document.getElementById('scale').value = p.projectBudget || '';
-//       document.getElementById('status').value = p.projectStatus || '';
-//       document.getElementById('department_name').value = p.projectDEpartmentName || '';
-//       document.getElementById('location').value = p.projectLocation || '';
-//       document.getElementById('short_description').value = p.projectShortDescription || '';
-//       document.getElementById('people_impacted').value = p.impactpeople || '';
-      
-//       // Convert IDs to strings for matching with option values
-//       const categoryId = String(p.categoryId || '');
-//       const ngoId = String(p.ngoId || '');
-//       const companieId = String(p.companieId || ''); // Add this line
-      
-//       // Wait for dropdowns to populate, then set selected values
-//       waitUntilOptionsPopulated('category_id', categoryId, () => {
-//         document.getElementById('category_id').value = categoryId;
-//         console.log(`📌 Set Category ID: ${categoryId}`);
-//       });
-      
-//       waitUntilOptionsPopulated('ngo_id', ngoId, () => {
-//         document.getElementById('ngo_id').value = ngoId;
-//         console.log(`📌 Set NGO ID: ${ngoId}`);
-//       });
-      
-//       // Add company dropdown selection
-//       waitUntilOptionsPopulated('companieId', companieId, () => {
-//         document.getElementById('companieId').value = companieId;
-//         console.log(`📌 Set Company ID: ${companieId}`);
-//       });
-      
-//       // Display existing images (main + gallery)
-//       if (p.projectMainImage) {
-//         const preview = document.createElement('div');
-//         preview.innerHTML = `<p class="mt-2">Current Main Image: <a href="${p.projectMainImage}" target="_blank">View</a></p>`;
-//         document.getElementById('main_image').parentElement.appendChild(preview);
-//         window.existingMainImageUrl = p.projectMainImage;
-//       }
-      
-//       if (p.projectImages?.length > 0) {
-//         const galleryPreview = document.createElement('div');
-//         galleryPreview.innerHTML = `<p class="mt-2">Current Gallery Images: ${p.projectImages
-//           .map(img => `<a href="${img}" target="_blank">[View]</a>`)
-//           .join(', ')}</p>`;
-//         document.getElementById('gallery_images').parentElement.appendChild(galleryPreview);
-//         window.existingGalleryUrls = p.projectImages;
-//       }
-//     })
-//     .catch(err => {
-//       console.error('❌ Failed to load project:', err);
-//       alert('Could not load project data.');
-//     });
-// }
 function fetchProject(id) {
   console.log('🟢 Fetching project details for ID:', id);
   Api.project.getById(id)
@@ -391,17 +329,7 @@ function fetchProject(id) {
       // Convert IDs to strings for matching with option values
       const categoryId = String(p.categoryId || '');
       const ngoId = String(p.ngoId || '');
-      const companieId = String(p.companieId || '');
-      
-      // Store existing company ID for the save function
-      window.existingCompanyId = p.companieId;
-      
-      console.log('🔍 Fetched IDs:', {
-        categoryId,
-        ngoId,
-        companieId,
-        rawCompanyId: p.companieId
-      });
+      const companieId = String(p.companieId || ''); // Add this line
       
       // Wait for dropdowns to populate, then set selected values
       waitUntilOptionsPopulated('category_id', categoryId, () => {
@@ -414,22 +342,10 @@ function fetchProject(id) {
         console.log(`📌 Set NGO ID: ${ngoId}`);
       });
       
-      // Set company dropdown value and then DISABLE it for editing
+      // Add company dropdown selection
       waitUntilOptionsPopulated('companieId', companieId, () => {
-        const companySelect = document.getElementById('companieId');
-        companySelect.value = companieId;
-        
-        // 🔒 DISABLE the company dropdown in edit mode
-        companySelect.disabled = true;
-        companySelect.style.backgroundColor = '#f5f5f5'; // Visual indication it's disabled
-        companySelect.style.cursor = 'not-allowed';
-        
-        console.log(`📌 Set Company ID: ${companieId} (DISABLED for editing)`);
-        console.log(`📌 Company dropdown value: ${companySelect.value}`);
-        console.log(`📌 Company name: ${companySelect.options[companySelect.selectedIndex]?.text}`);
-        
-        // Add a visual indicator next to the company field
-        addEditModeIndicator(companySelect);
+        document.getElementById('companieId').value = companieId;
+        console.log(`📌 Set Company ID: ${companieId}`);
       });
       
       // Display existing images (main + gallery)
@@ -454,23 +370,107 @@ function fetchProject(id) {
       alert('Could not load project data.');
     });
 }
+// function fetchProject(id) {
+//   console.log('🟢 Fetching project details for ID:', id);
+//   Api.project.getById(id)
+//     .then(response => {
+//       const p = response.data;
+//       console.log('✅ Project data loaded:', p);
+      
+//       // Populate form fields
+//       document.getElementById('projectId').value = p.projectId;
+//       document.getElementById('name').value = p.projectName || '';
+//       document.getElementById('description').value = p.projectDescription || '';
+//       document.getElementById('scale').value = p.projectBudget || '';
+//       document.getElementById('status').value = p.projectStatus || '';
+//       document.getElementById('department_name').value = p.projectDEpartmentName || '';
+//       document.getElementById('location').value = p.projectLocation || '';
+//       document.getElementById('short_description').value = p.projectShortDescription || '';
+//       document.getElementById('people_impacted').value = p.impactpeople || '';
+      
+//       // Convert IDs to strings for matching with option values
+//       const categoryId = String(p.categoryId || '');
+//       const ngoId = String(p.ngoId || '');
+//       const companieId = String(p.companieId || '');
+      
+//       // Store existing company ID for the save function
+//       window.existingCompanyId = p.companieId;
+      
+//       console.log('🔍 Fetched IDs:', {
+//         categoryId,
+//         ngoId,
+//         companieId,
+//         rawCompanyId: p.companieId
+//       });
+      
+//       // Wait for dropdowns to populate, then set selected values
+//       waitUntilOptionsPopulated('category_id', categoryId, () => {
+//         document.getElementById('category_id').value = categoryId;
+//         console.log(`📌 Set Category ID: ${categoryId}`);
+//       });
+      
+//       waitUntilOptionsPopulated('ngo_id', ngoId, () => {
+//         document.getElementById('ngo_id').value = ngoId;
+//         console.log(`📌 Set NGO ID: ${ngoId}`);
+//       });
+      
+//       // Set company dropdown value and then DISABLE it for editing
+//       waitUntilOptionsPopulated('companieId', companieId, () => {
+//         const companySelect = document.getElementById('companieId');
+//         companySelect.value = companieId;
+        
+//         // 🔒 DISABLE the company dropdown in edit mode
+//         companySelect.disabled = true;
+//         companySelect.style.backgroundColor = '#f5f5f5'; // Visual indication it's disabled
+//         companySelect.style.cursor = 'not-allowed';
+        
+//         console.log(`📌 Set Company ID: ${companieId} (DISABLED for editing)`);
+//         console.log(`📌 Company dropdown value: ${companySelect.value}`);
+//         console.log(`📌 Company name: ${companySelect.options[companySelect.selectedIndex]?.text}`);
+        
+//         // Add a visual indicator next to the company field
+//         addEditModeIndicator(companySelect);
+//       });
+      
+//       // Display existing images (main + gallery)
+//       if (p.projectMainImage) {
+//         const preview = document.createElement('div');
+//         preview.innerHTML = `<p class="mt-2">Current Main Image: <a href="${p.projectMainImage}" target="_blank">View</a></p>`;
+//         document.getElementById('main_image').parentElement.appendChild(preview);
+//         window.existingMainImageUrl = p.projectMainImage;
+//       }
+      
+//       if (p.projectImages?.length > 0) {
+//         const galleryPreview = document.createElement('div');
+//         galleryPreview.innerHTML = `<p class="mt-2">Current Gallery Images: ${p.projectImages
+//           .map(img => `<a href="${img}" target="_blank">[View]</a>`)
+//           .join(', ')}</p>`;
+//         document.getElementById('gallery_images').parentElement.appendChild(galleryPreview);
+//         window.existingGalleryUrls = p.projectImages;
+//       }
+//     })
+//     .catch(err => {
+//       console.error('❌ Failed to load project:', err);
+//       alert('Could not load project data.');
+//     });
+// }
 
-function addEditModeIndicator(element) {
-  // Check if indicator already exists
-  if (element.parentElement.querySelector('.edit-mode-indicator')) {
-    return;
-  }
+// function addEditModeIndicator(element) {
+//   // Check if indicator already exists
+//   if (element.parentElement.querySelector('.edit-mode-indicator')) {
+//     return;
+//   }
   
-  const indicator = document.createElement('small');
-  indicator.className = 'edit-mode-indicator';
-  indicator.style.color = '#6c757d';
-  indicator.style.fontStyle = 'italic';
-  indicator.style.marginLeft = '8px';
-  indicator.textContent = '(Cannot be changed when editing)';
+//   const indicator = document.createElement('small');
+//   indicator.className = 'edit-mode-indicator';
+//   indicator.style.color = '#6c757d';
+//   indicator.style.fontStyle = 'italic';
+//   indicator.style.marginLeft = '8px';
+//   indicator.textContent = '(Cannot be changed when editing)';
   
-  // Insert the indicator after the select element
-  element.parentElement.insertBefore(indicator, element.nextSibling);
-}
+//   // Insert the indicator after the select element
+//   element.parentElement.insertBefore(indicator, element.nextSibling);
+// }
 
 
 // Updated saveProject function to use existing company ID when disabled
