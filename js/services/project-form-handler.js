@@ -391,9 +391,9 @@ function fetchProject(id) {
       // Convert IDs to strings for matching with option values
       const categoryId = String(p.categoryId || '');
       const ngoId = String(p.ngoId || '');
-      const companieId = String(p.companieId || ''); // Note: using companieId from response
+      const companieId = String(p.companieId || '');
       
-      // Store existing company ID for fallback in saveProject
+      // Store existing company ID for the save function
       window.existingCompanyId = p.companieId;
       
       console.log('🔍 Fetched IDs:', {
@@ -414,13 +414,22 @@ function fetchProject(id) {
         console.log(`📌 Set NGO ID: ${ngoId}`);
       });
       
-      // Add company dropdown selection with better debugging
+      // Set company dropdown value and then DISABLE it for editing
       waitUntilOptionsPopulated('companieId', companieId, () => {
         const companySelect = document.getElementById('companieId');
         companySelect.value = companieId;
-        console.log(`📌 Set Company ID: ${companieId}`);
-        console.log(`📌 Company dropdown value after setting: ${companySelect.value}`);
-        console.log(`📌 Company dropdown selected text: ${companySelect.options[companySelect.selectedIndex]?.text}`);
+        
+        // 🔒 DISABLE the company dropdown in edit mode
+        companySelect.disabled = true;
+        companySelect.style.backgroundColor = '#f5f5f5'; // Visual indication it's disabled
+        companySelect.style.cursor = 'not-allowed';
+        
+        console.log(`📌 Set Company ID: ${companieId} (DISABLED for editing)`);
+        console.log(`📌 Company dropdown value: ${companySelect.value}`);
+        console.log(`📌 Company name: ${companySelect.options[companySelect.selectedIndex]?.text}`);
+        
+        // Add a visual indicator next to the company field
+        addEditModeIndicator(companySelect);
       });
       
       // Display existing images (main + gallery)
@@ -446,10 +455,39 @@ function fetchProject(id) {
     });
 }
 
+function addEditModeIndicator(element) {
+  // Check if indicator already exists
+  if (element.parentElement.querySelector('.edit-mode-indicator')) {
+    return;
+  }
+  
+  const indicator = document.createElement('small');
+  indicator.className = 'edit-mode-indicator';
+  indicator.style.color = '#6c757d';
+  indicator.style.fontStyle = 'italic';
+  indicator.style.marginLeft = '8px';
+  indicator.textContent = '(Cannot be changed when editing)';
+  
+  // Insert the indicator after the select element
+  element.parentElement.insertBefore(indicator, element.nextSibling);
+}
+
+
+// Updated saveProject function to use existing company ID when disabled
 function saveProject(id) {
-  // Get companieId from dropdown (don't hardcode it as 1)
-  const companieIdValue = document.getElementById('companieId').value;
-  const companieId = companieIdValue ? parseInt(companieIdValue) : null;
+  const companySelect = document.getElementById('companieId');
+  let companieId;
+  
+  // If editing and company field is disabled, use the existing company ID
+  if (id && companySelect.disabled && window.existingCompanyId) {
+    companieId = window.existingCompanyId;
+    console.log('🔒 Using existing company ID (field disabled):', companieId);
+  } else {
+    // Normal logic for create mode or if field is not disabled
+    const companieIdValue = companySelect ? companySelect.value : '';
+    companieId = companieIdValue ? parseInt(companieIdValue) : null;
+    console.log('🆕 Using selected company ID:', companieId);
+  }
   
   // Prepare form data
   const data = {
@@ -460,7 +498,7 @@ function saveProject(id) {
     projectBudget: document.getElementById('scale').value,
     projectStatus: document.getElementById('status').value,
     projectDEpartmentName: document.getElementById('department_name').value,
-    companieId: companieId, // Use the value from dropdown instead of hardcoded 1
+    companieId: companieId,
     projectLocation: document.getElementById('location').value,
     projectShortDescription: document.getElementById('short_description').value,
     impactpeople: parseInt(document.getElementById('people_impacted').value) || 0,
@@ -469,15 +507,14 @@ function saveProject(id) {
   };
 
   console.log('💾 Saving project data:', data);
+  console.log('🏢 Company ID being sent:', data.companieId);
 
   let request;
   
   if (id) {
-    // Edit mode - Update existing project
     console.log('🔄 Updating existing project with ID:', id);
     request = Api.project.update(id, data);
   } else {
-    // Create mode - Add new project
     console.log('➕ Creating new project');
     request = ProjectService.add(data);
   }
@@ -493,7 +530,6 @@ function saveProject(id) {
       console.log('✅ Project save response:', response);
       
       if (id) {
-        // Update mode success
         if (response && (response.projectId || response.data?.projectId)) {
           alert("✅ Project updated successfully!");
           window.location.href = "projectlist.html";
@@ -502,7 +538,6 @@ function saveProject(id) {
           console.warn("Update response:", response);
         }
       } else {
-        // Create mode success
         if (response && (response.projectId || response.data?.projectId)) {
           alert("✅ Project created successfully!");
           window.location.href = "projectlist.html";
@@ -517,10 +552,32 @@ function saveProject(id) {
       alert(`❌ Failed to ${id ? 'update' : 'create'} project. Please try again.`);
     })
     .finally(() => {
-      // Restore button state
       submitBtn.textContent = originalText;
       submitBtn.disabled = false;
     });
+}
+
+function toggleCompanyField(enable = true) {
+  const companySelect = document.getElementById('companieId');
+  const indicator = companySelect.parentElement.querySelector('.edit-mode-indicator');
+  
+  if (enable) {
+    companySelect.disabled = false;
+    companySelect.style.backgroundColor = '';
+    companySelect.style.cursor = '';
+    if (indicator) {
+      indicator.remove();
+    }
+    console.log('🔓 Company field enabled');
+  } else {
+    companySelect.disabled = true;
+    companySelect.style.backgroundColor = '#f5f5f5';
+    companySelect.style.cursor = 'not-allowed';
+    if (!indicator) {
+      addEditModeIndicator(companySelect);
+    }
+    console.log('🔒 Company field disabled');
+  }
 }
 
 // function saveProject(id) {
