@@ -17,6 +17,7 @@ let currentPage = 0;
 const pageSize = 10;
 let lastFilterString = '';
 let useClientSideFiltering = false; // Flag to determine filtering method
+let serverPaginationInfo = null;
 
 function setupFilterListeners() {
   const filters = [
@@ -92,13 +93,84 @@ function getFilterParams() {
   return params.toString();
 }
 
+// async function loadProjects() {
+//   const filterParams = getFilterParams();
+//   console.log("🚀 Loading projects with filters:", filterParams);
+
+//   // Only refetch if filters have changed, not for pagination
+//   if (filterParams !== lastFilterString) {
+//     lastFilterString = filterParams;
+    
+//     // Try server-side filtering first
+//     if (filterParams) {
+//       await attemptServerSideFiltering(filterParams);
+//     } else {
+//       await loadAllProjects();
+//     }
+//   } else {
+//     // Filters unchanged, handle pagination appropriately
+//     if (useClientSideFiltering) {
+//       console.log("🔄 Client-side pagination - no API call needed");
+//       paginateFilteredResults();
+//     } else if (filterParams) {
+//       console.log("🔄 Server-side filtered pagination - no API call needed");
+//       paginateFilteredResults();
+//     } else {
+//       console.log("🌐 Server-side pagination - making API call");
+//       await loadAllProjects();
+//     }
+//   }
+// }
+
+// async function attemptServerSideFiltering(filterParams) {
+//   try {
+//     console.log("🌐 Attempting server-side filtering...");
+    
+//     const response = await fetch(`https://mumbailocal.org:8087/projects/filter?${filterParams}`);
+    
+//     if (!response.ok) {
+//       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+//     }
+    
+//     const apiResponse = await response.json();
+//     console.log("📦 Server response:", apiResponse);
+    
+//     let projects = apiResponse.data || [];
+//     console.log(`📊 Server returned ${projects.length} projects`);
+    
+//     // Validate server-side budget filtering
+//     if (window.currentFilters.minBudget !== undefined || window.currentFilters.maxBudget !== undefined) {
+//       const isServerFilteringCorrect = validateBudgetFiltering(projects);
+      
+//       if (!isServerFilteringCorrect) {
+//         console.warn("⚠️ Server-side budget filtering appears incorrect, falling back to client-side");
+//         await fallbackToClientSideFiltering();
+//         return;
+//       }
+//     }
+    
+//     // Server filtering worked correctly
+//     useClientSideFiltering = false;
+//     allFilteredProjects = projects;
+//     currentPage = 0;
+//     paginateFilteredResults();
+    
+//   } catch (error) {
+//     console.error("❌ Server-side filtering failed:", error);
+//     console.log("🔄 Falling back to client-side filtering...");
+//     await fallbackToClientSideFiltering();
+//   }
+// }
+
 async function loadProjects() {
   const filterParams = getFilterParams();
   console.log("🚀 Loading projects with filters:", filterParams);
 
-  // Only refetch if filters have changed, not for pagination
+  // Reset server pagination info when filters change
   if (filterParams !== lastFilterString) {
     lastFilterString = filterParams;
+    serverPaginationInfo = null; // Reset pagination info on filter change
+    currentPage = 0; // Reset to first page on filter change
     
     // Try server-side filtering first
     if (filterParams) {
@@ -112,8 +184,8 @@ async function loadProjects() {
       console.log("🔄 Client-side pagination - no API call needed");
       paginateFilteredResults();
     } else if (filterParams) {
-      console.log("🔄 Server-side filtered pagination - no API call needed");
-      paginateFilteredResults();
+      console.log("🌐 Server-side filtered pagination - making API call for page", currentPage + 1);
+      await attemptServerSideFiltering(filterParams);
     } else {
       console.log("🌐 Server-side pagination - making API call");
       await loadAllProjects();
@@ -125,7 +197,9 @@ async function attemptServerSideFiltering(filterParams) {
   try {
     console.log("🌐 Attempting server-side filtering...");
     
-    const response = await fetch(`https://mumbailocal.org:8087/projects/filter?${filterParams}`);
+    // Include pagination parameters in the request
+    const paginatedParams = `${filterParams}&page=${currentPage}&size=${pageSize}`;
+    const response = await fetch(`https://mumbailocal.org:8087/projects/filter?${paginatedParams}`);
     
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -137,7 +211,7 @@ async function attemptServerSideFiltering(filterParams) {
     let projects = apiResponse.data || [];
     console.log(`📊 Server returned ${projects.length} projects`);
     
-    // Validate server-side budget filtering
+    // Validate server-side budget filtering (only check if budget filter is applied)
     if (window.currentFilters.minBudget !== undefined || window.currentFilters.maxBudget !== undefined) {
       const isServerFilteringCorrect = validateBudgetFiltering(projects);
       
@@ -148,17 +222,41 @@ async function attemptServerSideFiltering(filterParams) {
       }
     }
     
-    // Server filtering worked correctly
+    // Server filtering worked correctly - store pagination info
     useClientSideFiltering = false;
-    allFilteredProjects = projects;
-    currentPage = 0;
-    paginateFilteredResults();
+    serverPaginationInfo = {
+      totalItems: apiResponse.totalItems || 0,
+      totalPages: apiResponse.totalPages || 1,
+      currentPage: apiResponse.currentPage || 0,
+      pageSize: apiResponse.pageSize || pageSize
+    };
+    
+    console.log(`📄 Server pagination info:`, serverPaginationInfo);
+    
+    // Render current page results
+    renderProjectsTable(projects);
+    renderServerSidePagination();
     
   } catch (error) {
     console.error("❌ Server-side filtering failed:", error);
     console.log("🔄 Falling back to client-side filtering...");
     await fallbackToClientSideFiltering();
   }
+}
+function renderServerSidePagination() {
+  if (!serverPaginationInfo) {
+    console.error("❌ No server pagination info available");
+    return;
+  }
+  
+  const { totalPages, currentPage: serverCurrentPage } = serverPaginationInfo;
+  
+  // Sync our local currentPage with server's currentPage
+  currentPage = serverCurrentPage;
+  
+  console.log(`🔢 Rendering server-side pagination: ${totalPages} total pages, current page: ${currentPage + 1}`);
+  
+  renderPagination(totalPages);
 }
 
 function validateBudgetFiltering(projects) {
@@ -281,18 +379,51 @@ async function loadAllProjects() {
   }
 }
 
+// function paginateFilteredResults() {
+//   const startIndex = currentPage * pageSize;
+//   const endIndex = startIndex + pageSize;
+//   const paginated = allFilteredProjects.slice(startIndex, endIndex);
+//   const totalPages = Math.ceil(allFilteredProjects.length / pageSize);
+
+//   console.log(`📄 Pagination: Page ${currentPage + 1}/${totalPages}, showing ${paginated.length} projects (${startIndex + 1}-${Math.min(endIndex, allFilteredProjects.length)} of ${allFilteredProjects.length})`);
+
+//   renderProjectsTable(paginated);
+//   renderPagination(totalPages);
+// }
 function paginateFilteredResults() {
   const startIndex = currentPage * pageSize;
   const endIndex = startIndex + pageSize;
   const paginated = allFilteredProjects.slice(startIndex, endIndex);
   const totalPages = Math.ceil(allFilteredProjects.length / pageSize);
 
-  console.log(`📄 Pagination: Page ${currentPage + 1}/${totalPages}, showing ${paginated.length} projects (${startIndex + 1}-${Math.min(endIndex, allFilteredProjects.length)} of ${allFilteredProjects.length})`);
+  console.log(`📄 Client-side Pagination: Page ${currentPage + 1}/${totalPages}, showing ${paginated.length} projects (${startIndex + 1}-${Math.min(endIndex, allFilteredProjects.length)} of ${allFilteredProjects.length})`);
 
   renderProjectsTable(paginated);
   renderPagination(totalPages);
 }
 
+// Update clearFilters to reset server pagination info
+function clearFilters() {
+  console.log("🧹 Clearing all filters");
+  
+  // Clear all filter elements
+  const filterElements = ['categoryFilter', 'ngoFilter', 'budgetFilter', 'statusFilter'];
+  filterElements.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) element.value = "";
+  });
+
+  // Reset state
+  currentPage = 0;
+  lastFilterString = '';
+  allFilteredProjects = [];
+  window.currentFilters = {};
+  useClientSideFiltering = false;
+  serverPaginationInfo = null; // Reset server pagination info
+  
+  // Reload projects
+  loadProjects();
+}
 function renderProjectsTable(projects) {
   const tbody = document.querySelector("tbody.table-border-bottom-0");
   if (!tbody) {
@@ -442,6 +573,7 @@ function renderPagination(totalPages) {
   pagination.innerHTML = html;
 }
 
+
 function changePage(newPage) {
   console.log(`📄 Changing to page ${newPage + 1}`);
   
@@ -449,22 +581,24 @@ function changePage(newPage) {
   
   // Calculate total pages based on current filtering state
   let totalPages;
-  if (useClientSideFiltering || allFilteredProjects.length > 0) {
+  if (useClientSideFiltering) {
     totalPages = Math.ceil(allFilteredProjects.length / pageSize);
+  } else if (serverPaginationInfo) {
+    totalPages = serverPaginationInfo.totalPages;
   } else {
-    totalPages = Infinity; // Will be handled by server-side pagination
+    totalPages = Infinity; 
   }
 
   if (newPage >= totalPages && totalPages !== Infinity) return;
 
   currentPage = newPage;
   
-  // For client-side filtering or when we have filtered results, just repaginate
-  if (useClientSideFiltering || (allFilteredProjects.length > 0 && lastFilterString)) {
+  // For client-side filtering, just repaginate locally
+  if (useClientSideFiltering) {
     console.log(`🔄 Client-side pagination: going to page ${newPage + 1}`);
     paginateFilteredResults();
   } else {
-    // For server-side pagination without filters
+    // For server-side pagination, make a new API call
     console.log(`🌐 Server-side pagination: loading page ${newPage + 1}`);
     loadProjects();
   }
@@ -472,7 +606,6 @@ function changePage(newPage) {
   // Smooth scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-
 function showError(message) {
   const tbody = document.querySelector("tbody.table-border-bottom-0");
   if (tbody) {
