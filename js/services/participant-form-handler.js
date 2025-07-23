@@ -118,8 +118,7 @@ function openEmailModal(recipientEmail, recipientName, projectName, amount) {
     `${amount ? `Your donation amount: ₹${parseFloat(amount).toLocaleString('en-IN')}\n\n` : ''}` +
     `We appreciate your support and would like to discuss further details with you.\n\n` +
     `Best regards,\n` +
-    `Ram\n` +
-    `Email: madhuri.k@kitintellect.com`;
+    `Amdavad Municipal Corporation CSR Portal` ;
   
   // Remove existing modal if present
   const existingModal = document.getElementById('emailModal');
@@ -345,8 +344,7 @@ function useTemplate(templateType) {
                `towards the project "${projectName}".\n\n` +
                `Your contribution will make a significant impact on our cause.\n\n` +
                `Best regards,\n` +
-               `Ram\n` +
-               `madhuri.k@kitintellect.com`;
+               `Amdavad Municipal Corporation CSR Portal\n`;
       break;
       
     case 'reminder':
@@ -356,8 +354,7 @@ function useTemplate(templateType) {
                `This is a gentle reminder about your pledge towards the project "${projectName}". ` +
                `Your support means a lot to us and will help us achieve our goals.\n\n` +
                `Best regards,\n` +
-               `Ram\n` +
-               `madhuri.k@kitintellect.com`;
+               `Amdavad Municipal Corporation CSR Portal\n` ;
       break;
       
     case 'update':
@@ -366,8 +363,7 @@ function useTemplate(templateType) {
                `We wanted to share some exciting updates about the project "${projectName}".\n\n` +
                `[Please add specific project updates here]\n\n` +
                `Best regards,\n` +
-               `Ram\n` +
-               `madhuri.k@kitintellect.com`;
+               `Amdavad Municipal Corporation CSR Portal`;
       break;
       
     default:
