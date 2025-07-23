@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   updateButtonText(id);
 
   // Load dropdowns first, then fetch project details (edit mode)
-  Promise.all([loadCategories(), loadNgos()])
+  Promise.all([loadCategories(), loadNgos(),loadcompanies()])
     .then(() => {
       if (id) {
         fetchProject(id);
@@ -107,9 +107,90 @@ function loadNgos() {
     });
 }
 
+// load company
+// function loadcompanies() {
+//   console.log('🟢 Calling Api.company.listAll...');
+//   return CompanyService.listAll(0, 1000)
+//     .then(response => {
+//       console.log(response,"comapnyyyyyyyyyyy")
+//       const company = response?.data?.content || [];
+//       const select = document.getElementById('companieId');
+//       select.innerHTML = '<option value="">Select Company</option>';
+
+//       company.forEach(company => {
+//         const option = document.createElement('option');
+//         option.value = String(company.companieId);
+//         option.textContent = company.companyname || 'Unnamed company';
+//         select.appendChild(option);
+//       });
+
+//       console.log('✅ company dropdown populated');  select.addEventListener('change', function () {
+//         const selectedId = this.value;
+//         const selectedName = this.options[this.selectedIndex].text;
+//         console.log(`📌 Selected company: ${selectedName} (ID: ${selectedId})`);
+//       });
+//       console.log('✅ Category dropdown populated');
+//     })
+//     .catch(error => {
+//       console.error('❌ Failed to load company:', error);
+//       alert('Unable to load company.');
+//     });
+// }
+function loadcompanies() {
+  console.log('🟢 Calling CompanyService.listAll...');
+  return CompanyService.listAll(0, 1000)
+    .then(response => {
+      console.log(response, "comapnyyyyyyyyyyy");
+      const companies = response?.data?.content || [];
+      const select = document.getElementById('companieId');
+      select.innerHTML = '<option value="">Select Company</option>';
+
+      companies.forEach(company => {
+        const option = document.createElement('option');
+        option.value = String(company.companieId);
+        option.textContent = company.companyname || 'Unnamed company';
+        select.appendChild(option);
+      });
+
+      console.log('✅ Company dropdown populated');
+      
+      // Add event listener for company selection
+      select.addEventListener('change', function () {
+        const selectedId = this.value;
+        const selectedName = this.options[this.selectedIndex].text;
+        console.log(`📌 Selected company: ${selectedName} (ID: ${selectedId})`);
+      });
+      
+    })
+    .catch(error => {
+      console.error('❌ Failed to load company:', error);
+      alert('Unable to load company.');
+    });
+}
+
+// document.addEventListener('DOMContentLoaded', function () {
+//   const categorySelect = document.getElementById('category_id');
+//   const ngoSelect = document.getElementById('ngo_id');
+
+//   if (categorySelect) {
+//     categorySelect.addEventListener('change', function () {
+//       const selectedId = categorySelect.value;
+//       console.log('🟢 Selected Category ID:', selectedId);
+//     });
+//   }
+
+//   if (ngoSelect) {
+//     ngoSelect.addEventListener('change', function () {
+//       const selectedId = ngoSelect.value;
+//       console.log('🟢 Selected NGO ID:', selectedId);
+//     });
+//   }
+// });
+
 document.addEventListener('DOMContentLoaded', function () {
   const categorySelect = document.getElementById('category_id');
   const ngoSelect = document.getElementById('ngo_id');
+  const companySelect = document.getElementById('companieId'); // Add this
 
   if (categorySelect) {
     categorySelect.addEventListener('change', function () {
@@ -124,7 +205,15 @@ document.addEventListener('DOMContentLoaded', function () {
       console.log('🟢 Selected NGO ID:', selectedId);
     });
   }
-});
+
+  // Add company selection listener
+  if (companySelect) {
+    companySelect.addEventListener('change', function () {
+      const selectedId = companySelect.value;
+      console.log('🟢 Selected Company ID:', selectedId);
+    });
+  }
+  }); // Add closing parenthesis
 
 document.addEventListener('DOMContentLoaded', function () {
   const mainImageInput = document.getElementById('main_image');
@@ -218,6 +307,69 @@ function uploadGalleryImages() {
 }
 
 // Fetch project details and populate form (edit mode)
+
+// function fetchProject(id) {
+//   console.log('🟢 Fetching project details for ID:', id);
+//   Api.project.getById(id)
+//     .then(response => {
+//       const p = response.data;
+//       console.log('✅ Project data loaded:', p);
+      
+//       // Populate form fields
+//       document.getElementById('projectId').value = p.projectId;
+//       document.getElementById('name').value = p.projectName || '';
+//       document.getElementById('description').value = p.projectDescription || '';
+//       document.getElementById('scale').value = p.projectBudget || '';
+//       document.getElementById('status').value = p.projectStatus || '';
+//       document.getElementById('department_name').value = p.projectDEpartmentName || '';
+//       document.getElementById('location').value = p.projectLocation || '';
+//       document.getElementById('short_description').value = p.projectShortDescription || '';
+//       document.getElementById('people_impacted').value = p.impactpeople || '';
+      
+//       // Convert IDs to strings for matching with option values
+//       const categoryId = String(p.categoryId || '');
+//       const ngoId = String(p.ngoId || '');
+//       const companieId = String(p.companieId || ''); // Add this line
+      
+//       // Wait for dropdowns to populate, then set selected values
+//       waitUntilOptionsPopulated('category_id', categoryId, () => {
+//         document.getElementById('category_id').value = categoryId;
+//         console.log(`📌 Set Category ID: ${categoryId}`);
+//       });
+      
+//       waitUntilOptionsPopulated('ngo_id', ngoId, () => {
+//         document.getElementById('ngo_id').value = ngoId;
+//         console.log(`📌 Set NGO ID: ${ngoId}`);
+//       });
+      
+//       // Add company dropdown selection
+//       waitUntilOptionsPopulated('companieId', companieId, () => {
+//         document.getElementById('companieId').value = companieId;
+//         console.log(`📌 Set Company ID: ${companieId}`);
+//       });
+      
+//       // Display existing images (main + gallery)
+//       if (p.projectMainImage) {
+//         const preview = document.createElement('div');
+//         preview.innerHTML = `<p class="mt-2">Current Main Image: <a href="${p.projectMainImage}" target="_blank">View</a></p>`;
+//         document.getElementById('main_image').parentElement.appendChild(preview);
+//         window.existingMainImageUrl = p.projectMainImage;
+//       }
+      
+//       if (p.projectImages?.length > 0) {
+//         const galleryPreview = document.createElement('div');
+//         galleryPreview.innerHTML = `<p class="mt-2">Current Gallery Images: ${p.projectImages
+//           .map(img => `<a href="${img}" target="_blank">[View]</a>`)
+//           .join(', ')}</p>`;
+//         document.getElementById('gallery_images').parentElement.appendChild(galleryPreview);
+//         window.existingGalleryUrls = p.projectImages;
+//       }
+//     })
+//     .catch(err => {
+//       console.error('❌ Failed to load project:', err);
+//       alert('Could not load project data.');
+//     });
+// }
 function fetchProject(id) {
   console.log('🟢 Fetching project details for ID:', id);
   Api.project.getById(id)
@@ -232,19 +384,43 @@ function fetchProject(id) {
       document.getElementById('scale').value = p.projectBudget || '';
       document.getElementById('status').value = p.projectStatus || '';
       document.getElementById('department_name').value = p.projectDEpartmentName || '';
-      document.getElementById('company_name').value = p.companyId || '';
       document.getElementById('location').value = p.projectLocation || '';
       document.getElementById('short_description').value = p.projectShortDescription || '';
       document.getElementById('people_impacted').value = p.impactpeople || '';
       
+      // Convert IDs to strings for matching with option values
       const categoryId = String(p.categoryId || '');
       const ngoId = String(p.ngoId || '');
+      const companieId = String(p.companieId || ''); // Note: using companieId from response
       
+      // Store existing company ID for fallback in saveProject
+      window.existingCompanyId = p.companieId;
+      
+      console.log('🔍 Fetched IDs:', {
+        categoryId,
+        ngoId,
+        companieId,
+        rawCompanyId: p.companieId
+      });
+      
+      // Wait for dropdowns to populate, then set selected values
       waitUntilOptionsPopulated('category_id', categoryId, () => {
         document.getElementById('category_id').value = categoryId;
+        console.log(`📌 Set Category ID: ${categoryId}`);
       });
+      
       waitUntilOptionsPopulated('ngo_id', ngoId, () => {
         document.getElementById('ngo_id').value = ngoId;
+        console.log(`📌 Set NGO ID: ${ngoId}`);
+      });
+      
+      // Add company dropdown selection with better debugging
+      waitUntilOptionsPopulated('companieId', companieId, () => {
+        const companySelect = document.getElementById('companieId');
+        companySelect.value = companieId;
+        console.log(`📌 Set Company ID: ${companieId}`);
+        console.log(`📌 Company dropdown value after setting: ${companySelect.value}`);
+        console.log(`📌 Company dropdown selected text: ${companySelect.options[companySelect.selectedIndex]?.text}`);
       });
       
       // Display existing images (main + gallery)
@@ -271,6 +447,10 @@ function fetchProject(id) {
 }
 
 function saveProject(id) {
+  // Get companieId from dropdown (don't hardcode it as 1)
+  const companieIdValue = document.getElementById('companieId').value;
+  const companieId = companieIdValue ? parseInt(companieIdValue) : null;
+  
   // Prepare form data
   const data = {
     projectName: document.getElementById('name').value,
@@ -280,7 +460,7 @@ function saveProject(id) {
     projectBudget: document.getElementById('scale').value,
     projectStatus: document.getElementById('status').value,
     projectDEpartmentName: document.getElementById('department_name').value,
-    companieId: 1,
+    companieId: companieId, // Use the value from dropdown instead of hardcoded 1
     projectLocation: document.getElementById('location').value,
     projectShortDescription: document.getElementById('short_description').value,
     impactpeople: parseInt(document.getElementById('people_impacted').value) || 0,
@@ -342,6 +522,79 @@ function saveProject(id) {
       submitBtn.disabled = false;
     });
 }
+
+// function saveProject(id) {
+//   // Prepare form data
+//   const data = {
+//     projectName: document.getElementById('name').value,
+//     projectDescription: document.getElementById('description').value,
+//     categoryId: parseInt(document.getElementById('category_id').value) || null,
+//     ngoId: parseInt(document.getElementById('ngo_id').value) || null,
+//     projectBudget: document.getElementById('scale').value,
+//     projectStatus: document.getElementById('status').value,
+//     projectDEpartmentName: document.getElementById('department_name').value,
+//     companieId: 1,
+//     projectLocation: document.getElementById('location').value,
+//     projectShortDescription: document.getElementById('short_description').value,
+//     impactpeople: parseInt(document.getElementById('people_impacted').value) || 0,
+//     projectMainImage: window.uploadedMainImageUrl || window.existingMainImageUrl || '',
+//     projectImages: window.uploadedGalleryUrls || window.existingGalleryUrls || []
+//   };
+
+//   console.log('💾 Saving project data:', data);
+
+//   let request;
+  
+//   if (id) {
+//     // Edit mode - Update existing project
+//     console.log('🔄 Updating existing project with ID:', id);
+//     request = Api.project.update(id, data);
+//   } else {
+//     // Create mode - Add new project
+//     console.log('➕ Creating new project');
+//     request = ProjectService.add(data);
+//   }
+
+//   // Show loading state
+//   const submitBtn = document.getElementById('submitBtn');
+//   const originalText = submitBtn.textContent;
+//   submitBtn.textContent = id ? 'Updating...' : 'Creating...';
+//   submitBtn.disabled = true;
+
+//   request
+//     .then(response => {
+//       console.log('✅ Project save response:', response);
+      
+//       if (id) {
+//         // Update mode success
+//         if (response && (response.projectId || response.data?.projectId)) {
+//           alert("✅ Project updated successfully!");
+//           window.location.href = "projectlist.html";
+//         } else {
+//           alert("⚠️ Update completed but response unclear. Please verify.");
+//           console.warn("Update response:", response);
+//         }
+//       } else {
+//         // Create mode success
+//         if (response && (response.projectId || response.data?.projectId)) {
+//           alert("✅ Project created successfully!");
+//           window.location.href = "projectlist.html";
+//         } else {
+//           alert("⚠️ Project created but response unclear. Please verify.");
+//           console.warn("Create response:", response);
+//         }
+//       }
+//     })
+//     .catch(error => {
+//       console.error("❌ Error saving project:", error);
+//       alert(`❌ Failed to ${id ? 'update' : 'create'} project. Please try again.`);
+//     })
+//     .finally(() => {
+//       // Restore button state
+//       submitBtn.textContent = originalText;
+//       submitBtn.disabled = false;
+//     });
+// }
 
 // Utility to wait until a select option is available before setting it
 function waitUntilOptionsPopulated(selectId, valueToSet, callback, retries = 10) {

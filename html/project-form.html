@@ -292,14 +292,23 @@
                       <div class="form-text">Minimum budget: ₹50,000</div>
                     </div>
 
-                    <div class="mb-3">
-                      <label for="status" class="form-label">Project Status</label>
-                      <select class="form-select" id="status">
-                        <option value="">Select Status</option>
-                        <option value="Ongoing">Ongoing</option>
-                        <option value="Proposed">Proposed</option>
-                        <option value="Cancelled">Cancelled</option>
-                      </select>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="status" class="form-label">Project Status</label>
+                        <select class="form-select" id="status">
+                          <option value="">Select Status</option>
+                          <option value="Ongoing">Ongoing</option>
+                          <option value="Proposed">Proposed</option>
+                          <option value="Cancelled">Cancelled</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label class="form-label">Company Name</label>
+                        <select class="form-select" id="companieId">
+                          <option value="0">Select Company</option>
+                          <!-- Dynamically populated -->
+                        </select>
+                      </div>
                     </div>
 
                     <!-- Main Image -->
@@ -322,10 +331,7 @@
                       <input type="text" class="form-control" id="department_name" />
                     </div>
 
-                    <div class="mb-3">
-                      <label for="company_name" class="form-label">Company Name</label>
-                      <input type="text" class="form-control" id="company_name" />
-                    </div>
+
 
                     <div class="mb-3">
                       <label for="location" class="form-label">Location</label>
@@ -394,6 +400,7 @@
   <script src="../js/services/category.js"></script>
   <script src="../js/services/ngo.js"></script>
   <script src="../js/services/project.js"></script>
+  <script src="../js/services/company.js"></script>
   <script src="../js/api/api.init.js"></script>
   <script src="../js/services/project-form-handler.js"></script>
   <script src="../js/script/logout.js"></script>
