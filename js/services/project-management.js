@@ -459,7 +459,7 @@ function renderProjectsTable(projects) {
     return `
       <tr data-project-id="${project.projectId}">
         <td>${i + 1 + currentPage * pageSize}</td>
-        <td>${escapeHTML(project.projectName)}</td>
+        <td>${escapeHTML(project.projectName?.split(/\s+/).slice(0, 5).join(' ') + (project.projectName?.split(/\s+/).length > 5 ? '...' : ''))}</td>
         <td class="${budgetClass}">₹${budgetFormatted}</td>
         <td>${escapeHTML(project.categoryName || '-')}</td>
         <td>${escapeHTML(project.ngoInfo?.ngoname || project.ngoInfo?.organizationName || '-')}</td>
