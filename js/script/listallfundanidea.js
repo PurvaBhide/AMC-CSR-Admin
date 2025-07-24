@@ -30,6 +30,12 @@ function renderfundanideasTable(fundanideas) {
 
   fundanideas.forEach((fundanideas, index) => {
     const row = document.createElement("tr");
+    function truncatesentence(str, maxlength){
+                if (!str) return ""; 
+    return str.length <= maxlength ? str : str.slice(0, maxlength) + "...";
+    }
+    const status=truncatesentence(fundanideas.fundanideastatus,10);
+    console.log(status,"truncate ststus");
     row.innerHTML = `
      <td>${index + 1 + currentPage * pageSize}</td>
 
@@ -37,7 +43,7 @@ function renderfundanideasTable(fundanideas) {
       <td>${fundanideas.fundanideadepartment}</td>
       <td>${fundanideas.fundanideacontactpersonname}</td>
       <td>${fundanideas.fundanideaestimateamount}</td>
-      <td>${fundanideas.fundanideastatus || '-'}</td>
+      <td>${status || '-'}</td>
       
       <td>
         <div class="dropdown">
