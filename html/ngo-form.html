@@ -293,7 +293,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Password*</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="passwordInput"
+                                        <input type="password" class="form-control" id="password"
                                             placeholder="Enter Password">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                             <i class="fas fa-eye" id="toggleIcon"></i>
@@ -333,7 +333,9 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Upload 80G Document</label>
                                     <input type="file" class="form-control" id="ngo80Gdocument">
+                                    <div id="preview80G"></div>
                                 </div>
+
                             </div>
 
                             <div class="row mb-3">
@@ -344,6 +346,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Upload 12A Document</label>
                                     <input type="file" class="form-control" id="ngo12Adocument">
+                                    <div id="preview12A"></div>
                                 </div>
                             </div>
 
@@ -351,10 +354,12 @@
                                 <div class="col-md-6">
                                     <label class="form-label">CA Certified Statement Upload</label>
                                     <input type="file" class="form-control" id="caCertifiedStatementUpload">
+                                    <div id="previewCA"></div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Organization Registration Certificate</label>
                                     <input type="file" class="form-control" id="organizationRegistrationCertificate">
+                                    <div id="previewRegistration"></div>
                                 </div>
                             </div>
 
@@ -366,6 +371,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Upload CSR-1 Document</label>
                                     <input type="file" class="form-control" id="csr1Document">
+                                    <div id="previewCSR1"></div>
                                 </div>
                             </div>
 
@@ -373,10 +379,12 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Upload Bylaws</label>
                                     <input type="file" class="form-control" id="bylaws">
+                                    <div id="previewBylaws"></div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Upload MOA</label>
                                     <input type="file" class="form-control" id="moa">
+                                    <div id="previewMOA"></div>
                                 </div>
                             </div>
 
@@ -411,7 +419,11 @@
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary me-2">Save Implementing Agencies
                                     </button>
+                                    <button type="button" class="btn btn-primary me-2" onclick="updateNgo()">update
+                                        Implementing Agencies
+                                    </button>
                                 </div>
+
                             </div>
                         </form>
                     </div>
