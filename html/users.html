@@ -243,7 +243,7 @@
               <li class="menu-item"><a href="donationlist.html" class="menu-link">
                   <div class="text-truncate">All Participants</div>
                 </a></li>
-              <li class="menu-item"><a href="participant-form.html" class="menu-link">
+              <li class="menu-item"><a href="add-participant.html" class="menu-link">
                   <div class="text-truncate">Participant Form</div>
                 </a></li>
             </ul>
@@ -462,7 +462,8 @@
                     <div class="row mb-3">
                       <div class="col-md-6">
                         <label class="form-label" for="editPhone">Phone Number*</label>
-                        <input type="text" id="editPhone" class="form-control" required>
+                        <input type="number" id="editPhone" class="form-control" pattern="[0-9]{10}" minlength="10"
+                          maxlength="10" required>
                       </div>
                       <div class="col-md-6">
                         <label class="form-label" for="editRole">Role*</label>
