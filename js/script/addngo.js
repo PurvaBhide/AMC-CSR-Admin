@@ -431,3 +431,101 @@ document.getElementById("togglePassword").addEventListener("click", function () 
     icon.classList.toggle("fa-eye");
     icon.classList.toggle("fa-eye-slash");
 });
+
+
+// validation
+   function checkemail() {
+            const emailInput = document.getElementById('emailId');
+            const email = emailInput.value.trim();
+            
+            // Remove any existing error styling
+            emailInput.classList.remove('is-invalid', 'is-valid');
+            
+            // Remove any existing error message
+            const existingError = emailInput.parentNode.querySelector('.invalid-feedback, .valid-feedback');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Email regex pattern
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            
+            if (email === '') {
+                showValidationMessage(emailInput, 'Email is required', false);
+                return false;
+            } else if (!emailPattern.test(email)) {
+                showValidationMessage(emailInput, 'Please enter a valid email address', false);
+                return false;
+            } else {
+                showValidationMessage(emailInput, 'Valid email address', true);
+                return true;
+            }
+        }
+
+        // Contact number validation function
+        function contactnumbervalidation() {
+            const contactInput = document.getElementById('contactNumber');
+            const contactNumber = contactInput.value.trim();
+            
+            // Remove any existing error styling
+            contactInput.classList.remove('is-invalid', 'is-valid');
+            
+            // Remove any existing error message
+            const existingError = contactInput.parentNode.querySelector('.invalid-feedback, .valid-feedback');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Indian mobile number pattern (10 digits starting with 6-9)
+            const indianMobilePattern = /^[6-9]\d{9}$/;
+            
+            // Remove any non-digit characters for validation
+            const digitsOnly = contactNumber.replace(/\D/g, '');
+            
+            if (contactNumber === '') {
+                showValidationMessage(contactInput, 'Contact number is required', false);
+                return false;
+            } else if (digitsOnly.length !== 10) {
+                showValidationMessage(contactInput, 'Contact number must be 10 digits', false);
+                return false;
+            } else if (!indianMobilePattern.test(digitsOnly)) {
+                showValidationMessage(contactInput, 'Please enter a valid Indian mobile number', false);
+                return false;
+            } else {
+                showValidationMessage(contactInput, 'Valid contact number', true);
+                return true;
+            }
+        }
+
+        // Helper function to show validation messages
+        function showValidationMessage(inputElement, message, isValid) {
+            // Add Bootstrap validation classes
+            if (isValid) {
+                inputElement.classList.add('is-valid');
+                inputElement.classList.remove('is-invalid');
+            } else {
+                inputElement.classList.add('is-invalid');
+                inputElement.classList.remove('is-valid');
+            }
+            
+            // Create and add feedback message
+            const feedbackDiv = document.createElement('div');
+            feedbackDiv.className = isValid ? 'valid-feedback' : 'invalid-feedback';
+            feedbackDiv.textContent = message;
+            
+            // Insert the feedback message after the input
+            inputElement.parentNode.appendChild(feedbackDiv);
+        }
+
+        // Auto-format contact number as user types
+        function formatContactNumber() {
+            const contactInput = document.getElementById('contactNumber');
+            let value = contactInput.value.replace(/\D/g, ''); // Remove non-digits
+            
+            // Limit to 10 digits
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            
+            contactInput.value = value;
+        }
