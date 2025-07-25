@@ -155,13 +155,20 @@ function deleteNGO(id) {
   const confirmDelete = confirm("Are you sure you want to delete this NGO?");
   if (!confirmDelete) return;
 
-  Api.ngo.delete(id)
-    .then(() => {
-      alert("NGO deleted successfully.");
-      loadNGOs();
-    })
-    .catch((error) => {
-      console.error("Failed to delete NGO:", error);
-      alert("Failed to delete NGO. Please try again.");
-    });
+  fetch(`https://mumbailocal.org:8087/deleteNgo/${id}`, {
+    method: 'DELETE',
+  })
+  .then(response => {
+    if (response.ok) {
+      alert("NGO deleted successfully");
+    
+      window.location.reload(); // or update specific elements
+    } else {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  })
+  .catch(error => {
+    console.error('Error deleting NGO:', error);
+    alert("Failed to delete NGO. Please try again.");
+  });
 }
