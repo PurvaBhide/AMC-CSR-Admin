@@ -257,34 +257,13 @@
           <!-- Filters -->
           <div class="card mb-4">
             <div class="card-body">
-              <div class="row">
-                <div class="col-md-4">
-                  <label class="form-label">Category</label>
-                  <select class="form-select" id="categoryFilter">
-                    <option value="">All Categories</option>
-                    <option>Education</option>
-                    <option>Healthcare</option>
-                    <option>Environment</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Budget Scale</label>
-                  <select class="form-select" id="scaleFilter">
-                    <option value="">All Scales</option>
-                    <option>Under ₹50k</option>
-                    <option>₹50k - ₹1L</option>
-                    <option>Above ₹1L</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label class="form-label">Status</label>
-                  <select class="form-select" id="statusFilter">
-                    <option value="">All Statuses</option>
-                    <option>Active</option>
-                    <option>Inactive</option>
-                  </select>
-                </div>
+
+              <div class="mb-3">
+                <input type="text" id="ngoSearchInput" class="form-control" placeholder="Search data..." />
+
               </div>
+
+
             </div>
           </div>
 
@@ -361,7 +340,7 @@
   <script src="../js/api/api.config.js"></script>
   <script src="../js/api/api.core.js"></script>
   <script src="../js/services/ngo.js"></script>
-  <!-- <script src="../js/services/category.js"></script> -->
+  <script src="../js/services/category.js"></script>
   <script src="../js/api/api.init.js"></script>
   <script src="../js/services/ngo-management.js"></script>
 
