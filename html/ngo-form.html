@@ -262,7 +262,7 @@
                     <!-- Header -->
                     <div class="card mb-4">
                         <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0" id="formTitle">Add Company</h5>
+                            <h5 class="mb-0" id="formTitle">Implementing Agencies Details </h5>
                             <a href="ngoPartnersList.html" class="btn btn-secondary">
                                 <i class="bx bx-arrow-back"></i> Back to List
                             </a>
@@ -276,50 +276,54 @@
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="form-label">Organization Name</label>
+                                    <label class="form-label">Organization Name*</label>
                                     <input type="text" class="form-control" id="organizationName" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Email ID</label>
+                                    <label class="form-label">Email ID*</label>
                                     <input type="email" class="form-control" id="emailId" required>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="form-label">Username</label>
+                                    <label class="form-label">Username*</label>
                                     <input type="text" class="form-control" id="userName" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Password</label>
+                                    <label class="form-label">Password*</label>
                                     <div class="input-group">
-                                        <input type="password" class="form-control" id="password" required>
+                                        <input type="password" class="form-control" id="password"
+                                            placeholder="Enter Password">
                                         <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                            <i class="fas fa-eye"></i>
+                                            <i class="fas fa-eye" id="toggleIcon"></i>
                                         </button>
                                     </div>
+
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="form-label">Age of Organization (in years)</label>
+                                    <label class="form-label">Age of Organization* (in years)</label>
                                     <input type="number" class="form-control" id="ageOfOrganization" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Annual Turnover</label>
+                                    <label class="form-label">Annual Turnover*</label>
                                     <input type="number" class="form-control" id="annualTurnover" required>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
-                                    <label class="form-label">Name of Contact Person</label>
+                                    <label class="form-label">Name of Contact Person*</label>
                                     <input type="text" class="form-control" id="nameOfContactPerson" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Contact Number</label>
-                                    <input type="number" class="form-control" id="contactNumber" required>
+
+                                    <label class="form-label">Contact Number*</label>
+                                    <input type="tel" class="form-control" id="contactNumber" required>
+
                                 </div>
                             </div>
 
@@ -331,7 +335,9 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Upload 80G Document</label>
                                     <input type="file" class="form-control" id="ngo80Gdocument">
+                                    <div id="preview80G"></div>
                                 </div>
+
                             </div>
 
                             <div class="row mb-3">
@@ -342,6 +348,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Upload 12A Document</label>
                                     <input type="file" class="form-control" id="ngo12Adocument">
+                                    <div id="preview12A"></div>
                                 </div>
                             </div>
 
@@ -349,10 +356,12 @@
                                 <div class="col-md-6">
                                     <label class="form-label">CA Certified Statement Upload</label>
                                     <input type="file" class="form-control" id="caCertifiedStatementUpload">
+                                    <div id="previewCA"></div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Organization Registration Certificate</label>
                                     <input type="file" class="form-control" id="organizationRegistrationCertificate">
+                                    <div id="previewRegistration"></div>
                                 </div>
                             </div>
 
@@ -364,6 +373,7 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Upload CSR-1 Document</label>
                                     <input type="file" class="form-control" id="csr1Document">
+                                    <div id="previewCSR1"></div>
                                 </div>
                             </div>
 
@@ -371,10 +381,12 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Upload Bylaws</label>
                                     <input type="file" class="form-control" id="bylaws">
+                                    <div id="previewBylaws"></div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Upload MOA</label>
                                     <input type="file" class="form-control" id="moa">
+                                    <div id="previewMOA"></div>
                                 </div>
                             </div>
 
@@ -385,7 +397,7 @@
                                 </div> -->
                                 <div class="col-md-6">
                                     <label class="form-label">Status</label>
-                                    <select class="form-select" id="status" required>
+                                    <select class="form-select" id="status">
                                         <option value="">Select Status</option>
                                         <option value="Active">Active</option>
                                         <option value="Inactive">Inactive</option>
@@ -393,9 +405,9 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Category</label>
+                                    <label class="form-label">Category *</label>
                                     <select class="form-select" id="categoryId" required>
-                                        <option value="">Select Category</option>
+                                        <option value="0">Select Category</option>
                                         <option value="1">Health</option>
                                         <option value="2">Environment</option>
                                         <option value="3">Education</option>
@@ -406,9 +418,17 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-success">Save NGO</button>
+                                <div class="col-6" id="saveBtn">
+                                    <button type="submit" class="btn btn-primary me-2">Save Implementing
+                                        Agencies
+                                    </button>
                                 </div>
+                                <div class="col-6" id="updateBtn">
+                                    <button type="button" class="btn btn-primary me-2" onclick="updateNgo()">Update
+                                        Implementing Agencies
+                                    </button>
+                                </div>
+
                             </div>
                         </form>
                     </div>
@@ -453,9 +473,9 @@
     <script src="../js/api/api.core.js"></script>
     <script src="../js/services/company.js"></script>
     <script src="../js/api/api.init.js"></script>
-    <script src="../js/services/add-company.js"></script>
+    <!-- <script src="../js/services/add-company.js"></script> -->
     <script src="../js/script/logout.js"></script>
-
+    <script src="../js/script/addngo.js"></script>
 </body>
 
 </html>
