@@ -14,8 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (id) {
     loadNgoData(id);
     // Show update button and hide save button when editing
-    toggleButtons(true);
+     document.getElementById('saveBtn').style.display = 'none';
+        document.getElementById('updateBtn').style.display = 'inline-block';
+
+    console.log("hide button")
+    // toggleButtons(true);
   } else {
+      document.getElementById('saveBtn').style.display = 'inline-block';
+    document.getElementById('updateBtn').style.display = 'none';
+    console.log("Creation mode: show Save, hide Update");
     // Show save button and hide update button when creating
     toggleButtons(false);
   }
@@ -29,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function toggleButtons(isEditMode) {
   const saveBtn = document.querySelector('button[type="submit"]');
   const updateBtn = document.querySelector('button[onclick="updateNgo()"]');
+  
   
   if (saveBtn && updateBtn) {
     if (isEditMode) {
@@ -408,6 +416,7 @@ async function loadNgoData(id) {
 
 // Make updateNgo available globally for the onclick handler
 window.updateNgo = updateNgo;
+
 
 
 
