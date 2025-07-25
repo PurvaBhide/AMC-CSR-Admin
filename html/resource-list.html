@@ -40,7 +40,7 @@
                         <span class="app-brand-logo demo pt-4 pb-4">
                             <img src="../assets/img/logo/amcLogo.png" alt="AMC Logo" height="50px" />
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bold ms-2">Admin</span>
+                        <span class="app-brand-text demo menu-text fw-bold ms-2" id="sidebaruser">Admin</span>
                     </a>
                     <a href="javascript:void(0);"
                         class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -225,9 +225,9 @@
                                                             class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
-                                                <div class="flex-grow-1" id="userInfoContainer">
-                                                    <h6 class="mb-0">John Doe</h6>
-                                                    <small class="text-muted">Admin</small>
+                                                <div class="flex-grow-1">
+                                                    <h6 class="mb-0" id="User"></h6>
+                                                    <small class="text-muted" id="userdepartmentname"></small>
                                                 </div>
                                             </div>
                                         </a>
@@ -309,6 +309,32 @@
     <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const userDataStr = localStorage.getItem("userData");
+
+            if (!userDataStr) {
+                console.warn("No user data in localStorage.");
+                return;
+            }
+
+            const userData = JSON.parse(userDataStr);
+            const user = userData.user.name || "User";
+            const userDepartmentName = userData.user.departmentname || "N/A";
+            const role = userData.role || "User";
+
+            const welcomeTextEl = document.getElementById("welcomeText");
+            const departmentNameEl = document.getElementById("userdepartmentname");
+            const userNameEl = document.getElementById("User");
+            const sidebaruser1 = document.getElementById("sidebaruser")
+
+            // Set values if elements exist
+            sidebaruser.textContent = user;
+            if (userNameEl) userNameEl.textContent = role;
+            if (departmentNameEl) departmentNameEl.textContent = userDepartmentName;
+            welcomeTextEl.textContent = `Welcome, ${user}!`;
+        });
+    </script>
 
     <!-- Core JS -->
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>

@@ -40,7 +40,7 @@
             <span class="app-brand-logo demo pt-4 pb-4">
               <img src="../assets/img/logo/amcLogo.png" alt="AMC Logo" height="50px" />
             </span>
-            <span class="app-brand-text demo menu-text fw-bold ms-2">Admin</span>
+            <span class="app-brand-text demo menu-text fw-bold ms-2" id="sidebaruser">Admin</span>
           </a>
           <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -377,7 +377,32 @@
   <div class="layout-overlay layout-menu-toggle"></div>
   </div>
   <!-- / Layout wrapper -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userDataStr = localStorage.getItem("userData");
 
+      if (!userDataStr) {
+        console.warn("No user data in localStorage.");
+        return;
+      }
+
+      const userData = JSON.parse(userDataStr);
+      console.log(userData.user)
+      const user = userData.user.name;
+      const usersdepartmentname = userData.user.departmentname;
+      console.log(user)
+      const role = userData.role || "User"; // Default fallback
+      const welcomeTextEl = document.getElementById("welcomeText");
+      const username1 = document.getElementById("userdepartmentname");
+      const sidebaruser1 = document.getElementById("sidebaruser");
+
+      sidebaruser.textContent = user;
+      welcomeTextEl.textContent = `Welcome, ${user}!`;
+      username1.textContent = usersdepartmentname;
+    });
+
+
+  </script>
   <!-- Core JS -->
   <script src="../assets/vendor/libs/jquery/jquery.js"></script>
   <script src="../assets/vendor/libs/popper/popper.js"></script>

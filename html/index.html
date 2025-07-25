@@ -166,7 +166,7 @@
             <span class="app-brand-logo demo pt-4 pb-4">
               <img src="../assets/img/logo/amcLogo.png" alt="AMC Logo" height="50px" />
             </span>
-            <span class="app-brand-text demo menu-text fw-bold ms-2">Admin</span>
+            <span class="app-brand-text demo menu-text fw-bold ms-2" id="sidebaruser">Admin</span>
           </a>
           <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -353,7 +353,7 @@
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <h6 class="mb-0">Admin</h6>
+                          <h6 class="mb-0" id="userdepartmentname">Admin</h6>
                           <small class="text-muted">Online</small>
                         </div>
                       </div>
@@ -619,7 +619,32 @@
       <!-- / Layout page -->
     </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userDataStr = localStorage.getItem("userData");
 
+      if (!userDataStr) {
+        console.warn("No user data in localStorage.");
+        return;
+      }
+
+      const userData = JSON.parse(userDataStr);
+      console.log(userData.user)
+      const user = userData.user.name;
+      const usersdepartmentname = userData.user.departmentname;
+      console.log(user)
+      const role = userData.role || "User"; // Default fallback
+      const welcomeTextEl = document.getElementById("welcomeText");
+      const username1 = document.getElementById("userdepartmentname");
+      const sidebaruser1 = document.getElementById("sidebaruser");
+
+      sidebaruser.textContent = user;
+      welcomeTextEl.textContent = `Welcome, ${user}!`;
+      username1.textContent = usersdepartmentname;
+    });
+
+
+  </script>
   <!-- Core JS -->
   <script src="../assets/vendor/libs/jquery/jquery.js"></script>
   <script src="../assets/vendor/libs/popper/popper.js"></script>
@@ -667,6 +692,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="../js/services/project.js"></script>
   <!-- <script src="../js/script/dashboard.js"></script> -->
+
 </body>
 
 </html>
