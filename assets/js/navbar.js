@@ -1,9 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Fetch user data from localStorage
-  const departmentName = localStorage.getItem('departmentName') || 'Department Name';
-  const role = localStorage.getItem('role') || 'Role';
 
-  console.log(departmentName,"departmentNamedepartmentName");
+ const userDataStr = localStorage.getItem("userData");
+
+            if (!userDataStr) {
+                console.warn("No user data in localStorage.");
+                return;
+            }
+
+            const userData = JSON.parse(userDataStr);
+           
+  const departmentName = userData.user.departmentname|| 'Department Name';
+
+  const role =  userData.user.role || 'SUPERADMIN';
+
+ 
 
 
   // Select the container to update
