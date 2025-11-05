@@ -15,8 +15,13 @@
 }
 
 .app-brand-text.demo {
-    font-size: 1.1rem !important;
+    font-size: 1.6rem !important;
     letter-spacing: -0.5px;
+      white-space: nowrap;        /* Prevent text from wrapping to the next line */
+  overflow: hidden;
+  text-overflow: ellipsis;    /* Add the "..." at the end */
+  display: block;             /* Ensure it's treated as a block-level element */
+  max-width: 200px;
 }
 
 .menu .app-brand.demo {
