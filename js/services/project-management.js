@@ -22,7 +22,7 @@ let serverPaginationInfo = null;
 function setupFilterListeners() {
   const filters = [
     "categoryFilter",
-    "ngoFilter", 
+    "ngoFilter",
     "budgetFilter",
     "statusFilter"
   ];
@@ -62,15 +62,15 @@ function getFilterParams() {
   if (budgetEl && budgetEl.value && budgetEl.value !== "") {
     const budgetRange = budgetEl.value;
     console.log("💰 Selected budget range:", budgetRange);
-    
+
     const [minBudget, maxBudget] = budgetRange.split('-');
-    
+
     if (minBudget) {
       params.append('minBudget', minBudget);
       filters.minBudget = parseInt(minBudget);
       console.log("📊 Min budget:", minBudget);
     }
-    
+
     if (maxBudget && maxBudget !== 'undefined' && maxBudget !== '') {
       params.append('maxBudget', maxBudget);
       filters.maxBudget = parseInt(maxBudget);
@@ -89,7 +89,7 @@ function getFilterParams() {
 
   // Store current filters globally for client-side filtering
   window.currentFilters = filters;
-  
+
   return params.toString();
 }
 
@@ -100,7 +100,7 @@ function getFilterParams() {
 //   // Only refetch if filters have changed, not for pagination
 //   if (filterParams !== lastFilterString) {
 //     lastFilterString = filterParams;
-    
+
 //     // Try server-side filtering first
 //     if (filterParams) {
 //       await attemptServerSideFiltering(filterParams);
@@ -125,36 +125,36 @@ function getFilterParams() {
 // async function attemptServerSideFiltering(filterParams) {
 //   try {
 //     console.log("🌐 Attempting server-side filtering...");
-    
+
 //     const response = await fetch(`https://mumbailocal.org:8087/projects/filter?${filterParams}`);
-    
+
 //     if (!response.ok) {
 //       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
 //     }
-    
+
 //     const apiResponse = await response.json();
 //     console.log("📦 Server response:", apiResponse);
-    
+
 //     let projects = apiResponse.data || [];
 //     console.log(`📊 Server returned ${projects.length} projects`);
-    
+
 //     // Validate server-side budget filtering
 //     if (window.currentFilters.minBudget !== undefined || window.currentFilters.maxBudget !== undefined) {
 //       const isServerFilteringCorrect = validateBudgetFiltering(projects);
-      
+
 //       if (!isServerFilteringCorrect) {
 //         console.warn("⚠️ Server-side budget filtering appears incorrect, falling back to client-side");
 //         await fallbackToClientSideFiltering();
 //         return;
 //       }
 //     }
-    
+
 //     // Server filtering worked correctly
 //     useClientSideFiltering = false;
 //     allFilteredProjects = projects;
 //     currentPage = 0;
 //     paginateFilteredResults();
-    
+
 //   } catch (error) {
 //     console.error("❌ Server-side filtering failed:", error);
 //     console.log("🔄 Falling back to client-side filtering...");
@@ -171,7 +171,7 @@ async function loadProjects() {
     lastFilterString = filterParams;
     serverPaginationInfo = null; // Reset pagination info on filter change
     currentPage = 0; // Reset to first page on filter change
-    
+
     // Try server-side filtering first
     if (filterParams) {
       await attemptServerSideFiltering(filterParams);
@@ -196,32 +196,32 @@ async function loadProjects() {
 async function attemptServerSideFiltering(filterParams) {
   try {
     console.log("🌐 Attempting server-side filtering...");
-    
+
     // Include pagination parameters in the request
     const paginatedParams = `${filterParams}&page=${currentPage}&size=${pageSize}`;
     const response = await fetch(`https://mumbailocal.org:8087/projects/filter?${paginatedParams}`);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-    
+
     const apiResponse = await response.json();
     console.log("📦 Server response:", apiResponse);
-    
+
     let projects = apiResponse.data || [];
     console.log(`📊 Server returned ${projects.length} projects`);
-    
+
     // Validate server-side budget filtering (only check if budget filter is applied)
     if (window.currentFilters.minBudget !== undefined || window.currentFilters.maxBudget !== undefined) {
       const isServerFilteringCorrect = validateBudgetFiltering(projects);
-      
+
       if (!isServerFilteringCorrect) {
         console.warn("⚠️ Server-side budget filtering appears incorrect, falling back to client-side");
         await fallbackToClientSideFiltering();
         return;
       }
     }
-    
+
     // Server filtering worked correctly - store pagination info
     useClientSideFiltering = false;
     serverPaginationInfo = {
@@ -230,13 +230,13 @@ async function attemptServerSideFiltering(filterParams) {
       currentPage: apiResponse.currentPage || 0,
       pageSize: apiResponse.pageSize || pageSize
     };
-    
+
     console.log(`📄 Server pagination info:`, serverPaginationInfo);
-    
+
     // Render current page results
     renderProjectsTable(projects);
     renderServerSidePagination();
-    
+
   } catch (error) {
     console.error("❌ Server-side filtering failed:", error);
     console.log("🔄 Falling back to client-side filtering...");
@@ -248,14 +248,14 @@ function renderServerSidePagination() {
     console.error("❌ No server pagination info available");
     return;
   }
-  
+
   const { totalPages, currentPage: serverCurrentPage } = serverPaginationInfo;
-  
+
   // Sync our local currentPage with server's currentPage
   currentPage = serverCurrentPage;
-  
+
   console.log(`🔢 Rendering server-side pagination: ${totalPages} total pages, current page: ${currentPage + 1}`);
-  
+
   renderPagination(totalPages);
 }
 
@@ -263,15 +263,15 @@ function validateBudgetFiltering(projects) {
   if (!window.currentFilters.minBudget && !window.currentFilters.maxBudget) {
     return true; // No budget filter applied
   }
-  
+
   const { minBudget = 0, maxBudget = Infinity } = window.currentFilters;
-  
+
   // Check if any project is outside the budget range
   const invalidProjects = projects.filter(project => {
-    const budget = parseFloat(project.projectBudget) || 0;
+    const budget = parseFloat(project.projectBudget) || 'NA';
     return budget < minBudget || budget > maxBudget;
   });
-  
+
   if (invalidProjects.length > 0) {
     console.log("❌ Found projects outside budget range:", invalidProjects.map(p => ({
       name: p.projectName,
@@ -280,23 +280,23 @@ function validateBudgetFiltering(projects) {
     })));
     return false;
   }
-  
+
   return true;
 }
 
 async function fallbackToClientSideFiltering() {
   try {
     useClientSideFiltering = true;
-    
+
     // Load all projects if not already loaded
     if (allProjects.length === 0) {
       console.log("📥 Loading all projects for client-side filtering...");
       await loadAllProjectsForFiltering();
     }
-    
+
     // Apply client-side filters
     applyClientSideFilters();
-    
+
   } catch (error) {
     console.error("❌ Client-side filtering fallback failed:", error);
     showError("Error loading projects. Please try again.");
@@ -317,48 +317,48 @@ async function loadAllProjectsForFiltering() {
 
 function applyClientSideFilters() {
   console.log("🔧 Applying client-side filters...");
-  
+
   let filteredProjects = [...allProjects];
   const filters = window.currentFilters || {};
-  
+
   // Apply category filter
   if (filters.categoryId) {
-    filteredProjects = filteredProjects.filter(project => 
+    filteredProjects = filteredProjects.filter(project =>
       project.categoryId == filters.categoryId
     );
     console.log(`🏷️ Category filter applied: ${filteredProjects.length} projects remain`);
   }
-  
+
   // Apply NGO filter
   if (filters.ngoId) {
-    filteredProjects = filteredProjects.filter(project => 
+    filteredProjects = filteredProjects.filter(project =>
       project.ngoInfo?.id == filters.ngoId
     );
     console.log(`🏢 NGO filter applied: ${filteredProjects.length} projects remain`);
   }
-  
+
   // Apply budget filter
   if (filters.minBudget !== undefined || filters.maxBudget !== undefined) {
     const minBudget = filters.minBudget || 0;
     const maxBudget = filters.maxBudget || Infinity;
-    
+
     const beforeBudgetFilter = filteredProjects.length;
     filteredProjects = filteredProjects.filter(project => {
-      const budget = parseFloat(project.projectBudget) || 0;
+      const budget = parseFloat(project.projectBudget) || 'NA';
       return budget >= minBudget && budget <= maxBudget;
     });
-    
+
     console.log(`💰 Budget filter applied (₹${minBudget.toLocaleString()} - ₹${maxBudget.toLocaleString()}): ${beforeBudgetFilter} → ${filteredProjects.length} projects`);
   }
-  
+
   // Apply status filter
   if (filters.status) {
-    filteredProjects = filteredProjects.filter(project => 
+    filteredProjects = filteredProjects.filter(project =>
       project.status === filters.status
     );
     console.log(`📊 Status filter applied: ${filteredProjects.length} projects remain`);
   }
-  
+
   allFilteredProjects = filteredProjects;
   currentPage = 0;
   paginateFilteredResults();
@@ -368,11 +368,11 @@ async function loadAllProjects() {
   try {
     useClientSideFiltering = false;
     console.log("📋 Loading all projects (no filters)");
-    
+
     const response = await Api.project.listAll(currentPage, pageSize);
     renderProjectsTable(response.data.content);
     renderPagination(response.data.totalPages);
-    
+
   } catch (error) {
     console.error("❌ Error loading all projects:", error);
     showError("Error loading projects");
@@ -405,7 +405,7 @@ function paginateFilteredResults() {
 // Update clearFilters to reset server pagination info
 function clearFilters() {
   console.log("🧹 Clearing all filters");
-  
+
   // Clear all filter elements
   const filterElements = ['categoryFilter', 'ngoFilter', 'budgetFilter', 'statusFilter'];
   filterElements.forEach(id => {
@@ -420,7 +420,7 @@ function clearFilters() {
   window.currentFilters = {};
   useClientSideFiltering = false;
   serverPaginationInfo = null; // Reset server pagination info
-  
+
   // Reload projects
   loadProjects();
 }
@@ -432,10 +432,10 @@ function renderProjectsTable(projects) {
   }
 
   if (!projects?.length) {
-    const filterInfo = window.currentFilters && Object.keys(window.currentFilters).length > 0 
+    const filterInfo = window.currentFilters && Object.keys(window.currentFilters).length > 0
       ? `<br><small class="text-muted">Active filters: ${getActiveFiltersText()}</small>`
       : '';
-    
+
     tbody.innerHTML = `
       <tr>
         <td colspan="7" class="text-center py-4">
@@ -449,13 +449,13 @@ function renderProjectsTable(projects) {
   }
 
   tbody.innerHTML = projects.map((project, i) => {
-    const budget = parseFloat(project.projectBudget) || 0;
+    const budget = parseFloat(project.projectBudget) ||'NA';
     const budgetFormatted = budget.toLocaleString('en-IN');
-    
+
     // Highlight budget if budget filter is active
-    const budgetClass = (window.currentFilters?.minBudget !== undefined || window.currentFilters?.maxBudget !== undefined) 
+    const budgetClass = (window.currentFilters?.minBudget !== undefined || window.currentFilters?.maxBudget !== undefined)
       ? 'bg-success-subtle fw-bold' : '';
-    
+
     return `
       <tr data-project-id="${project.projectId}">
         <td>${i + 1 + currentPage * pageSize}</td>
@@ -492,7 +492,7 @@ function renderProjectsTable(projects) {
 function getActiveFiltersText() {
   const filters = window.currentFilters || {};
   const activeFilters = [];
-  
+
   if (filters.categoryId) activeFilters.push('Category');
   if (filters.ngoId) activeFilters.push('NGO');
   if (filters.minBudget !== undefined || filters.maxBudget !== undefined) {
@@ -501,7 +501,7 @@ function getActiveFiltersText() {
     activeFilters.push(`Budget (₹${min.toLocaleString()} - ₹${max})`);
   }
   if (filters.status) activeFilters.push('Status');
-  
+
   return activeFilters.join(', ');
 }
 
@@ -511,7 +511,7 @@ function renderPagination(totalPages) {
     console.error("❌ Pagination container not found");
     return;
   }
-  
+
   if (totalPages <= 1) {
     pagination.innerHTML = '';
     return;
@@ -531,7 +531,7 @@ function renderPagination(totalPages) {
   const maxPagesToShow = 5;
   let startPage = Math.max(0, currentPage - Math.floor(maxPagesToShow / 2));
   let endPage = Math.min(totalPages - 1, startPage + maxPagesToShow - 1);
-  
+
   // Adjust start page if we're near the end
   if (endPage - startPage < maxPagesToShow - 1) {
     startPage = Math.max(0, endPage - maxPagesToShow + 1);
@@ -576,9 +576,9 @@ function renderPagination(totalPages) {
 
 function changePage(newPage) {
   console.log(`📄 Changing to page ${newPage + 1}`);
-  
+
   if (newPage < 0) return;
-  
+
   // Calculate total pages based on current filtering state
   let totalPages;
   if (useClientSideFiltering) {
@@ -586,13 +586,13 @@ function changePage(newPage) {
   } else if (serverPaginationInfo) {
     totalPages = serverPaginationInfo.totalPages;
   } else {
-    totalPages = Infinity; 
+    totalPages = Infinity;
   }
 
   if (newPage >= totalPages && totalPages !== Infinity) return;
 
   currentPage = newPage;
-  
+
   // For client-side filtering, just repaginate locally
   if (useClientSideFiltering) {
     console.log(`🔄 Client-side pagination: going to page ${newPage + 1}`);
@@ -602,7 +602,7 @@ function changePage(newPage) {
     console.log(`🌐 Server-side pagination: loading page ${newPage + 1}`);
     loadProjects();
   }
-  
+
   // Smooth scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -698,7 +698,7 @@ function loadNgoOptions() {
 
 function clearFilters() {
   console.log("🧹 Clearing all filters");
-  
+
   // Clear all filter elements
   const filterElements = ['categoryFilter', 'ngoFilter', 'budgetFilter', 'statusFilter'];
   filterElements.forEach(id => {
@@ -712,18 +712,18 @@ function clearFilters() {
   allFilteredProjects = [];
   window.currentFilters = {};
   useClientSideFiltering = false;
-  
+
   // Reload projects
   loadProjects();
 }
 
 function deleteProject(projectId, projectName) {
   console.log('🗑️ Deleting project:', projectId);
-  
-  const confirmMessage = projectName 
+
+  const confirmMessage = projectName
     ? `Are you sure you want to delete "${projectName}"?`
     : `Are you sure you want to delete this project?`;
-  
+
   if (!confirm(confirmMessage)) {
     return;
   }
@@ -732,17 +732,17 @@ function deleteProject(projectId, projectName) {
     .then(response => {
       console.log('✅ Project deleted successfully:', response);
       alert('Project deleted successfully!');
-      
+
       // Remove from all project arrays
       allFilteredProjects = allFilteredProjects.filter(p => p.projectId !== projectId);
       allProjects = allProjects.filter(p => p.projectId !== projectId);
-      
+
       // Remove from DOM
       const projectRow = document.querySelector(`[data-project-id="${projectId}"]`);
       if (projectRow) {
         projectRow.remove();
       }
-      
+
       // Reload projects
       loadProjects();
     })
@@ -762,18 +762,18 @@ function debugFilters() {
   console.log("currentPage:", currentPage);
   console.log("pageSize:", pageSize);
   console.log("lastFilterString:", lastFilterString);
-  
+
   // Calculate and show pagination info
   const totalPages = Math.ceil(allFilteredProjects.length / pageSize);
   const startIndex = currentPage * pageSize;
   const endIndex = startIndex + pageSize;
-  
+
   console.log("📄 Pagination Info:");
   console.log("totalPages:", totalPages);
   console.log("startIndex:", startIndex);
   console.log("endIndex:", endIndex);
   console.log("Current page items:", allFilteredProjects.slice(startIndex, endIndex).length);
-  
+
   // Check budget filter specifically
   const budgetEl = document.getElementById("budgetFilter");
   if (budgetEl) {
@@ -796,7 +796,7 @@ function testPagination() {
   console.log("Total filtered projects:", allFilteredProjects.length);
   console.log("Page size:", pageSize);
   console.log("Total pages should be:", Math.ceil(allFilteredProjects.length / pageSize));
-  
+
   for (let page = 0; page < Math.ceil(allFilteredProjects.length / pageSize); page++) {
     const start = page * pageSize;
     const end = start + pageSize;
@@ -911,7 +911,7 @@ function testPagination() {
 
 //     if (filterParams) {
 //       console.log("Fetching with filters:", filterParams);
-      
+
 //       // FIXED: Remove client-side budget filtering since server handles it
 //       fetch(`https://mumbailocal.org:8087/projects/filter?${filterParams}`)
 //         .then(response => {
@@ -920,11 +920,11 @@ function testPagination() {
 //         })
 //         .then(apiResponse => {
 //           let projects = apiResponse.data || [];
-          
+
 //           // Store all filtered projects for pagination
 //           allFilteredProjects = projects;
 //           console.log(`Found ${projects.length} projects matching filters`);
-          
+
 //           paginateFilteredResults();
 //         })
 //         .catch(error => {
@@ -1187,11 +1187,11 @@ function testPagination() {
 // // Add the deleteProject function to avoid the error
 // function deleteProject(projectId, projectName) {
 //     console.log('🗑️ Delete project called with ID:', projectId);
-    
-//     const confirmMessage = projectName 
+
+//     const confirmMessage = projectName
 //         ? `Are you sure you want to delete "${projectName}"?`
 //         : `Are you sure you want to delete this project?`;
-    
+
 //     if (!confirm(confirmMessage)) {
 //         return;
 //     }
@@ -1200,13 +1200,13 @@ function testPagination() {
 //         .then(response => {
 //             console.log('✅ Project deleted successfully:', response);
 //             alert('Project deleted successfully!');
-            
+
 //             // Remove from DOM
 //             const projectRow = document.querySelector(`[data-project-id="${projectId}"]`);
 //             if (projectRow) {
 //                 projectRow.remove();
 //             }
-            
+
 //             // Reload projects to refresh the list
 //             loadProjects();
 //         })
@@ -1613,11 +1613,11 @@ function testPagination() {
 
 // function deleteProject(projectId, projectName) {
 //     console.log('🗑️ Delete project called with ID:', projectId);
-    
-//     const confirmMessage = projectName 
+
+//     const confirmMessage = projectName
 //         ? `Are you sure you want to delete "${projectName}"?`
 //         : `Are you sure you want to delete this project?`;
-    
+
 //     if (!confirm(confirmMessage)) {
 //         return;
 //     }
@@ -1626,7 +1626,7 @@ function testPagination() {
 //         .then(response => {
 //             console.log('✅ Project deleted successfully:', response);
 //             alert('Project deleted successfully!');
-            
+
 //             // Remove from DOM or reload page
 //             const projectRow = document.querySelector(`[data-project-id="${projectId}"]`);
 //             if (projectRow) {

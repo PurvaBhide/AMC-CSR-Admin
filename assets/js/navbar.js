@@ -8,12 +8,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const userData = JSON.parse(userDataStr);
-           
+
   const departmentName = userData.user.departmentname|| 'Department Name';
+  const name = userData.user.name || 'Admin User';
 
   const role =  userData.user.role || 'SUPERADMIN';
 
- 
+
 
 
   // Select the container to update
@@ -21,8 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (userInfoContainer) {
     userInfoContainer.innerHTML = `
-      <h6 class="mb-0">${departmentName}</h6>
-      <small class="text-muted">${role}</small>
+      <h6 class="mb-0">${role}</h6>
+      <small class="text-muted">${name}</small>
     `;
   } else {
     console.error("User info container not found!");

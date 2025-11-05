@@ -2,6 +2,22 @@
 * demo.css
 * File include item demo only specific css only
 ******************************************************************************/
+.menu-vertical .app-brand {
+    padding-right: 0rem;
+    padding-left: 0.5rem;
+}
+.menu .app-brand.demo {
+    height: 59px;
+    margin-top: 12px;
+}
+.menu-vertical, .menu-vertical .menu-block, .menu-vertical .menu-inner > .menu-item, .menu-vertical .menu-inner > .menu-header {
+    width: 17.35rem;
+}
+
+.app-brand-text.demo {
+    font-size: 1.1rem !important;
+    letter-spacing: -0.5px;
+}
 
 .menu .app-brand.demo {
   height: 64px;
